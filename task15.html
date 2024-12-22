@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex and Spread Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .output {
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 300px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>تنظيف البيانات</h1>
+    <div class="output" id="output"></div>
+
+    <script>
+        const names = [" محمد ", "سارة123", "علي@!", " أحمد "];
+        const cleanedNames = [...names.map(name => name.trim().replace(/[^a-zA-Z\u0621-\u064A ]/g, ""))];
+
+        const outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = `
+            <h2>الأسماء بعد التنظيف:</h2>
+            <ul>${cleanedNames.map(name => `<li>${name}</li>`).join("")}</ul>
+        `;
+    </script>
+</body>
+</html>

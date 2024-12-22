@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History and Scroll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .content {
+            height: 2000px;
+            background: linear-gradient(to bottom, #ffcccc, #ccccff);
+        }
+        .buttons {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <button onclick="scrollToTop()">العودة للأعلى</button>
+        <button onclick="goBack()">العودة للخلف</button>
+        <button onclick="goForward()">التقدم للأمام</button>
+    </div>
+    <div class="content">
+        <h1>مرحباً! جرّب الأزرار التفاعلية.</h1>
+        <p>استمر في التمرير للأسفل لترى تأثير الزر العودة للأعلى.</p>
+    </div>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function goForward() {
+            window.history.forward();
+        }
+    </script>
+</body>
+</html>

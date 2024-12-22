@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekday Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1>ما هو يومك المفضل؟</h1>
+    <form id="dayForm">
+        <input type="text" id="dayInput" placeholder="اكتب يومك (مثلاً الجمعة)" required>
+        <button type="submit">تحقق</button>
+    </form>
+    <div class="message" id="message"></div>
+
+    <script>
+        document.getElementById("dayForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const day = document.getElementById("dayInput").value.trim().toLowerCase();
+            let message;
+
+            switch (day) {
+                case 'الجمعة':
+                    message = "يومك جمعة.. خليها مباركة!";
+                    break;
+                case 'السبت':
+                case 'الأحد':
+                    message = "ويك إند؟ ركز وابدأ أسبوعك!";
+                    break;
+                case 'الاثنين':
+                    message = "بداية أسبوع موفقة!";
+                    break;
+                case 'الثلاثاء':
+                    message = "استمر، لسه نص الأسبوع!";
+                    break;
+                case 'الأربعاء':
+                    message = "قربت تنهي أسبوعك!";
+                    break;
+                case 'الخميس':
+                    message = "يوم خفيف.. وخلاص على نهاية الأسبوع!";
+                    break;
+                default:
+                    message = "اليوم المدخل غير صحيح، جرب تكتب يوم من الأسبوع!";
+            }
+
+            document.getElementById("message").textContent = message;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products with Map and Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .product {
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 300px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Products List</h1>
+    <div id="productContainer"></div>
+    <button onclick="filterExpensiveProducts()">عرض المنتجات الأعلى من 100 جنيه</button>
+
+    <script>
+        const products = [
+            { name: "منتج 1", price: 50 },
+            { name: "منتج 2", price: 120 },
+            { name: "منتج 3", price: 200 },
+            { name: "منتج 4", price: 75 },
+        ];
+
+        function calculateFinalPrices() {
+            return products.map(product => ({
+                ...product,
+                finalPrice: product.price + product.price * 0.14
+            }));
+        }
+
+        function displayProducts(filteredProducts) {
+            const container = document.getElementById("productContainer");
+            container.innerHTML = "";
+            filteredProducts.forEach(product => {
+                const productDiv = document.createElement("div");
+                productDiv.className = "product";
+                productDiv.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>السعر الأصلي: ${product.price} جنيه</p>
+                    <p>السعر بعد الضريبة: ${product.finalPrice.toFixed(2)} جنيه</p>
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+
+        function filterExpensiveProducts() {
+            const filtered = calculateFinalPrices().filter(product => product.finalPrice > 100);
+            displayProducts(filtered);
+        }
+
+        displayProducts(calculateFinalPrices());
+    </script>
+</body>
+</html>

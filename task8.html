@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .book {
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 300px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Library Books</h1>
+    <div id="libraryContainer"></div>
+    <p id="totalPages"></p>
+
+    <script>
+        const library = {
+            fiction: [
+                { title: "Book 1", author: "Author 1", pages: 150 },
+                { title: "Book 2", author: "Author 2", pages: 200 }
+            ],
+            science: [
+                { title: "Book 3", author: "Author 3", pages: 300 },
+                { title: "Book 4", author: "Author 4", pages: 250 }
+            ],
+        };
+
+        function calculateTotalPages() {
+            return Object.values(library).flat().reduce((total, book) => total + book.pages, 0);
+        }
+
+        function displayBooks() {
+            const container = document.getElementById("libraryContainer");
+            container.innerHTML = "";
+
+            Object.entries(library).forEach(([category, books]) => {
+                const categoryHeader = document.createElement("h2");
+                categoryHeader.textContent = `Category: ${category}`;
+                container.appendChild(categoryHeader);
+
+                books.forEach(book => {
+                    const bookDiv = document.createElement("div");
+                    bookDiv.className = "book";
+                    bookDiv.innerHTML = `
+                        <h3>${book.title}</h3>
+                        <p>Author: ${book.author}</p>
+                        <p>Pages: ${book.pages}</p>
+                    `;
+                    container.appendChild(bookDiv);
+                });
+            });
+
+            document.getElementById("totalPages").textContent = `Total Pages in Library: ${calculateTotalPages()}`;
+        }
+
+        displayBooks();
+    </script>
+</body>
+</html>

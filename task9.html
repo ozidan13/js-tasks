@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Table</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        .delete-btn {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>جدول المستخدمين</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>الاسم</th>
+                <th>العمر</th>
+                <th>البريد الإلكتروني</th>
+                <th>إجراءات</th>
+            </tr>
+        </thead>
+        <tbody id="userTable"></tbody>
+    </table>
+    <form id="userForm">
+        <input type="text" id="name" placeholder="اسم" required>
+        <input type="number" id="age" placeholder="عمر" required>
+        <input type="email" id="email" placeholder="بريد إلكتروني" required>
+        <button type="submit">إضافة مستخدم</button>
+    </form>
+
+    <script>
+        const users = [];
+        const userTable = document.getElementById("userTable");
+
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const email = document.getElementById("email").value;
+
+            users.push({ name, age, email });
+            displayUsers();
+            this.reset();
+        });
+
+        function displayUsers() {
+            userTable.innerHTML = "";
+            users.forEach((user, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${user.name}</td>
+                    <td>${user.age}</td>
+                    <td>${user.email}</td>
+                    <td><span class="delete-btn" onclick="deleteUser(${index})">حذف</span></td>
+                `;
+                userTable.appendChild(row);
+            });
+        }
+
+        function deleteUser(index) {
+            users.splice(index, 1);
+            displayUsers();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .clock {
+            font-size: 30px;
+            margin: 20px 0;
+            color: blue;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Clock</h1>
+    <div class="clock" id="clock">00:00:00</div>
+    <div class="buttons">
+        <button onclick="startClock()">ابدأ الساعة</button>
+        <button onclick="stopClock()">أوقف الساعة</button>
+        <button onclick="goToURL()">اذهب لرابط</button>
+    </div>
+
+    <script>
+        let interval;
+
+        function startClock() {
+            if (interval) clearInterval(interval); // تأكد من عدم تشغيل مؤقت آخر
+            interval = setInterval(() => {
+                const now = new Date();
+                const time = now.toLocaleTimeString();
+                document.getElementById("clock").textContent = time;
+            }, 1000);
+        }
+
+        function stopClock() {
+            clearInterval(interval);
+            interval = null;
+        }
+
+        function goToURL() {
+            const url = prompt("أدخل الرابط الذي تريد الذهاب إليه:");
+            if (url) {
+                window.location.assign(url);
+            }
+        }
+    </script>
+</body>
+</html>

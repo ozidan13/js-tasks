@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes and Inheritance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .book {
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 300px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>بيانات الكتب</h1>
+    <div id="bookContainer"></div>
+
+    <script>
+        class Book {
+            constructor(title, author, pages) {
+                this.title = title;
+                this.author = author;
+                this.pages = pages;
+            }
+
+            getDetails() {
+                return `${this.title} بقلم ${this.author} - ${this.pages} صفحة.`;
+            }
+        }
+
+        class Ebook extends Book {
+            constructor(title, author, pages, fileSize) {
+                super(title, author, pages);
+                this.fileSize = fileSize;
+            }
+
+            getEbookDetails() {
+                return `${this.getDetails()} الكتاب متوفر بصيغة إلكترونية بحجم ${this.fileSize} ميجا.`;
+            }
+        }
+
+        Book.prototype.thankYou = function() {
+            return "شكرًا على قراءة كتابنا!";
+        };
+
+        const book1 = new Book("فن اللامبالاة", "مارك مانسون", 300);
+        const ebook1 = new Ebook("كيف تكسب الأصدقاء", "ديل كارنيجي", 250, 2.5);
+
+        const bookContainer = document.getElementById("bookContainer");
+        [book1, ebook1].forEach(book => {
+            const bookDiv = document.createElement("div");
+            bookDiv.className = "book";
+            bookDiv.innerHTML = `
+                <p>${book instanceof Ebook ? book.getEbookDetails() : book.getDetails()}</p>
+                <p>${book.thankYou()}</p>
+            `;
+            bookContainer.appendChild(bookDiv);
+        });
+    </script>
+</body>
+</html>

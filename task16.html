@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            margin: 20px auto;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>التحقق من البيانات</h1>
+    <form id="userForm">
+        <input type="text" id="username" placeholder="اسم المستخدم (3-10 أحرف)" required>
+        <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+        <input type="text" id="phone" placeholder="رقم الهاتف (10 أرقام)" required>
+        <button type="submit">تحقق</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+        const form = document.getElementById("userForm");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+
+            const usernameRegex = /^[a-zA-Z\u0621-\u064A]{3,10}$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /^\d{10}$/;
+
+            if (!usernameRegex.test(username)) {
+                message.textContent = "❌ اسم المستخدم غير صالح.";
+                message.className = "error";
+            } else if (!emailRegex.test(email)) {
+                message.textContent = "❌ البريد الإلكتروني غير صالح.";
+                message.className = "error";
+            } else if (!phoneRegex.test(phone)) {
+                message.textContent = "❌ رقم الهاتف غير صالح.";
+                message.className = "error";
+            } else {
+                message.textContent = "✅ البيانات صحيحة! مرحبًا بك.";
+                message.className = "success";
+            }
+        });
+    </script>
+</body>
+</html>

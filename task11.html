@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .color-picker {
+            margin: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>تغيير لون الخلفية</h1>
+    <div class="color-picker">
+        <button onclick="changeColor('red')">أحمر</button>
+        <button onclick="changeColor('blue')">أزرق</button>
+        <button onclick="changeColor('green')">أخضر</button>
+        <button onclick="resetColor()">إعادة اللون الافتراضي</button>
+    </div>
+
+    <script>
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            localStorage.setItem("backgroundColor", color);
+        }
+
+        function resetColor() {
+            document.body.style.backgroundColor = "white";
+            localStorage.removeItem("backgroundColor");
+        }
+
+        // استعادة لون الخلفية عند تحميل الصفحة
+        const savedColor = localStorage.getItem("backgroundColor");
+        if (savedColor) {
+            document.body.style.backgroundColor = savedColor;
+        }
+    </script>
+</body>
+</html>

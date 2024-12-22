@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .countdown {
+            margin-top: 20px;
+            font-size: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>العد التنازلي للحدث</h1>
+    <p id="eventInfo"></p>
+    <p class="countdown" id="countdown"></p>
+
+    <script>
+        const event = {
+            name: "مؤتمر البرمجة",
+            date: new Date("2024-12-31T23:59:59"),
+            description: "حدث يضم أبرز المبرمجين في الوطن العربي."
+        };
+
+        Object.defineProperty(event, "date", {
+            writable: false, // يجعل خاصية التاريخ غير قابلة للتعديل
+            configurable: false
+        });
+
+        const eventInfo = document.getElementById("eventInfo");
+        eventInfo.textContent = `اسم الحدث: ${event.name} | الوصف: ${event.description}`;
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeLeft = event.date - now;
+
+            if (timeLeft <= 0) {
+                document.getElementById("countdown").textContent = "🎉 انتهى الحدث!";
+                clearInterval(timer);
+                return;
+            }
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById("countdown").textContent = 
+                `متبقي ${days} يوم، ${hours} ساعة، ${minutes} دقيقة، ${seconds} ثانية.`;
+        }
+
+        const timer = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set and Map Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .data-container {
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 300px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Set و Map</h1>
+    <div id="setData" class="data-container"></div>
+    <div id="mapData" class="data-container"></div>
+
+    <script>
+        // Set
+        const userSet = new Set(["محمد", "أحمد", "علي"]);
+        userSet.add("سارة");
+        userSet.delete("علي");
+
+        const setDataDiv = document.getElementById("setData");
+        setDataDiv.innerHTML = `
+            <h2>المستخدمين (Set):</h2>
+            <ul>${[...userSet].map(user => `<li>${user}</li>`).join("")}</ul>
+        `;
+
+        // Map
+        const productMap = new Map();
+        productMap.set("Laptop", { price: 15000, quantity: 3 });
+        productMap.set("Phone", { price: 8000, quantity: 5 });
+
+        const mapDataDiv = document.getElementById("mapData");
+        mapDataDiv.innerHTML = `
+            <h2>المنتجات (Map):</h2>
+            ${[...productMap.entries()]
+                .map(([product, { price, quantity }]) => `
+                <p>${product}: السعر ${price} جنيه، الكمية ${quantity}</p>
+            `).join("")}
+        `;
+    </script>
+</body>
+</html>

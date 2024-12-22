@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor Function</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .user {
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 300px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>بيانات المستخدمين</h1>
+    <div id="userContainer"></div>
+
+    <script>
+        function User(name, age, email) {
+            this.name = name;
+            this.age = age;
+            this.email = email;
+            this.greet = function() {
+                return `مرحبًا ${this.name}! عمرك ${this.age} وبريدك الإلكتروني ${this.email}.`;
+            };
+            this.updateName = function(newName) {
+                this.name = newName;
+            };
+        }
+
+        const user1 = new User("محمد", 25, "mohamed@example.com");
+        const user2 = new User("سارة", 30, "sara@example.com");
+
+        const userContainer = document.getElementById("userContainer");
+        [user1, user2].forEach(user => {
+            const userDiv = document.createElement("div");
+            userDiv.className = "user";
+            userDiv.innerHTML = `
+                <p>${user.greet()}</p>
+                <button onclick="updateUserName('${user.name}')">تغيير الاسم</button>
+            `;
+            userContainer.appendChild(userDiv);
+        });
+
+        function updateUserName(currentName) {
+            const newName = prompt(`أدخل الاسم الجديد للمستخدم ${currentName}:`);
+            if (newName) {
+                const user = [user1, user2].find(u => u.name === currentName);
+                user.updateName(newName);
+                alert("تم تحديث الاسم بنجاح!");
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

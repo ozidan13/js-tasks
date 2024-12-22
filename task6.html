@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Prices</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .product {
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 300px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>أسعار المنتجات بعد الضريبة</h1>
+    <div id="productContainer">
+        
+    </div>
+
+    <script>
+        const products = [
+            { name: " Eva 1", price: 50 },
+            { name: "منتج 2", price: 100 },
+            { name: "منتج 3", price: 200 },
+        ];
+
+        const TAX_RATE = 0.14;
+
+        function calculateFinalPrice(price) {
+            return (price + price * TAX_RATE).toFixed(2);
+        }
+
+        function displayProducts() {
+            const container = document.getElementById("productContainer");
+            container.innerHTML = "";
+            products.forEach(product => {
+                const finalPrice = calculateFinalPrice(product.price);
+                const productDiv = document.createElement("div");
+                productDiv.className = "product";
+                productDiv.innerHTML = `
+                    <h3>${product.name}</h3>
+                    <p>السعر الأصلي: ${product.price} جنيه</p>
+                    <p>السعر بعد الضريبة: ${finalPrice} جنيه</p>
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+
+        displayProducts();
+    </script>
+</body>
+</html>

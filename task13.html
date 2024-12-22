@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructuring Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .info {
+            margin: 20px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 300px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>بيانات الشخص</h1>
+    <div class="info" id="info"></div>
+
+    <script>
+        const person = {
+            name: "محمد أحمد",
+            age: 30,
+            job: "مهندس برمجيات",
+            address: {
+                city: "القاهرة",
+                zip: "12345"
+            },
+            language: "العربية"
+        };
+
+        // Destructuring
+        const { name, age, job, address: { city, zip }, language = "غير محدد" } = person;
+
+        // عرض البيانات
+        const infoDiv = document.getElementById("info");
+        infoDiv.innerHTML = `
+            <p>الاسم: ${name}</p>
+            <p>العمر: ${age}</p>
+            <p>الوظيفة: ${job}</p>
+            <p>المدينة: ${city}</p>
+            <p>الرمز البريدي: ${zip}</p>
+            <p>اللغة: ${language}</p>
+        `;
+
+        // Destructuring داخل Function
+        function displayGreeting({ name, age, job }) {
+            alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);
+        }
+
+        // استدعاء الفنكشن
+        displayGreeting(person);
+    </script>
+</body>
+</html>
