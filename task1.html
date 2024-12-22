@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            width: fit-content;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>أدخل بياناتك</h1>
+    <form id="userForm">
+        <input type="text" id="name" placeholder="اسمك" required>
+        <input type="number" id="age" placeholder="سنك" required>
+        <input type="text" id="hobby" placeholder="هوايتك" required>
+        <button type="submit">اعرض الرسالة</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const hobby = document.getElementById("hobby").value;
+
+            const message = `أهلاً يا ${name}! عندك ${age} سنة، وهوايتك المفضلة هي ${hobby}. جميل جدًا!`;
+            const outputDiv = document.getElementById("output");
+            outputDiv.textContent = message;
+            outputDiv.style.color = "blue";
+            outputDiv.style.fontSize = "18px";
+        });
+    </script>
+</body>
+</html>
