@@ -5,23 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Destructuring Example</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Cairo', sans-serif;
             text-align: center;
-            margin-top: 50px;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
         }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
         .info {
             margin: 20px auto;
-            padding: 15px;
-            border: 1px solid #ccc;
-            width: 300px;
-            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            background-color: #fff;
+            text-align: left;
+            line-height: 1.6;
+        }
+
+        .info p {
+            margin: 10px 0;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <h1>بيانات الشخص</h1>
     <div class="info" id="info"></div>
+    <button onclick="displayGreeting(person)">عرض رسالة ترحيب</button>
 
     <script>
         const person = {
@@ -41,21 +79,18 @@
         // عرض البيانات
         const infoDiv = document.getElementById("info");
         infoDiv.innerHTML = `
-            <p>الاسم: ${name}</p>
-            <p>العمر: ${age}</p>
-            <p>الوظيفة: ${job}</p>
-            <p>المدينة: ${city}</p>
-            <p>الرمز البريدي: ${zip}</p>
-            <p>اللغة: ${language}</p>
+            <p><strong>الاسم:</strong> ${name}</p>
+            <p><strong>العمر:</strong> ${age}</p>
+            <p><strong>الوظيفة:</strong> ${job}</p>
+            <p><strong>المدينة:</strong> ${city}</p>
+            <p><strong>الرمز البريدي:</strong> ${zip}</p>
+            <p><strong>اللغة:</strong> ${language}</p>
         `;
 
         // Destructuring داخل Function
         function displayGreeting({ name, age, job }) {
             alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);
         }
-
-        // استدعاء الفنكشن
-        displayGreeting(person);
     </script>
 </body>
 </html>

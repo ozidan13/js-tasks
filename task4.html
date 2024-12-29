@@ -4,32 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        #taskForm {
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
         }
         .task {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             width: 300px;
             margin: 10px auto;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
         }
-        button {
+        .task button {
+            background-color: transparent;
+            border: none;
+            color: #dc3545;
+            font-size: 18px;
             cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .task button:hover {
+            color: #b02a37;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(20px);
+            }
         }
     </style>
 </head>
 <body>
     <h1>To-Do List</h1>
     <form id="taskForm">
-        <input type="text" id="taskInput" placeholder="أضف مهمة جديدة" required>
-        <button type="submit">إضافة</button>
+        <input type="text" id="taskInput" placeholder="Add a new task" required>
+        <button type="submit"><i class="fas fa-plus"></i> Add</button>
     </form>
     <div id="tasksContainer"></div>
 
@@ -54,15 +108,19 @@
                 taskDiv.className = "task";
                 taskDiv.innerHTML = `
                     <span>${task}</span>
-                    <button onclick="deleteTask(${index})">حذف</button>
+                    <button onclick="deleteTask(${index})"><i class="fas fa-trash-alt"></i></button>
                 `;
                 tasksContainer.appendChild(taskDiv);
             });
         }
 
         function deleteTask(index) {
-            tasks.splice(index, 1);
-            displayTasks();
+            const taskDiv = tasksContainer.children[index];
+            taskDiv.style.animation = "fadeOut 0.5s ease forwards";
+            setTimeout(() => {
+                tasks.splice(index, 1);
+                displayTasks();
+            }, 500);
         }
     </script>
 </body>

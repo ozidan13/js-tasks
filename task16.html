@@ -5,35 +5,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Validation</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6e7dff, #b99aff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+        }
+
         form {
-            margin: 20px auto;
-            width: 300px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
+            animation: scaleIn 0.8s ease-in-out;
         }
+
+        input {
+            padding: 12px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #6e7dff;
+            box-shadow: 0 0 10px rgba(110, 125, 255, 0.5);
+        }
+
+        button {
+            padding: 12px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #6e7dff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #575fca;
+        }
+
         .error {
-            color: red;
+            color: #ff4d4d;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 15px;
+            animation: slideIn 1s ease-out;
         }
+
         .success {
-            color: green;
+            color: #4CAF50;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 15px;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            form {
+                width: 90%;
+                padding: 20px;
+            }
+
+            input, button {
+                font-size: 1em;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>التحقق من البيانات</h1>
-    <form id="userForm">
-        <input type="text" id="username" placeholder="اسم المستخدم (3-10 أحرف)" required>
-        <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-        <input type="text" id="phone" placeholder="رقم الهاتف (10 أرقام)" required>
-        <button type="submit">تحقق</button>
-    </form>
-    <p id="message"></p>
+    <div>
+        <h1>Form Validation</h1>
+        <form id="userForm">
+            <input type="text" id="username" placeholder="Username (3-10 characters)" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="text" id="phone" placeholder="Phone Number (10 digits)" required>
+            <button type="submit">Submit</button>
+        </form>
+        <p id="message"></p>
+    </div>
 
     <script>
         const form = document.getElementById("userForm");
@@ -51,16 +164,16 @@
             const phoneRegex = /^\d{10}$/;
 
             if (!usernameRegex.test(username)) {
-                message.textContent = "❌ اسم المستخدم غير صالح.";
+                message.textContent = "❌ Invalid username. Must be 3-10 characters.";
                 message.className = "error";
             } else if (!emailRegex.test(email)) {
-                message.textContent = "❌ البريد الإلكتروني غير صالح.";
+                message.textContent = "❌ Invalid email address.";
                 message.className = "error";
             } else if (!phoneRegex.test(phone)) {
-                message.textContent = "❌ رقم الهاتف غير صالح.";
+                message.textContent = "❌ Invalid phone number. Must be 10 digits.";
                 message.className = "error";
             } else {
-                message.textContent = "✅ البيانات صحيحة! مرحبًا بك.";
+                message.textContent = "✅ Data is correct! Welcome.";
                 message.className = "success";
             }
         });

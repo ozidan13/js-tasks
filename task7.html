@@ -5,24 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products with Map and Filter</title>
     <style>
+        /* Reset and base styles */
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
             text-align: center;
-            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
         }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        #productContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+
         .product {
-            margin: 10px auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            width: 300px;
-            text-align: left;
+            background: #fff;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .product h3 {
+            font-size: 1.5rem;
+            color: #6a11cb;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #e05446;
         }
     </style>
 </head>
 <body>
-    <h1>Products List</h1>
+    <h1>قائمة المنتجات</h1>
     <div id="productContainer"></div>
-    <button onclick="filterExpensiveProducts()">عرض المنتجات الأعلى من 100 جنيه</button>
+    <button class="btn" onclick="filterExpensiveProducts()">عرض المنتجات الأعلى من 100 جنيه</button>
 
     <script>
         const products = [

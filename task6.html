@@ -5,33 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Prices</title>
     <style>
+        /* Reset and base styles */
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #333;
         }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #productContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+
         .product {
-            margin: 10px auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            width: 300px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 20px;
             text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        .product h3 {
+            font-size: 1.5rem;
+            color: #ff6f61;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            font-size: 1rem;
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .product p span {
+            font-weight: bold;
+            color: #333;
         }
     </style>
 </head>
 <body>
     <h1>أسعار المنتجات بعد الضريبة</h1>
-    <div id="productContainer">
-        
-    </div>
+    <div id="productContainer"></div>
 
     <script>
         const products = [
-            { name: " Eva 1", price: 50 },
+            { name: "منتج 1", price: 50 },
             { name: "منتج 2", price: 100 },
             { name: "منتج 3", price: 200 },
         ];
-
+        
         const TAX_RATE = 0.14;
 
         function calculateFinalPrice(price) {
@@ -47,8 +93,8 @@
                 productDiv.className = "product";
                 productDiv.innerHTML = `
                     <h3>${product.name}</h3>
-                    <p>السعر الأصلي: ${product.price} جنيه</p>
-                    <p>السعر بعد الضريبة: ${finalPrice} جنيه</p>
+                    <p>السعر الأصلي: <span>${product.price} جنيه</span></p>
+                    <p>السعر بعد الضريبة: <span>${finalPrice} جنيه</span></p>
                 `;
                 container.appendChild(productDiv);
             });

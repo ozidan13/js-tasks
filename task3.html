@@ -10,52 +10,85 @@
             text-align: center;
             margin-top: 50px;
         }
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
         .message {
             margin-top: 20px;
             font-weight: bold;
+            font-size: 18px;
             color: #007bff;
+        }
+        .error {
+            color: red;
         }
     </style>
 </head>
 <body>
-    <h1>ما هو يومك المفضل؟</h1>
+    <h1>What is your favorite day?</h1>
     <form id="dayForm">
-        <input type="text" id="dayInput" placeholder="اكتب يومك (مثلاً الجمعة)" required>
-        <button type="submit">تحقق</button>
+        <input type="text" id="dayInput" placeholder="Enter a day (e.g., Friday)" required>
+        <button type="submit">Check</button>
     </form>
     <div class="message" id="message"></div>
 
     <script>
         document.getElementById("dayForm").addEventListener("submit", function(event) {
             event.preventDefault();
-            const day = document.getElementById("dayInput").value.trim().toLowerCase();
+            const dayInput = document.getElementById("dayInput").value.trim().toLowerCase();
+            const messageDiv = document.getElementById("message");
             let message;
 
-            switch (day) {
-                case 'الجمعة':
-                    message = "يومك جمعة.. خليها مباركة!";
+            switch (dayInput) {
+                case 'friday':
+                    message = "Friday is your favorite day! Enjoy your weekend!";
                     break;
-                case 'السبت':
-                case 'الأحد':
-                    message = "ويك إند؟ ركز وابدأ أسبوعك!";
+                case 'saturday':
+                    message = "Saturday is a great weekend day to relax!";
                     break;
-                case 'الاثنين':
-                    message = "بداية أسبوع موفقة!";
+                case 'sunday':
+                    message = "Sunday is the start of the week! Stay motivated!";
                     break;
-                case 'الثلاثاء':
-                    message = "استمر، لسه نص الأسبوع!";
+                case 'monday':
+                    message = "Monday is a fresh start! Make it count!";
                     break;
-                case 'الأربعاء':
-                    message = "قربت تنهي أسبوعك!";
+                case 'tuesday':
+                    message = "Tuesday is a productive day! Keep going!";
                     break;
-                case 'الخميس':
-                    message = "يوم خفيف.. وخلاص على نهاية الأسبوع!";
+                case 'wednesday':
+                    message = "Wednesday is midweek! You're halfway through!";
+                    break;
+                case 'thursday':
+                    message = "Thursday is almost the weekend! Hang in there!";
                     break;
                 default:
-                    message = "اليوم المدخل غير صحيح، جرب تكتب يوم من الأسبوع!";
+                    message = "Invalid day entered. Please enter a valid day of the week in English!";
+                    messageDiv.className = "message error";
+                    break;
             }
 
-            document.getElementById("message").textContent = message;
+            messageDiv.textContent = message;
+            if (!messageDiv.className.includes("error")) {
+                messageDiv.className = "message";
+            }
         });
     </script>
 </body>

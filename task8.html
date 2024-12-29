@@ -5,34 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+        /* General Body Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Cairo', sans-serif;
         }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #468e97, #253d50);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #6cecff;            margin-bottom: 20px;
+        }
+
+        #libraryContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            padding: 20px;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
         .book {
-            margin: 10px auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            width: 300px;
-            text-align: left;
+            background: #396d70;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .book:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .book h3 {
+            font-size: 1.5rem;
+            color: #6cecff;
+            margin-bottom: 10px;
+        }
+
+        .book p {
+            font-size: 1rem;
+            color: #ccc;
+            margin: 5px 0;
+        }
+
+        #totalPages {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #6cecff;
+            text-shadow: 0 0 10px #6cecff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .book {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Library Books</h1>
+    <h1>Our LIBRARY</h1>
     <div id="libraryContainer"></div>
     <p id="totalPages"></p>
 
     <script>
         const library = {
             fiction: [
-                { title: "Book 1", author: "Author 1", pages: 150 },
-                { title: "Book 2", author: "Author 2", pages: 200 }
+                { title: "Neon Dreams", author: "Author Cyber", pages: 150 },
+                { title: "Electric Shadows", author: "Author Spark", pages: 200 }
             ],
             science: [
-                { title: "Book 3", author: "Author 3", pages: 300 },
-                { title: "Book 4", author: "Author 4", pages: 250 }
+                { title: "Quantum Realms", author: "Author Quark", pages: 300 },
+                { title: "Cosmic Light", author: "Author Astro", pages: 250 }
             ],
         };
 
@@ -45,8 +114,8 @@
             container.innerHTML = "";
 
             Object.entries(library).forEach(([category, books]) => {
-                const categoryHeader = document.createElement("h2");
-                categoryHeader.textContent = `Category: ${category}`;
+                const categoryHeader = document.createElement("div");
+                categoryHeader.innerHTML = `<h2 style="grid-column: span 2; color: #fff; font-size: 1.5rem; text-align: center; text-shadow: 0 0 10px #6cecff;">${category} Books</h2>`;
                 container.appendChild(categoryHeader);
 
                 books.forEach(book => {

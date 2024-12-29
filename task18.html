@@ -6,22 +6,66 @@
     <title>Classes and Inheritance</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
             text-align: center;
+        }
+        h1 {
             margin-top: 50px;
+            font-size: 2.5em;
+            color: #333;
+        }
+        .book-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
         }
         .book {
-            margin: 20px auto;
-            padding: 15px;
-            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 20px;
+            margin: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             width: 300px;
-            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .book:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        .book p {
+            font-size: 1em;
+            color: #555;
+        }
+        .book button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .book button:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 768px) {
+            .book {
+                width: 90%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>بيانات الكتب</h1>
-    <div id="bookContainer"></div>
+    <h1>Book Information</h1>
+    <div class="book-container" id="bookContainer"></div>
 
     <script>
         class Book {
@@ -32,7 +76,7 @@
             }
 
             getDetails() {
-                return `${this.title} بقلم ${this.author} - ${this.pages} صفحة.`;
+                return `${this.title} by ${this.author} - ${this.pages} pages.`;
             }
         }
 
@@ -43,16 +87,16 @@
             }
 
             getEbookDetails() {
-                return `${this.getDetails()} الكتاب متوفر بصيغة إلكترونية بحجم ${this.fileSize} ميجا.`;
+                return `${this.getDetails()} Available in ebook format with a file size of ${this.fileSize}MB.`;
             }
         }
 
         Book.prototype.thankYou = function() {
-            return "شكرًا على قراءة كتابنا!";
+            return "Thank you for reading our book!";
         };
 
-        const book1 = new Book("فن اللامبالاة", "مارك مانسون", 300);
-        const ebook1 = new Ebook("كيف تكسب الأصدقاء", "ديل كارنيجي", 250, 2.5);
+        const book1 = new Book("The Subtle Art of Not Giving a F*ck", "Mark Manson", 300);
+        const ebook1 = new Ebook("How to Win Friends and Influence People", "Dale Carnegie", 250, 2.5);
 
         const bookContainer = document.getElementById("bookContainer");
         [book1, ebook1].forEach(book => {
@@ -61,6 +105,7 @@
             bookDiv.innerHTML = `
                 <p>${book instanceof Ebook ? book.getEbookDetails() : book.getDetails()}</p>
                 <p>${book.thankYou()}</p>
+                <button onclick="alert('Enjoy your reading!')">Start Reading</button>
             `;
             bookContainer.appendChild(bookDiv);
         });

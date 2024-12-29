@@ -5,40 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Clock</title>
     <style>
+        /* General Body Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1d2b64, #f8cdda);
+            color: #fff;
             text-align: center;
-            margin-top: 50px;
         }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
         .clock {
-            font-size: 30px;
+            font-size: 3rem;
+            font-weight: bold;
             margin: 20px 0;
-            color: blue;
+            color: #ffe53b;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            
         }
+
         .buttons {
             margin: 20px 0;
         }
+
         button {
-            padding: 10px 15px;
-            margin: 5px;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1rem;
+            color: #fff;
+            background: #ff6f61;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #e05446;
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <h1>Interactive Clock</h1>
+    <h1>الساعة التفاعلية</h1>
     <div class="clock" id="clock">00:00:00</div>
     <div class="buttons">
         <button onclick="startClock()">ابدأ الساعة</button>
         <button onclick="stopClock()">أوقف الساعة</button>
-        <button onclick="goToURL()">اذهب لرابط</button>
+        <button onclick="goToURL()">اذهب إلى رابط</button>
     </div>
 
     <script>
-        let interval;
+        let interval; // لتعقب حالة المؤقت
 
+        // وظيفة تشغيل الساعة
         function startClock() {
-            if (interval) clearInterval(interval); // تأكد من عدم تشغيل مؤقت آخر
+            if (interval) clearInterval(interval); // منع تشغيل مؤقت جديد إذا كان هناك مؤقت نشط
             interval = setInterval(() => {
                 const now = new Date();
                 const time = now.toLocaleTimeString();
@@ -46,15 +84,17 @@
             }, 1000);
         }
 
+        // وظيفة إيقاف الساعة
         function stopClock() {
-            clearInterval(interval);
+            clearInterval(interval); // إيقاف المؤقت
             interval = null;
         }
 
+        // وظيفة فتح رابط
         function goToURL() {
             const url = prompt("أدخل الرابط الذي تريد الذهاب إليه:");
-            if (url) {
-                window.location.assign(url);
+            if (url && url.trim()) {
+                window.location.assign(url.trim());
             }
         }
     </script>

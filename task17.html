@@ -17,10 +17,23 @@
             width: 300px;
             background-color: #f9f9f9;
         }
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #6e7dff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #575fca;
+        }
     </style>
 </head>
 <body>
-    <h1>بيانات المستخدمين</h1>
+    <h1>User Data</h1>
     <div id="userContainer"></div>
 
     <script>
@@ -29,36 +42,43 @@
             this.age = age;
             this.email = email;
             this.greet = function() {
-                return `مرحبًا ${this.name}! عمرك ${this.age} وبريدك الإلكتروني ${this.email}.`;
+                return `Hello ${this.name}! You are ${this.age} years old, and your email is ${this.email}.`;
             };
             this.updateName = function(newName) {
                 this.name = newName;
             };
         }
 
-        const user1 = new User("محمد", 25, "mohamed@example.com");
-        const user2 = new User("سارة", 30, "sara@example.com");
+        const user1 = new User("Osama", 25, "osama@example.com");
+        const user2 = new User("Sama", 30, "sama@example.com");
 
         const userContainer = document.getElementById("userContainer");
-        [user1, user2].forEach(user => {
-            const userDiv = document.createElement("div");
-            userDiv.className = "user";
-            userDiv.innerHTML = `
-                <p>${user.greet()}</p>
-                <button onclick="updateUserName('${user.name}')">تغيير الاسم</button>
-            `;
-            userContainer.appendChild(userDiv);
-        });
+        const users = [user1, user2];
+
+        function renderUsers() {
+            userContainer.innerHTML = ""; // Clear the container before rendering again
+            users.forEach(user => {
+                const userDiv = document.createElement("div");
+                userDiv.className = "user";
+                userDiv.innerHTML = `
+                    <p>${user.greet()}</p>
+                    <button onclick="updateUserName('${user.name}')">Change Name</button>
+                `;
+                userContainer.appendChild(userDiv);
+            });
+        }
 
         function updateUserName(currentName) {
-            const newName = prompt(`أدخل الاسم الجديد للمستخدم ${currentName}:`);
+            const newName = prompt(`Enter the new name for user ${currentName}:`);
             if (newName) {
-                const user = [user1, user2].find(u => u.name === currentName);
+                const user = users.find(u => u.name === currentName);
                 user.updateName(newName);
-                alert("تم تحديث الاسم بنجاح!");
-                location.reload();
+                alert("Name updated successfully!");
+                renderUsers(); // Re-render users after name update
             }
         }
+
+        renderUsers(); // Initial render of users
     </script>
 </body>
 </html>
