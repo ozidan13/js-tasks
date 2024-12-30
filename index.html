@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Files Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20px;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .tab:hover {
+            background-color: #2980b9;
+        }
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Files Navigation</h1>
+    
+    <nav>
+        <!-- Tabs for the 21 files -->
+        <ul>
+            <li><a class="tab" href="task1.html">task 1</a></li>
+            <li><a class="tab" href="task2.html">task 2</a></li>
+            <li><a class="tab" href="task3.html">task 3</a></li>
+            <li><a class="tab" href="task4.html">task 4</a></li>
+            <li><a class="tab" href="task5.html">task 5</a></li>
+            <li><a class="tab" href="task6.html">task 6</a></li>
+            <li><a class="tab" href="task7.html">task 7</a></li>
+            <li><a class="tab" href="task8.html">task 8</a></li>
+            <li><a class="tab" href="task9.html">task 9</a></li>
+            <li><a class="tab" href="task10.html">task 10</a></li>
+            <li><a class="tab" href="task11.html">task 11</a></li>
+            <li><a class="tab" href="task12.html">task 12</a></li>
+            <li><a class="tab" href="task13.html">task 13</a></li>
+            <li><a class="tab" href="task14.html">task 14</a></li>
+            <li><a class="tab" href="task15.html">task 15</a></li>
+            <li><a class="tab" href="task16.html">task 16</a></li>
+            <li><a class="tab" href="task17.html">task 17</a></li>
+            <li><a class="tab" href="task18.html">task 18</a></li>
+            <li><a class="tab" href="task19.html">task 19</a></li>
+            <li><a class="tab" href="task20.html">task 20</a></li>
+            <li><a class="tab" href="task21.html">task 21</a></li>
+            
+        </ul>
+
+
+    </nav>
+
+    <iframe id="fileIframe"></iframe>
+
+    <script>
+        function openFile(fileNumber) {
+            const iframe = document.getElementById("fileIframe");
+            iframe.src = `file${fileNumber}.html`; // Assuming the HTML files are named file1.html, file2.html, ..., file21.html
+        }
+    </script>
+</body>
+</html>

@@ -3,64 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classes and Inheritance</title>
+    <title>Book Information</title>
     <style>
+        /* Global Styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            background-color: #f7f9fc;
             margin: 0;
             padding: 0;
             text-align: center;
+            overflow-x: hidden;
         }
+
         h1 {
-            margin-top: 50px;
-            font-size: 2.5em;
-            color: #333;
+            margin-top: 40px;
+            font-size: 3em;
+            color: #2c3e50;
+            font-weight: 700;
+            letter-spacing: 1px;
+            animation: fadeIn 1s ease-out;
         }
+
+        /* Container for Books */
         .book-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 30px;
+            gap: 30px;
+            margin-top: 40px;
+            animation: fadeInUp 1s ease-out;
         }
+
+        /* Individual Book Card */
         .book {
             background-color: #fff;
             padding: 20px;
-            margin: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 12px;
             width: 300px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
+
         .book:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
+
         .book p {
-            font-size: 1em;
-            color: #555;
+            font-size: 1.1em;
+            color: #34495e;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-align: left;
         }
+
         .book button {
-            background-color: #4CAF50;
+            background-color: #3498db;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
             cursor: pointer;
-            font-size: 1em;
-            margin-top: 15px;
             transition: background-color 0.3s ease;
         }
+
         .book button:hover {
-            background-color: #45a049;
+            background-color: #2980b9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .book-container {
+                gap: 20px;
+            }
         }
 
         @media (max-width: 768px) {
             .book {
                 width: 90%;
             }
+
+            h1 {
+                font-size: 2.2em;
+            }
         }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -68,6 +126,7 @@
     <div class="book-container" id="bookContainer"></div>
 
     <script>
+        // Book Class Definition
         class Book {
             constructor(title, author, pages) {
                 this.title = title;
@@ -80,6 +139,7 @@
             }
         }
 
+        // Ebook Class Definition (extends Book)
         class Ebook extends Book {
             constructor(title, author, pages, fileSize) {
                 super(title, author, pages);
@@ -91,14 +151,19 @@
             }
         }
 
+        // Add a "thank you" message to the Book prototype
         Book.prototype.thankYou = function() {
             return "Thank you for reading our book!";
         };
 
+        // Create Instances of Book and Ebook
         const book1 = new Book("The Subtle Art of Not Giving a F*ck", "Mark Manson", 300);
         const ebook1 = new Ebook("How to Win Friends and Influence People", "Dale Carnegie", 250, 2.5);
 
+        // Get book container element
         const bookContainer = document.getElementById("bookContainer");
+
+        // Display Books on Page
         [book1, ebook1].forEach(book => {
             const bookDiv = document.createElement("div");
             bookDiv.className = "book";
