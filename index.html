@@ -3,79 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Files Navigation</title>
+    <title>HTML tasks</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 20px;
-        }
-        nav {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 20px;
+            min-height: 100vh; /* Ensure full viewport height */
+            background-color: #f4f4f4; /* Light background */
+            color: #333; /* Dark text for contrast */
         }
-        .tab {
-            padding: 10px 20px;
-            margin: 5px;
-            background-color: #3498db;
+
+        nav {
+            background-color: #34495e; /* Darker sidebar */
             color: white;
-            cursor: pointer;
-            border: none;
+            width: 250px;
+            padding: 20px;
+            overflow-y: auto; /* Scroll if needed */
+            position: fixed; /* Fixed sidebar */
+            height: 100%;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            text-align: center;
+        }
+
+        nav a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #ecf0f1; /* Lighter text in sidebar */
             border-radius: 5px;
-            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 5px;
         }
-        .tab:hover {
-            background-color: #2980b9;
+        nav a:hover {
+            background-color: #2c3e50; /* Darker on hover */
         }
+        main {
+            flex: 1;
+            padding: 20px;
+            margin-left: 250px; /* Adjust for sidebar width */
+            overflow-y: auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
         iframe {
             width: 100%;
-            height: 80vh;
+            height: calc(100vh - 60px); /* Adjust height for padding and margin */
             border: none;
+            display: block;
+        }
+
+        h1 {
+            color: #2c3e50; /* Darker heading */
+            margin-bottom: 20px;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; /* Stack vertically on smaller screens */
+            }
+            nav {
+                width: 100%;
+                height: auto;
+                position: static;
+                overflow-y: visible;
+                box-shadow: none;
+                
+            }
+
+            nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                align-content: center;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 2px;
+            }
+
+            nav ul li {
+                width: 6rem;
+                text-align: center;
+                background-color: #354e66;
+            }
+
+            main{
+                margin-left: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>HTML Files Navigation</h1>
-    
     <nav>
-        <!-- Tabs for the 21 files -->
+        <h1 style="color: white; text-align: center;" >التطبيقات</h1>
         <ul>
-            <li><a class="tab" href="task1.html">task 1</a></li>
-            <li><a class="tab" href="task2.html">task 2</a></li>
-            <li><a class="tab" href="task3.html">task 3</a></li>
-            <li><a class="tab" href="task4.html">task 4</a></li>
-            <li><a class="tab" href="task5.html">task 5</a></li>
-            <li><a class="tab" href="task6.html">task 6</a></li>
-            <li><a class="tab" href="task7.html">task 7</a></li>
-            <li><a class="tab" href="task8.html">task 8</a></li>
-            <li><a class="tab" href="task9.html">task 9</a></li>
-            <li><a class="tab" href="task10.html">task 10</a></li>
-            <li><a class="tab" href="task11.html">task 11</a></li>
-            <li><a class="tab" href="task12.html">task 12</a></li>
-            <li><a class="tab" href="task13.html">task 13</a></li>
-            <li><a class="tab" href="task14.html">task 14</a></li>
-            <li><a class="tab" href="task15.html">task 15</a></li>
-            <li><a class="tab" href="task16.html">task 16</a></li>
-            <li><a class="tab" href="task17.html">task 17</a></li>
-            <li><a class="tab" href="task18.html">task 18</a></li>
-            <li><a class="tab" href="task19.html">task 19</a></li>
-            <li><a class="tab" href="task20.html">task 20</a></li>
-            <li><a class="tab" href="task21.html">task 21</a></li>
-            
+            <li><a href="task1.html" target="fileIframe">تطبيق 1</a></li>
+            <li><a href="task2.html" target="fileIframe">تطبيق 2</a></li>
+            <li><a href="task3.html" target="fileIframe">تطبيق 3</a></li>
+            <li><a href="task4.html" target="fileIframe">تطبيق 4</a></li>
+            <li><a href="task5.html" target="fileIframe">تطبيق 5</a></li>
+            <li><a href="task6.html" target="fileIframe">تطبيق 6</a></li>
+            <li><a href="task7.html" target="fileIframe">تطبيق 7</a></li>
+            <li><a href="task8.html" target="fileIframe">تطبيق 8</a></li>
+            <li><a href="task9.html" target="fileIframe">تطبيق 9</a></li>
+            <li><a href="task10.html" target="fileIframe">تطبيق 10</a></li>
+            <li><a href="task11.html" target="fileIframe">تطبيق 11</a></li>
+            <li><a href="task12.html" target="fileIframe">تطبيق 12</a></li>
+            <li><a href="task13.html" target="fileIframe">تطبيق 13</a></li>
+            <li><a href="task14.html" target="fileIframe">تطبيق 14</a></li>
+            <li><a href="task15.html" target="fileIframe">تطبيق 15</a></li>
+            <li><a href="task16.html" target="fileIframe">تطبيق 16</a></li>
+            <li><a href="task17.html" target="fileIframe">تطبيق 17</a></li>
+            <li><a href="task18.html" target="fileIframe">تطبيق 18</a></li>
+            <li><a href="task19.html" target="fileIframe">تطبيق 19</a></li>
+            <li><a href="task20.html" target="fileIframe">تطبيق 20</a></li>
+            <li><a href="task21.html" target="fileIframe">تطبيق 21</a></li>
         </ul>
-
-
     </nav>
-
-    <iframe id="fileIframe"></iframe>
-
-    <script>
-        function openFile(fileNumber) {
-            const iframe = document.getElementById("fileIframe");
-            iframe.src = `file${fileNumber}.html`; // Assuming the HTML files are named file1.html, file2.html, ..., file21.html
-        }
-    </script>
+    <main>
+        <iframe name="fileIframe"></iframe>
+    </main>
 </body>
 </html>
