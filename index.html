@@ -57,11 +57,13 @@
             overflow-y: auto;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            width: 100%;
         }
 
         iframe {
             width: 100%;
-            height: calc(100vh - 60px); /* Adjust height for padding and margin */
+            height: calc(100vh - 30px); /* Adjust height for padding and margin */
             border: none;
             display: block;
         }
@@ -103,6 +105,14 @@
                 margin-left: 0;
             }
         }
+
+        @media (max-width: 768px) {
+            iframe {
+                height: calc(100vh - 60px); /* Adjust height for padding and margin */
+            }
+
+        }
+
     </style>
 </head>
 <body>
