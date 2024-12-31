@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>History and Scroll</title>
+    <title>Background Color Selector</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
@@ -15,93 +15,98 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-        }
-
-        .content {
-            height: 2000px;
-            background: linear-gradient(to bottom, #ffe6e6, #e6e6ff);
-            padding: 20px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.5s ease;
         }
 
-        .buttons {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #444;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-picker {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
         }
 
         button {
             padding: 10px 20px;
-            margin: 5px 0;
-            background: #4CAF50;
-            color: white;
+            font-size: 1rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s ease, transform 0.2s;
+            transition: transform 0.3s, background-color 0.3s;
         }
 
         button:hover {
-            background: #45a049;
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         button:active {
-            transform: scale(0.95);
+            transform: scale(1);
         }
 
-        h1 {
-            margin-bottom: 20px;
-            font-size: 2.5rem;
-            color: #333;
+        button:nth-child(1) {
+            background-color: #e74c3c;
+            color: white;
         }
 
-        p {
-            font-size: 1.2rem;
-            color: #666;
+        button:nth-child(2) {
+            background-color: #d19d0d;
+            color: white;
+        }
+
+        button:nth-child(3) {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        button:nth-child(4) {
+            background-color: #bdc3c7;
+            color: black;
         }
 
         footer {
             margin-top: 20px;
-            text-align: center;
             font-size: 0.9rem;
             color: #555;
         }
     </style>
 </head>
 <body>
-    <div class="buttons">
-        <button onclick="scrollToTop()">⬆️ العودة للأعلى</button>
-        <button onclick="goBack()">⬅️ العودة للخلف</button>
-        <button onclick="goForward()">➡️ التقدم للأمام</button>
+    <h1>تغيير لون الخلفية</h1>
+    <div class="color-picker">
+        <button onclick="changeColor('red')">أحمر</button>
+        <button onclick="changeColor('yellow')">اصفر</button>
+        <button onclick="changeColor('green')">أخضر</button>
+        <button onclick="resetColor()">إعادة اللون الافتراضي</button>
     </div>
-    <div class="content">
-        <h1>مرحباً! جرّب الأزرار التفاعلية.</h1>
-        <p>استمر في التمرير للأسفل لترى تأثير الزر "العودة للأعلى".</p>
-    </div>
-    <footer>حقوق النشر © 2024 - واجهة تجريبية</footer>
+    <footer>استمتع بتجربة تغيير الألوان! 😊</footer>
 
     <script>
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth" // حركة سلسة عند العودة للأعلى
-            });
+        function changeColor(color) {
+            document.body.style.backgroundColor = color;
+            localStorage.setItem("backgroundColor", color);
         }
 
-        function goBack() {
-            window.history.back(); // التنقل للخلف باستخدام window.history
+        function resetColor() {
+            document.body.style.backgroundColor = "white";
+            localStorage.removeItem("backgroundColor");
         }
 
-        function goForward() {
-            window.history.forward(); // التنقل للأمام باستخدام window.history
+        // استعادة لون الخلفية عند تحميل الصفحة
+        const savedColor = localStorage.getItem("backgroundColor");
+        if (savedColor) {
+            document.body.style.backgroundColor = savedColor;
         }
     </script>
 </body>

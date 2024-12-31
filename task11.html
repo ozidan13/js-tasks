@@ -3,110 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Color Selector</title>
+    <title>Interactive Clock</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        /* General Body Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            text-align: center;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            transition: background-color 0.5s ease;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1d2b64, #f8cdda);
+            color: #fff;
+            text-align: center;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            color: #444;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
-        .color-picker {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
+        .clock {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #ffe53b;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            
+        }
+
+        .buttons {
+            margin: 20px 0;
         }
 
         button {
             padding: 10px 20px;
+            margin: 10px;
             font-size: 1rem;
+            color: #fff;
+            background: #ff6f61;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
+            transition: background 0.3s, transform 0.2s;
         }
 
         button:hover {
+            background: #e05446;
             transform: scale(1.1);
-        }
-
-        button:active {
-            transform: scale(1);
-        }
-
-        button:nth-child(1) {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-        button:nth-child(2) {
-            background-color: #d19d0d;
-            color: white;
-        }
-
-        button:nth-child(3) {
-            background-color: #2ecc71;
-            color: white;
-        }
-
-        button:nth-child(4) {
-            background-color: #bdc3c7;
-            color: black;
-        }
-
-        footer {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #555;
         }
     </style>
 </head>
 <body>
-    <h1>تغيير لون الخلفية</h1>
-    <div class="color-picker">
-        <button onclick="changeColor('red')">أحمر</button>
-        <button onclick="changeColor('yellow')">اصفر</button>
-        <button onclick="changeColor('green')">أخضر</button>
-        <button onclick="resetColor()">إعادة اللون الافتراضي</button>
+    <h1>الساعة التفاعلية</h1>
+    <div class="clock" id="clock">00:00:00</div>
+    <div class="buttons">
+        <button onclick="startClock()">ابدأ الساعة</button>
+        <button onclick="stopClock()">أوقف الساعة</button>
+        <button onclick="goToURL()">اذهب إلى رابط</button>
     </div>
-    <footer>استمتع بتجربة تغيير الألوان! 😊</footer>
 
     <script>
-        function changeColor(color) {
-            document.body.style.backgroundColor = color;
-            localStorage.setItem("backgroundColor", color);
+        let interval; // لتعقب حالة المؤقت
+
+        // وظيفة تشغيل الساعة
+        function startClock() {
+            if (interval) clearInterval(interval); // منع تشغيل مؤقت جديد إذا كان هناك مؤقت نشط
+            interval = setInterval(() => {
+                const now = new Date();
+                const time = now.toLocaleTimeString();
+                document.getElementById("clock").textContent = time;
+            }, 1000);
         }
 
-        function resetColor() {
-            document.body.style.backgroundColor = "white";
-            localStorage.removeItem("backgroundColor");
+        // وظيفة إيقاف الساعة
+        function stopClock() {
+            clearInterval(interval); // إيقاف المؤقت
+            interval = null;
         }
 
-        // استعادة لون الخلفية عند تحميل الصفحة
-        const savedColor = localStorage.getItem("backgroundColor");
-        if (savedColor) {
-            document.body.style.backgroundColor = savedColor;
+        // وظيفة فتح رابط
+        function goToURL() {
+            const url = prompt("أدخل الرابط الذي تريد الذهاب إليه:");
+            if (url && url.trim()) {
+                window.location.assign(url.trim());
+            }
         }
     </script>
 </body>
