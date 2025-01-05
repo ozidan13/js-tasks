@@ -72,11 +72,11 @@
     </div>
 
     <script>
-        let interval; // لتعقب حالة المؤقت
+        let interval; 
 
-        // وظيفة تشغيل الساعة
+       
         function startClock() {
-            if (interval) clearInterval(interval); // منع تشغيل مؤقت جديد إذا كان هناك مؤقت نشط
+            if (interval) clearInterval(interval); 
             interval = setInterval(() => {
                 const now = new Date();
                 const time = now.toLocaleTimeString();
@@ -84,13 +84,12 @@
             }, 1000);
         }
 
-        // وظيفة إيقاف الساعة
+        
         function stopClock() {
-            clearInterval(interval); // إيقاف المؤقت
+            clearInterval(interval);
             interval = null;
         }
 
-        // وظيفة فتح رابط
         function goToURL() {
             const url = prompt("أدخل الرابط الذي تريد الذهاب إليه:");
             if (url && url.trim()) {
