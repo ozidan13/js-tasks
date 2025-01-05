@@ -13,12 +13,14 @@
             background-color: #f0f4f8;
             margin: 0;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         h1 {
             color: #333;
             margin-bottom: 20px;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            animation: fadeInDown 1s ease-out;
         }
 
         .info {
@@ -31,6 +33,9 @@
             background-color: #fff;
             text-align: left;
             line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards ease-out;
         }
 
         .info p {
@@ -48,11 +53,35 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
+            animation: fadeInUp 1.5s ease-out;
         }
 
         button:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -76,7 +105,7 @@
         // Destructuring
         const { name, age, job, address: { city, zip }, language = "غير محدد" } = person;
 
-        // عرض البيانات
+        // Display data with animation
         const infoDiv = document.getElementById("info");
         infoDiv.innerHTML = `
             <p><strong>الاسم:</strong> ${name}</p>
@@ -87,7 +116,7 @@
             <p><strong>اللغة:</strong> ${language}</p>
         `;
 
-        // Destructuring داخل Function
+        // Destructuring inside function
         function displayGreeting({ name, age, job }) {
             alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);
         }
