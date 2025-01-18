@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,14 +13,12 @@
             background-color: #f0f4f8;
             margin: 0;
             padding: 20px;
-            overflow-x: hidden;
         }
 
         h1 {
             color: #333;
             margin-bottom: 20px;
-            font-size: 2.5rem;
-            animation: fadeInDown 1s ease-out;
+            font-size: 2rem;
         }
 
         .info {
@@ -33,9 +31,6 @@
             background-color: #fff;
             text-align: left;
             line-height: 1.6;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s forwards ease-out;
         }
 
         .info p {
@@ -53,35 +48,43 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s;
-            animation: fadeInUp 1.5s ease-out;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
             background-color: #0056b3;
-            transform: scale(1.05);
         }
 
-        @keyframes fadeInDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .code-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #272822;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #f8f8f2;
+            text-align: left;
+            direction: ltr;
         }
 
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        pre {
+            margin: 0;
+            overflow-x: auto;
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            color: #66d9ef;
+        }
+
+        .line-number {
+            display: inline-block;
+            width: 30px;
+            color: #75715e;
+            user-select: none;
         }
     </style>
 </head>
@@ -89,14 +92,44 @@
     <h1>بيانات الشخص</h1>
     <div class="info" id="info"></div>
     <button onclick="displayGreeting(person)">عرض رسالة ترحيب</button>
+    
+    <div class="code-container">
+        <pre><code>
+<span class="line-number">1</span> <span>const person = {</span>
+<span class="line-number">2</span> <span>    name: "محمد أحمد",</span>
+<span class="line-number">3</span> <span>    age: 30,</span>
+<span class="line-number">4</span> <span>    job: "مهندس برمجيات",</span>
+<span class="line-number">5</span> <span>    address: {</span>
+<span class="line-number">6</span> <span>        city: "القاهرة",</span>
+<span class="line-number">7</span> <span>        zip: "12345"</span>
+<span class="line-number">8</span> <span>    }</span>
+<span class="line-number">9</span> <span>};</span>
+
+<span class="line-number">10</span> <span>const { name, age, job, address: { city, zip }, language = "غير محدد" } = person;</span>
+
+<span class="line-number">11</span> <span>const infoDiv = document.getElementById("info");</span>
+<span class="line-number">12</span> <span>infoDiv.innerHTML = `</span>
+<span class="line-number">13</span> <span>    <p><strong>الاسم:</strong> ${name}</p></span>
+<span class="line-number">14</span> <span>    <p><strong>العمر:</strong> ${age}</p></span>
+<span class="line-number">15</span> <span>    <p><strong>الوظيفة:</strong> ${job}</p></span>
+<span class="line-number">16</span> <span>    <p><strong>المدينة:</strong> ${city}</p></span>
+<span class="line-number">17</span> <span>    <p><strong>الرمز البريدي:</strong> ${zip}</p></span>
+<span class="line-number">18</span> <span>    <p><strong>اللغة:</strong> ${language}</p></span>
+<span class="line-number">19</span> <span>`;</span>
+
+<span class="line-number">20</span> <span>function displayGreeting({ name, age, job }) {</span>
+<span class="line-number">21</span> <span>    alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);</span>
+<span class="line-number">22</span> <span>}</span>
+        </code></pre>
+    </div>
 
     <script>
         const person = {
-            name: "محمد أحمد",
+            name: "اسامة زينهم",
             age: 30,
             job: "مهندس برمجيات",
             address: {
-                city: "القاهرة",
+                city: "المنيا",
                 zip: "12345"
             },
             language: "العربية"
@@ -105,7 +138,7 @@
         // Destructuring
         const { name, age, job, address: { city, zip }, language = "غير محدد" } = person;
 
-        // Display data with animation
+        // عرض البيانات
         const infoDiv = document.getElementById("info");
         infoDiv.innerHTML = `
             <p><strong>الاسم:</strong> ${name}</p>
@@ -116,7 +149,7 @@
             <p><strong>اللغة:</strong> ${language}</p>
         `;
 
-        // Destructuring inside function
+        // Destructuring داخل Function
         function displayGreeting({ name, age, job }) {
             alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);
         }

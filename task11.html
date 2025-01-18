@@ -4,17 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Clock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
     <style>
         /* General Body Styling */
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
-
-        * {
-            font-family: 'Cairo', sans-serif;
-        }
-
         body {
             margin: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Cairo', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -37,7 +33,6 @@
             margin: 20px 0;
             color: #ffe53b;
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            
         }
 
         .buttons {
@@ -60,6 +55,22 @@
             background: #e05446;
             transform: scale(1.1);
         }
+
+        /* Code Block Styling */
+        pre {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -71,10 +82,36 @@
         <button onclick="goToURL()">اذهب إلى رابط</button>
     </div>
 
-    <script>
-        let interval; 
+    <pre><code class="language-javascript">
+let interval;
 
-       
+function startClock() {
+    if (interval) clearInterval(interval); 
+    interval = setInterval(() => {
+        const now = new Date();
+        const time = now.toLocaleTimeString();
+        document.getElementById("clock").textContent = time;
+    }, 1000);
+}
+
+function stopClock() {
+    clearInterval(interval);
+    interval = null;
+}
+
+function goToURL() {
+    const url = prompt("أدخل الرابط الذي تريد الذهاب إليه:");
+    if (url && url.trim()) {
+        window.location.assign(url.trim());
+    }
+}
+    </code></pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+        let interval;
+
         function startClock() {
             if (interval) clearInterval(interval); 
             interval = setInterval(() => {
@@ -84,7 +121,6 @@
             }, 1000);
         }
 
-        
         function stopClock() {
             clearInterval(interval);
             interval = null;

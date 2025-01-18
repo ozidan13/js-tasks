@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Background Color Selector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* General Body Styling */
         body {
             font-family: 'Cairo', sans-serif;
             text-align: center;
@@ -51,10 +46,6 @@
             transform: scale(1.1);
         }
 
-        button:active {
-            transform: scale(1);
-        }
-
         button:nth-child(1) {
             background-color: #e74c3c;
             color: white;
@@ -80,6 +71,22 @@
             font-size: 0.9rem;
             color: #555;
         }
+
+        /* Code Block Styling */
+        pre {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +99,26 @@
     </div>
     <footer>استمتع بتجربة تغيير الألوان! 😊</footer>
 
+    <pre><code class="language-javascript">
+function changeColor(color) {
+    document.body.style.backgroundColor = color;
+    localStorage.setItem("backgroundColor", color);
+}
+
+function resetColor() {
+    document.body.style.backgroundColor = "white";
+    localStorage.removeItem("backgroundColor");
+}
+
+// استعادة لون الخلفية عند تحميل الصفحة
+const savedColor = localStorage.getItem("backgroundColor");
+if (savedColor) {
+    document.body.style.backgroundColor = savedColor;
+}
+    </code></pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
         function changeColor(color) {
             document.body.style.backgroundColor = color;

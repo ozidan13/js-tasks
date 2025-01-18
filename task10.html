@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Table</title>
     <style>
-        /* General Body Styling */
+        /* Import custom fonts for better typography */
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
 
         * {
             font-family: 'Cairo', sans-serif;
         }
 
-        /* Reset and base styling */
+        /* Reset and base styling for body */
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #ffffff;
             display: flex;
@@ -32,6 +31,7 @@
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
+        /* Styling for the table */
         table {
             width: 70%;
             margin: 20px 0;
@@ -57,10 +57,7 @@
 
         td {
             font-size: 1rem;
-            color: #ffffff;
         }
-
-        
 
         tr:hover {
             background-color: rgba(255, 255, 255, 0.1);
@@ -70,18 +67,15 @@
         .delete-btn {
             color: #ff4c4c;
             cursor: pointer;
-            transition: transform 0.2s, color 0.2s;
         }
 
         .delete-btn:hover {
-            transform: scale(1.1);
             color: #ff1e1e;
         }
 
+        /* Styling for the form */
         form {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             gap: 10px;
             margin-top: 20px;
         }
@@ -91,58 +85,41 @@
             font-size: 1rem;
             border: none;
             border-radius: 5px;
-            outline: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        input {
-            flex: 1;
-            min-width: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            transition: all 0.3s ease-in-out;
-        }
-
-        input:focus {
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
         }
 
         button {
             background: linear-gradient(135deg, #0ef5e3, #1e90ff);
-            color: #000000;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
+            color: #000;
         }
 
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.5);
-        }
-
-        /* responsive styling */
         @media screen and (max-width: 768px) {
             table {
                 width: 90%;
             }
 
-            th, td {
-                padding: 10px;
-            }
-
             form {
                 flex-direction: column;
-                align-items: center;
             }
 
             input, button {
                 width: 100%;
             }
+        }
 
-            form {
-                width: 83%;
-            }
+        /* Style for code block */
+        pre {
+            background: #1e1e1e;
+            color: #0ef5e3;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            overflow-x: auto;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
         }
     </style>
 </head>
@@ -166,7 +143,12 @@
         <button type="submit">إضافة مستخدم</button>
     </form>
 
+    <pre>
+        <code id="jsCode"></code>
+    </pre>
+
     <script>
+        // JavaScript code for user table functionality
         const users = [];
         const userTable = document.getElementById("userTable");
 
@@ -199,6 +181,43 @@
             users.splice(index, 1);
             displayUsers();
         }
+
+        // Display JavaScript code dynamically in the code block
+        const jsCode = `
+        const users = [];
+        const userTable = document.getElementById("userTable");
+
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const email = document.getElementById("email").value;
+
+            users.push({ name, age, email });
+            displayUsers();
+            this.reset();
+        });
+
+        function displayUsers() {
+            userTable.innerHTML = "";
+            users.forEach((user, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = \`
+                    <td>\${user.name}</td>
+                    <td>\${user.age}</td>
+                    <td>\${user.email}</td>
+                    <td><span class="delete-btn" onclick="deleteUser(\${index})">حذف</span></td>
+                \`;
+                userTable.appendChild(row);
+            });
+        }
+
+        function deleteUser(index) {
+            users.splice(index, 1);
+            displayUsers();
+        }
+        `;
+        document.getElementById("jsCode").textContent = jsCode;
     </script>
 </body>
 </html>

@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Product List with Enhanced Code Block</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
     <style>
-        /* Reset and base styling */
+        /* General Body Styling */
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #4e54c8, #8f94fb);
-            color: #ffffff;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f4f8;
+            transition: background-color 0.5s ease;
+            margin: 0;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #444;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
         }
 
+        /* Product List */
         .filter {
             display: flex;
             gap: 10px;
@@ -39,14 +43,14 @@
             outline: none;
             font-size: 1rem;
             background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            color: #444;
             width: 200px;
             transition: background 0.3s, box-shadow 0.3s;
         }
 
         .filter input:focus {
             background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
         }
 
         .filter button {
@@ -55,15 +59,15 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
-            color: #000;
+            background: #3498db;
+            color: white;
             font-weight: bold;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .filter button:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(255, 126, 95, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         #productContainer {
@@ -93,12 +97,52 @@
         .product h3 {
             font-size: 1.5rem;
             margin: 10px 0;
-            color: #fcd34d;
+            color: #f39c12;
         }
 
         .product p {
             font-size: 1.2rem;
             margin: 0;
+        }
+
+        /* Modern Code Block Styling */
+        pre {
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            margin-top: 30px;
+            padding-top: 5rem;
+            overflow-x: auto;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        pre::before {
+            content: 'JavaScript Code';
+            position: absolute;
+            top: 5px;
+            left: 20px;
+            background-color: #3498db;
+            padding: 6px 18px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        pre:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            color: #f8f8f2;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     </style>
 </head>
@@ -110,7 +154,54 @@
     </div>
     <div id="productContainer"></div>
 
+    <!-- Enhanced Code Block for JavaScript -->
+    <pre><code class="language-javascript">
+// JavaScript logic for displaying and filtering products
+const products = [
+    { name: "منتج 1", price: 50 },
+    { name: "منتج 2", price: 150 },
+    { name: "منتج 3", price: 80 },
+    { name: "منتج 4", price: 200 },
+];
+
+const productContainer = document.getElementById("productContainer");
+
+function displayProducts(filteredProducts) {
+    productContainer.innerHTML = "";
+    if (filteredProducts.length === 0) {
+        productContainer.innerHTML = `
+            <p style="text-align: center; font-size: 1.2rem; color: #f39c12;">لا توجد منتجات مطابقة للفلتر.</p>
+        `;
+        return;
+    }
+    filteredProducts.forEach(product => {
+        const productDiv = document.createElement("div");
+        productDiv.className = "product";
+        productDiv.innerHTML = \`
+            <h3>\${product.name}</h3>
+            <p>السعر: \${product.price} جنيه</p>
+        \`;
+        productContainer.appendChild(productDiv);
+    });
+}
+
+function filterProducts() {
+    const maxPrice = parseInt(document.getElementById("priceFilter").value);
+    if (!isNaN(maxPrice)) {
+        const filtered = products.filter(product => product.price <= maxPrice);
+        displayProducts(filtered);
+    } else {
+        displayProducts(products);
+    }
+}
+
+displayProducts(products);
+    </code></pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
+        // JavaScript code is the same as shown in the <code> block above
         const products = [
             { name: "منتج 1", price: 50 },
             { name: "منتج 2", price: 150 },
@@ -124,7 +215,7 @@
             productContainer.innerHTML = "";
             if (filteredProducts.length === 0) {
                 productContainer.innerHTML = `
-                    <p style="text-align: center; font-size: 1.2rem; color: #f9a825;">لا توجد منتجات مطابقة للفلتر.</p>
+                    <p style="text-align: center; font-size: 1.2rem; color: #f39c12;">لا توجد منتجات مطابقة للفلتر.</p>
                 `;
                 return;
             }
