@@ -1,123 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set and Map Example</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>تطبيق Set و Map</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f0f0f0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
         }
 
-        h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            animation: fadeIn 1.5s ease-out;
+        /* Learning Objective Section */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
-        .data-container {
-            margin: 20px auto;
-            padding: 20px;
-            border: 2px solid #ccc;
-            width: 320px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            animation: slideUp 0.8s ease-out;
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .data-container h2 {
-            font-size: 1.5em;
-            color: #555;
-            margin-bottom: 10px;
+        /* Demo Section */
+        .demo-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .info {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
         }
 
-        li {
-            background-color: #f9f9f9;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+        .info ul {
+            padding-left: 1rem;
+        }
+
+        .info li {
+            margin: 0.5rem 0;
+        }
+
+        .info p {
+            margin: 0.5rem 0;
+            color: var(--text-light);
+        }
+
+        .info strong {
+            color: var(--text-dark);
+        }
+
+        /* Code Display Section */
+        .code-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .code-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            direction: ltr;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-tab {
+            background: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            color: white;
+            display: inline-block;
+            margin-bottom: -1px;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
             cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        li:hover {
-            background-color: #e0e0e0;
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        p {
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 5px;
-            transition: background-color 0.3s ease;
-        }
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
 
-        p:hover {
-            background-color: #e0e0e0;
-        }
+            .objective-section,
+            .demo-section,
+            .code-section {
+                padding: 1.5rem;
+            }
 
-        .fa {
-            margin-right: 10px;
-            color: #4CAF50;
-            transition: transform 0.3s ease;
-        }
-
-        .fa:hover {
-            transform: scale(1.2);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            pre {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Set and Map Example</h1>
-    <div id="setData" class="data-container"></div>
-    <div id="mapData" class="data-container"></div>
+    <!-- Learning Objective Section -->
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم كيفية استخدام <strong>Set</strong> و <strong>Map</strong> في JavaScript لإدارة البيانات بكفاءة، مع التركيز على العمليات الأساسية مثل الإضافة، الحذف، والاسترجاع.</p>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <h2>عرض تطبيقي</h2>
+        <div class="info" id="setData"></div>
+        <div class="info" id="mapData"></div>
+    </section>
+
+    <!-- Code Section -->
+    <section class="code-section">
+        <h2>الشرح البرمجي</h2>
+        <div class="code-tab">JavaScript</div>
+        <div class="code-container">
+            <pre><code>// Set Example
+const userSet = new Set(["Osama", "Ahmed", "Ali"]);
+userSet.add("Reda");
+userSet.delete("Ali");
+
+// Map Example
+const productMap = new Map();
+productMap.set("Laptop", { price: 15000, quantity: 3 });
+productMap.set("Phone", { price: 8000, quantity: 5 });
+
+console.log([...userSet]);
+console.log([...productMap.entries()]);
+</code></pre>
+        </div>
+    </section>
 
     <script>
-        // Set
+        // Set Data
         const userSet = new Set(["Osama", "Ahmed", "Ali"]);
-        userSet.add("Reda"); 
+        userSet.add("Reda");
         userSet.delete("Ali");
 
         const setDataDiv = document.getElementById("setData");
         setDataDiv.innerHTML = `
-            <h2><i class="fa fa-users"></i>Users (Set):</h2>
+            <h3>المستخدمون:</h3>
             <ul>${[...userSet].map(user => `<li>${user}</li>`).join("")}</ul>
         `;
 
-        // Map
+        // Map Data
         const productMap = new Map();
         productMap.set("Laptop", { price: 15000, quantity: 3 });
         productMap.set("Phone", { price: 8000, quantity: 5 });
 
         const mapDataDiv = document.getElementById("mapData");
         mapDataDiv.innerHTML = `
-            <h2><i class="fa fa-box"></i>Products (Map):</h2>
+            <h3>المنتجات:</h3>
             ${[...productMap.entries()]
                 .map(([product, { price, quantity }]) => `
-                <p><i class="fa fa-tag"></i>${product}: Price ${price} EGP, Quantity ${quantity}</p>
+                <p><strong>${product}:</strong> السعر ${price} جنيه، الكمية ${quantity}</p>
             `).join("")}
         `;
     </script>

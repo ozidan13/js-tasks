@@ -1,96 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Cleaning</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>تنظيف البيانات</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f0f0f0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
         }
 
-        h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            animation: fadeIn 1.5s ease-out;
+        /* Learning Objective Section */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
-        .output {
-            margin: 20px auto;
-            padding: 20px;
-            border: 2px solid #ccc;
-            width: 320px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            animation: slideUp 0.8s ease-out;
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .output h2 {
-            font-size: 1.5em;
-            color: #555;
-            margin-bottom: 10px;
+        /* Demo Section */
+        .demo-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .info {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
         }
 
-        li {
-            background-color: #f9f9f9;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
+        .info ul {
+            padding-left: 1rem;
+        }
+
+        .info li {
+            background: var(--bg-white);
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease;
         }
 
-        li:hover {
+        .info li:hover {
             background-color: #e0e0e0;
         }
 
-        .fa {
-            margin-right: 10px;
-            color: #4CAF50;
-            transition: transform 0.3s ease;
+        .info strong {
+            color: var(--text-dark);
         }
 
-        .fa:hover {
-            transform: scale(1.2);
+        /* Code Display Section */
+        .code-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .code-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            direction: ltr;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-tab {
+            background: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            color: white;
+            display: inline-block;
+            margin-bottom: -1px;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .objective-section,
+            .demo-section,
+            .code-section {
+                padding: 1.5rem;
+            }
+
+            pre {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Data Cleaning</h1>
-    <div class="output" id="output"></div>
+    <!-- Learning Objective Section -->
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم كيفية تنظيف البيانات من النصوص باستخدام JavaScript، مع التركيز على إزالة الرموز الغير مرغوب فيها وتصحيح الأخطاء الشائعة في القيم النصية.</p>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <h2>عرض تطبيقي</h2>
+        <div class="info" id="output"></div>
+    </section>
+
+    <!-- Code Section -->
+    <section class="code-section">
+        <h2>الشرح البرمجي</h2>
+        <div class="code-tab">JavaScript</div>
+        <div class="code-container">
+            <pre><code>// Data Cleaning Example
+const names = ["Mohamed", "Sara123", "Ali@!", "Ahmed"];
+names.push("Osama"); // Adding Osama
+
+// Cleaning and Filtering
+const cleanedNames = [...names.map(name => name.trim().replace(/[^a-zA-Zء-ي ]/g, ""))];
+const updatedNames = cleanedNames.filter(name => name !== "Sara");
+
+// Displaying Results
+console.log(updatedNames);
+</code></pre>
+        </div>
+    </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const names = ["Mohamed", "Sara123", "Ali@!", "Ahmed"];
             names.push("Osama"); // Adding Osama
-            const cleanedNames = [...names.map(name => name.trim().replace(/[^a-zA-Z\u0621-\u064A ]/g, ""))];
+
+            const cleanedNames = [...names.map(name => name.trim().replace(/[^a-zA-Zء-ي ]/g, ""))];
             const updatedNames = cleanedNames.filter(name => name !== "Sara"); // Removing Sara
 
             const outputDiv = document.getElementById("output");
             outputDiv.innerHTML = `
-                <h2><i class="fa fa-check-circle"></i> Cleaned Names:</h2>
+                <h3>الأسماء المُنظفة:</h3>
                 <ul>${updatedNames.map(name => `<li>${name}</li>`).join("")}</ul>
             `;
         });

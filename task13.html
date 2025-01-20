@@ -3,99 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Destructuring Example</title>
+    <title>تطبيق Destructuring</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            text-align: center;
-            background-color: #f0f4f8;
-            margin: 0;
-            padding: 20px;
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 2rem;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        /* Learning Objective Section */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
         .info {
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 400px;
-            background-color: #fff;
-            text-align: left;
-            line-height: 1.6;
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
         }
 
         .info p {
-            margin: 10px 0;
-            color: #555;
-            font-size: 1.1rem;
+            margin: 0.5rem 0;
+            color: var(--text-light);
         }
 
-        button {
-            padding: 10px 20px;
-            margin-top: 15px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #007BFF;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        .info strong {
+            color: var(--text-dark);
         }
 
-        button:hover {
-            background-color: #0056b3;
+        /* Code Display Section */
+        .code-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
         .code-container {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #272822;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            color: #f8f8f2;
-            text-align: left;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
             direction: ltr;
         }
 
         pre {
             margin: 0;
-            overflow-x: auto;
-            font-size: 1rem;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            color: #66d9ef;
-        }
-
-        .line-number {
+        .code-tab {
+            background: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            color: white;
             display: inline-block;
-            width: 30px;
-            color: #75715e;
-            user-select: none;
+            margin-bottom: -1px;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .objective-section,
+            .demo-section,
+            .code-section {
+                padding: 1.5rem;
+            }
+
+            pre {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>بيانات الشخص</h1>
-    <div class="info" id="info"></div>
-    <button onclick="displayGreeting(person)">عرض رسالة ترحيب</button>
-    
+    <!-- Learning Objective Section -->
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم استخدام خاصية Destructuring في JavaScript للتعامل مع الكائنات (Objects) بشكل أكثر كفاءة وسهولة، مع التركيز على استخراج البيانات المتداخلة والقيم الافتراضية.</p>
+    </section>
 
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <h2>عرض تطبيقي</h2>
+        <div class="info" id="info"></div>
+        <button onclick="displayGreeting(person)">عرض رسالة ترحيب</button>
+    </section>
+
+    <!-- Code Section -->
+    <section class="code-section">
+        <h2>الشرح البرمجي</h2>
+        <div class="code-tab">JavaScript</div>
+        <div class="code-container">
+            <pre><code>// تعريف كائن الشخص
+const person = {
+    name: "اسامة زينهم",
+    age: 30,
+    job: "مهندس برمجيات",
+    address: {
+        city: "المنيا",
+        zip: "12345"
+    },
+    language: "العربية"
+};
+
+// استخدام Destructuring لاستخراج البيانات
+const { 
+    name, 
+    age, 
+    job, 
+    address: { city, zip }, 
+    language = "غير محدد" 
+} = person;
+
+// استخدام Destructuring في الدوال
+function displayGreeting({ name, age, job }) {
+    alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);
+}</code></pre>
+        </div>
+    </section>
 
     <script>
+        // بيانات الشخص
         const person = {
             name: "اسامة زينهم",
             age: 30,
@@ -121,7 +213,7 @@
             <p><strong>اللغة:</strong> ${language}</p>
         `;
 
-        // Destructuring داخل Function
+        // دالة عرض الترحيب
         function displayGreeting({ name, age, job }) {
             alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);
         }
