@@ -1,65 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Information</title>
+    <title>معلومات الكتب</title>
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f7f9fc;
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            text-align: center;
-            overflow-x: hidden;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
 
-        h1 {
-            margin-top: 40px;
-            font-size: 3em;
-            color: #2c3e50;
-            font-weight: 700;
-            letter-spacing: 1px;
-            animation: fadeIn 1s ease-out;
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
         }
 
-        /* Container for Books */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .demo-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
         .book-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 30px;
+            justify-content: center;
             margin-top: 40px;
-            animation: fadeInUp 1s ease-out;
         }
 
-        /* Individual Book Card */
         .book {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 12px;
+            background-color: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
             width: 300px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .book:hover {
-            transform: translateY(-15px);
+            transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
         .book p {
             font-size: 1.1em;
-            color: #34495e;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            text-align: left;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
         }
 
         .book button {
-            background-color: #3498db;
+            background-color: var(--primary-color);
             color: white;
             border: none;
             padding: 12px 20px;
@@ -70,109 +99,169 @@
         }
 
         .book button:hover {
-            background-color: #2980b9;
+            background-color: var(--accent-color);
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .book-container {
-                gap: 20px;
-            }
+        .code-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .code-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* make pre and code ltr direction */
+        pre {
+            direction: ltr;
+        }
+
+        code {
+            direction: ltr; 
+        }
+
+        .code-tab {
+            background: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            color: white;
+            display: inline-block;
+            margin-bottom: -1px;
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .book-container {
+                gap: 20px;
+            }
+
             .book {
                 width: 90%;
             }
 
-            h1 {
-                font-size: 2.2em;
+            pre {
+                font-size: 0.8rem;
             }
         }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8em;
-            }
-        }
-
-        /* Animation Keyframes */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
     </style>
 </head>
 <body>
-    <h1>Book Information</h1>
-    <div class="book-container" id="bookContainer"></div>
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم كيفية التعامل مع معلومات الكتب وعرضها باستخدام JavaScript، بالإضافة إلى بناء واجهة تفاعلية لعرض تفاصيل الكتب.</p>
+    </section>
+
+    <section class="demo-section">
+        <h2>عرض تطبيقي</h2>
+        <div class="book-container" id="bookContainer"></div>
+    </section>
+
+    <section class="code-section">
+        <h2>الشرح البرمجي</h2>
+        <div class="code-tab">JavaScript</div>
+        <div class="code-container">
+            <pre><code>
+// Book Class Definition
+class Book {
+    constructor(title, author, pages) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+    }
+
+    getDetails() {
+        return `${this.title} by ${this.author} - ${this.pages} pages.`;
+    }
+}
+
+// Ebook Class Definition (extends Book)
+class Ebook extends Book {
+    constructor(title, author, pages, fileSize) {
+        super(title, author, pages);
+        this.fileSize = fileSize;
+    }
+
+    getEbookDetails() {
+        return `${this.getDetails()} Available in ebook format with a file size of ${this.fileSize}MB.`;
+    }
+}
+
+// Create Instances of Book and Ebook
+const book1 = new Book("The Subtle Art of Not Giving a F*ck", "Mark Manson", 300);
+const ebook1 = new Ebook("How to Win Friends and Influence People", "Dale Carnegie", 250, 2.5);
+
+// Get book container element
+const bookContainer = document.getElementById("bookContainer");
+
+// Display Books on Page
+[book1, ebook1].forEach(book => {
+    const bookDiv = document.createElement("div");
+    bookDiv.className = "book";
+    bookDiv.innerHTML = `
+        <p>${book instanceof Ebook ? book.getEbookDetails() : book.getDetails()}</p>
+        <button onclick="alert('Enjoy your reading!')">ابدأ القراءة</button>
+    `;
+    bookContainer.appendChild(bookDiv);
+});
+            </code></pre>
+        </div>
+    </section>
 
     <script>
-        // Book Class Definition
-        class Book {
-            constructor(title, author, pages) {
-                this.title = title;
-                this.author = author;
-                this.pages = pages;
+        document.addEventListener("DOMContentLoaded", function () {
+            class Book {
+                constructor(title, author, pages) {
+                    this.title = title;
+                    this.author = author;
+                    this.pages = pages;
+                }
+
+                getDetails() {
+                    return `${this.title} by ${this.author} - ${this.pages} pages.`;
+                }
             }
 
-            getDetails() {
-                return `${this.title} by ${this.author} - ${this.pages} pages.`;
+            class Ebook extends Book {
+                constructor(title, author, pages, fileSize) {
+                    super(title, author, pages);
+                    this.fileSize = fileSize;
+                }
+
+                getEbookDetails() {
+                    return `${this.getDetails()} Available in ebook format with a file size of ${this.fileSize}MB.`;
+                }
             }
-        }
 
-        // Ebook Class Definition (extends Book)
-        class Ebook extends Book {
-            constructor(title, author, pages, fileSize) {
-                super(title, author, pages);
-                this.fileSize = fileSize;
-            }
+            const book1 = new Book("The Subtle Art of Not Giving a Mercy", "Mark Manson", 300);
+            const ebook1 = new Ebook("How to Win Friends and Influence People", "Dale Carnegie", 250, 2.5);
+            const bookContainer = document.getElementById("bookContainer");
 
-            getEbookDetails() {
-                return `${this.getDetails()} Available in ebook format with a file size of ${this.fileSize}MB.`;
-            }
-        }
-
-        // Add a "thank you" message to the Book prototype
-        Book.prototype.thankYou = function() {
-            return "Thank you for reading our book!";
-        };
-
-        // Create Instances of Book and Ebook
-        const book1 = new Book("The Subtle Art of Not Giving a F*ck", "Mark Manson", 300);
-        const ebook1 = new Ebook("How to Win Friends and Influence People", "Dale Carnegie", 250, 2.5);
-
-        // Get book container element
-        const bookContainer = document.getElementById("bookContainer");
-
-        // Display Books on Page
-        [book1, ebook1].forEach(book => {
-            const bookDiv = document.createElement("div");
-            bookDiv.className = "book";
-            bookDiv.innerHTML = `
-                <p>${book instanceof Ebook ? book.getEbookDetails() : book.getDetails()}</p>
-                <p>${book.thankYou()}</p>
-                <button onclick="alert('Enjoy your reading!')">Start Reading</button>
-            `;
-            bookContainer.appendChild(bookDiv);
+            [book1, ebook1].forEach(book => {
+                const bookDiv = document.createElement("div");
+                bookDiv.className = "book";
+                bookDiv.innerHTML = `
+                    <p>${book instanceof Ebook ? book.getEbookDetails() : book.getDetails()}</p>
+                    <button onclick="alert('Enjoy your reading!')">ابدأ القراءة</button>
+                `;
+                bookContainer.appendChild(bookDiv);
+            });
         });
     </script>
 </body>

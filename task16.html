@@ -1,180 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Validation</title>
+    <title>التحقق من صحة النموذج</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #6e7dff, #b99aff);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-            text-align: center;
-            padding: 20px;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
         }
 
-        h1 {
-            font-size: 2.5em;
-            color: #fff;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1s ease-out;
+        /* Objective Section */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
         form {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-            padding: 30px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            animation: scaleIn 0.8s ease-in-out;
+            gap: 1rem;
+        }
+
+        label {
+            font-weight: 700;
         }
 
         input {
-            padding: 12px;
-            font-size: 1.1em;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            transition: all 0.3s ease;
-            outline: none;
+            padding: 0.8rem;
+            border: 1px solid var(--text-light);
+            border-radius: 0.5rem;
+            font-size: 1rem;
         }
 
         input:focus {
-            border-color: #6e7dff;
-            box-shadow: 0 0 10px rgba(110, 125, 255, 0.5);
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 4px var(--primary-color);
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
         }
 
         button {
-            padding: 12px;
-            font-size: 1.2em;
+            background: var(--primary-color);
             color: white;
-            background-color: #6e7dff;
             border: none;
-            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         button:hover {
-            background-color: #575fca;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .error {
-            color: #ff4d4d;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-top: 15px;
-            animation: slideIn 1s ease-out;
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
-        .success {
-            color: #4CAF50;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-top: 15px;
-            animation: slideIn 1s ease-out;
+        .code-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            direction: ltr;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        @keyframes scaleIn {
-            from {
-                transform: scale(0.8);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2em;
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
             }
 
-            form {
-                width: 90%;
-                padding: 20px;
+            .objective-section,
+            .form-section,
+            .code-section {
+                padding: 1.5rem;
             }
 
-            input, button {
-                font-size: 1em;
-                padding: 10px;
+            pre {
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <div>
-        <h1>Form Validation</h1>
-        <form id="userForm">
-            <input type="text" id="username" placeholder="Username (3-10 characters)" required>
-            <input type="email" id="email" placeholder="Email Address" required>
-            <input type="text" id="phone" placeholder="Phone Number (10 digits)" required>
-            <button type="submit">Submit</button>
+    <!-- Objective Section -->
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم كيفية التحقق من صحة البيانات المدخلة في النماذج باستخدام JavaScript لضمان إدخال بيانات صحيحة وسليمة.</p>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <h2>النموذج التفاعلي</h2>
+        <form id="validationForm">
+            <label for="username">اسم المستخدم:</label>
+            <input type="text" id="username" name="username" placeholder="أدخل اسم المستخدم">
+            <div class="error-message" id="usernameError"></div>
+
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" placeholder="أدخل البريد الإلكتروني">
+            <div class="error-message" id="emailError"></div>
+
+            <button type="submit">إرسال</button>
         </form>
-        <p id="message"></p>
-    </div>
+    </section>
+
+    <!-- Code Section -->
+    <section class="code-section">
+        <h2>الشرح البرمجي</h2>
+        <div class="code-container">
+            <pre><code>// Form Validation Logic
+const form = document.getElementById('validationForm');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const usernameError = document.getElementById('usernameError');
+const emailError = document.getElementById('emailError');
+
+form.addEventListener('submit', (e) => {
+    let valid = true;
+
+    // Username Validation
+    if (username.value.trim() === '') {
+        usernameError.textContent = 'اسم المستخدم مطلوب.';
+        valid = false;
+    } else {
+        usernameError.textContent = '';
+    }
+
+    // Email Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.value)) {
+        emailError.textContent = 'البريد الإلكتروني غير صحيح.';
+        valid = false;
+    } else {
+        emailError.textContent = '';
+    }
+
+    if (!valid) {
+        e.preventDefault();
+    }
+});
+            </code></pre>
+        </div>
+    </section>
 
     <script>
-        const form = document.getElementById("userForm");
-        const message = document.getElementById("message");
+        // Form Validation Logic
+        const form = document.getElementById('validationForm');
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const usernameError = document.getElementById('usernameError');
+        const emailError = document.getElementById('emailError');
 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
+        form.addEventListener('submit', (e) => {
+            let valid = true;
 
-            const username = document.getElementById("username").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-
-            const usernameRegex = /^[a-zA-Z\u0621-\u064A]{3,10}$/;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const phoneRegex = /^\d{10}$/;
-
-            if (!usernameRegex.test(username)) {
-                message.textContent = "❌ Invalid username. Must be 3-10 characters.";
-                message.className = "error";
-            } else if (!emailRegex.test(email)) {
-                message.textContent = "❌ Invalid email address.";
-                message.className = "error";
-            } else if (!phoneRegex.test(phone)) {
-                message.textContent = "❌ Invalid phone number. Must be 10 digits.";
-                message.className = "error";
+            // Username Validation
+            if (username.value.trim() === '') {
+                usernameError.textContent = 'اسم المستخدم مطلوب.';
+                valid = false;
             } else {
-                message.textContent = "✅ Data is correct! Welcome.";
-                message.className = "success";
+                usernameError.textContent = '';
+            }
+
+            // Email Validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                emailError.textContent = 'البريد الإلكتروني غير صحيح.';
+                valid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            if (!valid) {
+                e.preventDefault();
             }
         });
     </script>

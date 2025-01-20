@@ -1,73 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Numbers</title>
+    <title>توليد أرقام عشوائية</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #3498db, #8e44ad);
-            color: #fff;
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
 
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            animation: fadeIn 1s ease-out;
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
         }
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            width: 90%;
+        /* Learning Objective Section */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
             animation: slideUp 1s ease-out;
         }
 
-        .button {
-            background-color: #2ecc71;
+        .info {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .info ul {
+            padding-left: 1rem;
+        }
+
+        .info li {
+            background: var(--bg-white);
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .info li:hover {
+            background-color: #e0e0e0;
+        }
+
+        .info strong {
+            color: var(--text-dark);
+        }
+
+        /* Code Display Section */
+        .code-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .code-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            direction: ltr;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-tab {
+            background: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            color: white;
+            display: inline-block;
+            margin-bottom: -1px;
+        }
+
+        button {
+            background: var(--primary-color);
             color: white;
             border: none;
-            padding: 15px 20px;
-            font-size: 1.2em;
-            border-radius: 10px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            margin: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.8);
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .numbers {
-            margin-top: 20px;
-            font-size: 1.5em;
-            color: #ecf0f1;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .objective-section,
+            .demo-section,
+            .code-section {
+                padding: 1.5rem;
+            }
+
+            pre {
+                font-size: 0.8rem;
             }
         }
 
@@ -81,33 +161,69 @@
                 opacity: 1;
             }
         }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .container {
-                padding: 20px;
-            }
-
-            .button {
-                padding: 10px 15px;
-                font-size: 1em;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>توليد أرقام عشوائية</h1>
-        <button class="button" onclick="generateRandomNumber()">توليد رقم جديد</button>
-        <p class="numbers" id="number"></p>
-        <button class="button" onclick="showAllNumbers()">عرض جميع الأرقام</button>
-        <p class="numbers" id="allNumbers"></p>
-    </div>
+    <!-- Learning Objective Section -->
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم كيفية توليد أرقام عشوائية باستخدام JavaScript، وتخزينها وعرضها بطريقة تفاعلية.</p>
+    </section>
 
-    <script type="module">
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <h2>عرض تطبيقي</h2>
+        <div class="info" id="number"></div>
+        <button class="button" onclick="generateRandomNumber()">توليد رقم عشوائي جديد</button>
+        <button class="button" onclick="showAllNumbers()">عرض جميع الأرقام</button>
+        <div class="info" id="allNumbers"></div>
+    </section>
+
+    <!-- Code Section -->
+    <section class="code-section">
+        <h2>الشرح البرمجي</h2>
+        <div class="code-tab">JavaScript</div>
+        <div class="code-container">
+            <pre><code>// Random Number Generator Example
+let generatedNumbers = [];
+
+// Generator function to generate random numbers
+function* randomNumberGenerator() {
+    while (true) {
+        yield Math.floor(Math.random() * 100) + 1;
+    }
+}
+
+const generator = randomNumberGenerator();
+
+// Function to generate a random number and add it to the list
+function generateRandomNumber() {
+    const number = generator.next().value;
+    generatedNumbers.push(number);
+    const numberElement = document.getElementById("number");
+    numberElement.textContent = `الرقم العشوائي: ${number}`;
+    numberElement.style.color = "#2ecc71";
+    numberElement.style.fontWeight = "bold";
+}
+
+// Function to display all generated numbers
+function showAllNumbers() {
+    const allNumbersElement = document.getElementById("allNumbers");
+    allNumbersElement.textContent = generatedNumbers.length
+        ? `الأرقام المنتجة: ${generatedNumbers.join(", ")}`
+        : "لم يتم إنتاج أرقام بعد.";
+    allNumbersElement.style.color = "#f1c40f";
+    allNumbersElement.style.fontWeight = "bold";
+}
+
+window.generateRandomNumber = generateRandomNumber;
+window.showAllNumbers = showAllNumbers;
+</code></pre>
+        </div>
+    </section>
+
+    <script>
+        // Random Number Generator Example
         let generatedNumbers = [];
 
         // Generator function to generate random numbers
@@ -139,7 +255,6 @@
             allNumbersElement.style.fontWeight = "bold";
         }
 
-        // Make functions globally accessible
         window.generateRandomNumber = generateRandomNumber;
         window.showAllNumbers = showAllNumbers;
     </script>

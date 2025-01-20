@@ -1,152 +1,254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Countdown</title>
+    <title>العد التنازلي للحدث</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
 
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #74ebd5, #9face6);
-            color: #fff;
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        /* Learning Objective Section */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .info {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            text-align: center;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            justify-content: space-between
+        }
+
+        .info ul {
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between
+        }
+
+        .info li {
+            background: var(--bg-white);
+            padding: 2rem;
+            margin: 0.5rem 0;
+            width: 100%;
             text-align: center;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            list-style: none;
+            cursor: pointer;
+            font-size: larger;
+            font-weight: 900;
         }
 
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            animation: fadeInDown 1s ease-out;
+        .info li:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
 
-        .event-info {
-            font-size: 1.5em;
-            margin: 20px 0;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1.5s ease-out;
+        /* Code Display Section */
+        .code-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
-        .countdown {
-            font-size: 2em;
-            font-weight: bold;
-            color: #333;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            margin-top: 20px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            animation: pulse 2s infinite;
+        .code-tab {
+            background: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            color: white;
+            display: inline-block;
+            margin-bottom: -1px;
         }
 
-        .countdown.finished {
-            background-color: #28a745;
-            color: #fff;
-            transform: scale(1.1);
-            animation: none;
+        .code-container {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            direction: ltr;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        button {
+            background: var(--primary-color);
+            color: white;
+            width: 100%;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: var(--accent-color);
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
+            body {
+                padding: 1rem;
             }
 
-            .event-info {
-                font-size: 1.2em;
-                padding: 15px;
+            .objective-section,
+            .demo-section,
+            .code-section {
+                padding: 1.5rem;
             }
 
-            .countdown {
-                font-size: 1.8em;
-                padding: 15px;
+            pre {
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Event Countdown</h1>
-    <p class="event-info" id="eventInfo"></p>
-    <div class="countdown" id="countdown"></div>
+    <!-- Learning Objective Section -->
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم كيفية تنفيذ العد التنازلي للـ Event باستخدام JavaScript، مع إضافة بعض التأثيرات المتقدمة لتحسين تجربة المستخدم.</p>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section">
+        <h2>عرض تطبيقي</h2>
+        <div class="info" id="countdown-display"></div>
+        <button id="start-countdown">ابدأ العد التنازلي</button>
+    </section>
+
+    <!-- Code Section -->
+    <section class="code-section">
+        <h2>الشرح البرمجي</h2>
+        <div class="code-tab">JavaScript</div>
+        <div class="code-container">
+            <pre><code>// Countdown Example
+const eventDate = new Date("Feb 28, 2025 15:00:00").getTime();
+
+let countdownInterval = setInterval(function () {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown-display").innerHTML =
+        `
+            <p>العد التنازلي للحدث:</p>
+            <ul>
+                <li>أيام: ${days}</li>
+                <li>ساعات: ${hours}</li>
+                <li>دقائق: ${minutes}</li>
+                <li>ثواني: ${seconds}</li>
+            </ul>
+        `;
+
+    if (distance < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("countdown-display").innerHTML = "الحدث قد بدأ!";
+    }
+}, 1000);
+
+// Start Countdown button functionality
+document.getElementById("start-countdown").addEventListener("click", function() {
+    countdownInterval; // Starts countdown when the button is clicked.
+});
+</code></pre>
+        </div>
+    </section>
 
     <script>
-        const event = {
-            name: "Programming Conference",
-            date: new Date("2025-02-25T23:59:59"),
-            description: "An event featuring the best programmers from the Arab world."
-        };
+        document.getElementById("start-countdown").addEventListener("click", function () {
+            const eventDate = new Date("Feb 28, 2025 15:00:00").getTime();
+            const countdownDisplay = document.getElementById("countdown-display");
 
-        Object.defineProperty(event, "date", {
-            writable: false,
-            configurable: false
+            let countdownInterval = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownDisplay.innerHTML =
+                    `
+                        <ul>
+                            <li>Days: ${days}</li>
+                            <li>Hours: ${hours}</li>
+                            <li>Minutes: ${minutes}</li>
+                            <li>Seconds: ${seconds}</li>
+                        </ul>
+                    `;
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    countdownDisplay.innerHTML = "الحدث قد بدأ!";
+                }
+            }, 1000);
         });
-
-        const eventInfo = document.getElementById("eventInfo");
-        eventInfo.textContent = `Event Name: ${event.name} | Description: ${event.description}`;
-
-        function updateCountdown() {
-            const now = new Date();
-            const timeLeft = event.date - now;
-
-            if (timeLeft <= 0) {
-                document.getElementById("countdown").textContent = "🎉 The event has ended!";
-                document.getElementById("countdown").classList.add("finished");
-                clearInterval(timer);
-                return;
-            }
-
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").textContent = 
-                `Time left: ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds.`;
-        }
-
-        const timer = setInterval(updateCountdown, 1000);
-        updateCountdown();
     </script>
 </body>
 </html>
