@@ -1,124 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Color Selector</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <title>مُحدد ألوان الخلفية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* General Body Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #470d99;
+            border-radius: 5px; 
+
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
         body {
-            font-family: 'Cairo', sans-serif;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
             transition: background-color 0.5s ease;
         }
 
+        .container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
             font-size: 2rem;
-            margin-bottom: 20px;
-            color: #444;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
         .color-picker {
             display: flex;
             flex-wrap: wrap;
+            gap: 1rem;
             justify-content: center;
-            gap: 10px;
+            margin: 2rem 0;
         }
 
         button {
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: transform 0.3s, background-color 0.3s;
+            transition: var(--transition);
+            font-weight: bold;
+            min-width: 120px;
         }
 
         button:hover {
-            transform: scale(1.1);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
 
-        button:nth-child(1) {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-        button:nth-child(2) {
-            background-color: #d19d0d;
-            color: white;
-        }
-
-        button:nth-child(3) {
-            background-color: #2ecc71;
-            color: white;
-        }
-
-        button:nth-child(4) {
-            background-color: #bdc3c7;
-            color: black;
-        }
+        .color-red { background-color: #e74c3c; color: white; }
+        .color-yellow { background-color: #f1c40f; color: black; }
+        .color-green { background-color: #2ecc71; color: white; }
+        .color-reset { background-color: #bdc3c7; color: black; }
 
         footer {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #555;
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
         }
 
-        /* Code Block Styling */
-        pre {
-            background: #2d2d2d;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            margin-top: 30px;
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
             overflow-x: auto;
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
         }
 
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
+        pre {
+            margin: 0;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .color-picker {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>تغيير لون الخلفية</h1>
-    <div class="color-picker">
-        <button onclick="changeColor('red')">أحمر</button>
-        <button onclick="changeColor('yellow')">اصفر</button>
-        <button onclick="changeColor('green')">أخضر</button>
-        <button onclick="resetColor()">إعادة اللون الافتراضي</button>
+    <div class="container">
+        <section class="objective-section">
+            <h2>الهدف التعليمي</h2>
+            <p>تعلم كيفية تغيير لون خلفية الصفحة وحفظ التفضيلات باستخدام JavaScript و localStorage.</p>
+        </section>
+
+        <h1>مُحدد ألوان الخلفية</h1>
+        <div class="color-picker">
+            <button class="color-red" onclick="changeColor('#e74c3c')">أحمر</button>
+            <button class="color-yellow" onclick="changeColor('#f1c40f')">أصفر</button>
+            <button class="color-green" onclick="changeColor('#2ecc71')">أخضر</button>
+            <button class="color-reset" onclick="resetColor()">إعادة الضبط</button>
+        </div>
+        <footer>استمتع بتجربة تغيير الألوان! 😊</footer>
     </div>
-    <footer>استمتع بتجربة تغيير الألوان! 😊</footer>
 
-    <pre><code class="language-javascript">
-function changeColor(color) {
-    document.body.style.backgroundColor = color;
-    localStorage.setItem("backgroundColor", color);
-}
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <button onclick="copyCode()"><i class="far fa-copy"></i> نسخ الكود</button>
+        </div>
+        <div class="code-container">
+            <pre><code><span class="code-line"><span class="code-comment">// تغيير لون الخلفية وحفظه</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">changeColor</span>(color) {</span>
+<span class="code-line">    <span class="code-keyword">document</span>.<span class="code-property">body</span>.<span class="code-property">style</span>.<span class="code-property">backgroundColor</span> <span class="code-operator">=</span> color;</span>
+<span class="code-line">    localStorage.<span class="code-function">setItem</span>(<span class="code-string">"backgroundColor"</span>, color);</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// إعادة تعيين اللون الافتراضي</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">resetColor</span>() {</span>
+<span class="code-line">    <span class="code-keyword">document</span>.<span class="code-property">body</span>.<span class="code-property">style</span>.<span class="code-property">backgroundColor</span> <span class="code-operator">=</span> <span class="code-string">"white"</span>;</span>
+<span class="code-line">    localStorage.<span class="code-function">removeItem</span>(<span class="code-string">"backgroundColor"</span>);</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// استعادة اللون المحفوظ عند التحميل</span></span>
+<span class="code-line"><span class="code-keyword">const</span> savedColor <span class="code-operator">=</span> localStorage.<span class="code-function">getItem</span>(<span class="code-string">"backgroundColor"</span>);</span>
+<span class="code-line"><span class="code-keyword">if</span> (savedColor) {</span>
+<span class="code-line">    <span class="code-keyword">document</span>.<span class="code-property">body</span>.<span class="code-property">style</span>.<span class="code-property">backgroundColor</span> <span class="code-operator">=</span> savedColor;</span>
+<span class="code-line">}</span></code></pre>
+        </div>
+    </section>
 
-function resetColor() {
-    document.body.style.backgroundColor = "white";
-    localStorage.removeItem("backgroundColor");
-}
-
-// استعادة لون الخلفية عند تحميل الصفحة
-const savedColor = localStorage.getItem("backgroundColor");
-if (savedColor) {
-    document.body.style.backgroundColor = savedColor;
-}
-    </code></pre>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
         function changeColor(color) {
             document.body.style.backgroundColor = color;
@@ -130,10 +244,23 @@ if (savedColor) {
             localStorage.removeItem("backgroundColor");
         }
 
-        // استعادة لون الخلفية عند تحميل الصفحة
+        // استعادة اللون المحفوظ
         const savedColor = localStorage.getItem("backgroundColor");
         if (savedColor) {
             document.body.style.backgroundColor = savedColor;
+        }
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-header button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
         }
     </script>
 </body>

@@ -1,119 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Clock</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <title>الساعة التفاعلية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* General Body Styling */
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #470d99;
+            border-radius: 5px; 
+
+        }
+
+
+        * {
             margin: 0;
-            font-family: 'Cairo', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1d2b64, #f8cdda);
-            color: #fff;
-            text-align: center;
+        }
+
+        .container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
 
         .clock {
             font-size: 3rem;
             font-weight: bold;
-            margin: 20px 0;
-            color: #ffe53b;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary-color);
+            text-shadow: var(--shadow);
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
         }
 
         .buttons {
-            margin: 20px 0;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
         }
 
         button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 1rem;
-            color: #fff;
-            background: #ff6f61;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
+            transition: var(--transition);
+            font-weight: bold;
+            background-color: var(--primary-color);
+            color: white;
         }
 
         button:hover {
-            background: #e05446;
-            transform: scale(1.1);
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
         }
 
-        /* Code Block Styling */
-        pre {
-            background: #2d2d2d;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            margin-top: 30px;
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
             overflow-x: auto;
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
         }
 
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
+        pre {
+            margin: 0;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .clock {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>الساعة التفاعلية</h1>
-    <div class="clock" id="clock">00:00:00</div>
-    <div class="buttons">
-        <button onclick="startClock()">ابدأ الساعة</button>
-        <button onclick="stopClock()">أوقف الساعة</button>
-        <button onclick="goToURL()">اذهب إلى رابط</button>
+    <div class="container">
+        <section class="objective-section">
+            <h2>الهدف التعليمي</h2>
+            <p>تعلم كيفية إنشاء ساعة تفاعلية مع إمكانيات التحكم باستخدام JavaScript.</p>
+        </section>
+
+        <h1>الساعة التفاعلية</h1>
+        <div class="clock" id="clock">00:00:00</div>
+        
+        <div class="buttons">
+            <button onclick="startClock()">ابدأ الساعة</button>
+            <button onclick="stopClock()">أوقف الساعة</button>
+            <button onclick="goToURL()">اذهب إلى رابط</button>
+        </div>
     </div>
 
-    <pre><code class="language-javascript">
-let interval;
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <button onclick="copyCode()"><i class="far fa-copy"></i> نسخ الكود</button>
+        </div>
+        <div class="code-container">
+            <pre><code><span class="code-line"><span class="code-comment">// متغير لتخزين مؤقت الساعة</span></span>
+<span class="code-line"><span class="code-keyword">let</span> interval;</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// بدء تشغيل الساعة</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">startClock</span>() {</span>
+<span class="code-line">    <span class="code-keyword">if</span> (interval) <span class="code-function">clearInterval</span>(interval);</span>
+<span class="code-line">    interval <span class="code-operator">=</span> <span class="code-function">setInterval</span>(() <span class="code-operator">=></span> {</span>
+<span class="code-line">        <span class="code-keyword">const</span> now <span class="code-operator">=</span> <span class="code-keyword">new</span> <span class="code-function">Date</span>();</span>
+<span class="code-line">        <span class="code-keyword">const</span> time <span class="code-operator">=</span> now.<span class="code-function">toLocaleTimeString</span>();</span>
+<span class="code-line">        <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"clock"</span>).<span class="code-property">textContent</span> <span class="code-operator">=</span> time;</span>
+<span class="code-line">    }, <span class="code-number">1000</span>);</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// إيقاف الساعة</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">stopClock</span>() {</span>
+<span class="code-line">    <span class="code-function">clearInterval</span>(interval);</span>
+<span class="code-line">    interval <span class="code-operator">=</span> <span class="code-keyword">null</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// الانتقال إلى رابط</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">goToURL</span>() {</span>
+<span class="code-line">    <span class="code-keyword">const</span> url <span class="code-operator">=</span> <span class="code-function">prompt</span>(<span class="code-string">"أدخل الرابط الذي تريد الذهاب إليه:"</span>);</span>
+<span class="code-line">    <span class="code-keyword">if</span> (url <span class="code-operator">&amp;&amp;</span> url.<span class="code-function">trim</span>()) {</span>
+<span class="code-line">        <span class="code-keyword">if</span> (<span class="code-operator">!</span>url.<span class="code-function">startsWith</span>(<span class="code-string">"http://"</span>) <span class="code-operator">&amp;&amp;</span> <span class="code-operator">!</span>url.<span class="code-function">startsWith</span>(<span class="code-string">"https://"</span>)) {</span>
+<span class="code-line">            window.location.<span class="code-property">href</span> <span class="code-operator">=</span> <span class="code-string">"https://"</span> <span class="code-operator">+</span> url.<span class="code-function">trim</span>();</span>
+<span class="code-line">        } <span class="code-keyword">else</span> {</span>
+<span class="code-line">            window.location.<span class="code-property">href</span> <span class="code-operator">=</span> url.<span class="code-function">trim</span>();</span>
+<span class="code-line">        }</span>
+<span class="code-line">    }</span>
+<span class="code-line">}</span></code></pre>
+        </div>
+    </section>
 
-function startClock() {
-    if (interval) clearInterval(interval); 
-    interval = setInterval(() => {
-        const now = new Date();
-        const time = now.toLocaleTimeString();
-        document.getElementById("clock").textContent = time;
-    }, 1000);
-}
-
-function stopClock() {
-    clearInterval(interval);
-    interval = null;
-}
-
-function goToURL() {
-    const url = prompt("أدخل الرابط الذي تريد الذهاب إليه:");
-    if (url && url.trim()) {
-        window.location.assign(url.trim());
-    }
-}
-    </code></pre>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
         let interval;
 
         function startClock() {
-            if (interval) clearInterval(interval); 
+            if (interval) clearInterval(interval);
             interval = setInterval(() => {
                 const now = new Date();
                 const time = now.toLocaleTimeString();
@@ -129,9 +276,29 @@ function goToURL() {
         function goToURL() {
             const url = prompt("أدخل الرابط الذي تريد الذهاب إليه:");
             if (url && url.trim()) {
-                window.location.assign(url.trim());
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    window.location.href = "https://" + url.trim();
+                } else {
+                    window.location.href = url.trim();
+                }
             }
         }
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-header button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
+        }
+
+        // Initial clock start
+        startClock();
     </script>
 </body>
 </html>
