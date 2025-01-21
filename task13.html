@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق Destructuring</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
 
         :root {
             --primary-color: #260553;
@@ -16,22 +17,10 @@
             --bg-light: #f8f9fa;
             --bg-white: #ffffff;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
         }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #470d99;
-            border-radius: 5px; 
-
-        }
-
 
         * {
             margin: 0;
@@ -45,6 +34,7 @@
             color: var(--text-dark);
             line-height: 1.6;
             padding: 2rem;
+            min-height: 100vh;
         }
 
         /* Learning Objective Section */
@@ -55,6 +45,7 @@
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
         }
 
         .objective-section h2 {
@@ -69,6 +60,7 @@
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            animation: slideIn 0.5s ease;
         }
 
         .info {
@@ -76,6 +68,12 @@
             padding: 1.5rem;
             border-radius: 0.5rem;
             margin: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .info:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
 
         .info p {
@@ -84,41 +82,60 @@
         }
 
         .info strong {
-            color: var(--text-dark);
+            color: var(--primary-color);
         }
 
-        /* Code Display Section */
+        /* Code Section */
         .code-section {
             background: var(--bg-white);
-            padding: 2rem;
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .code-container {
-            background: #1e1e1e;
-            color: #d4d4d4;
+            background: var(--code-bg);
+            color: var(--code-text);
             padding: 1.5rem;
-            border-radius: 0.5rem;
+            border-radius: 0 0 1rem 1rem;
             overflow-x: auto;
             direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
         }
 
         pre {
             margin: 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            counter-reset: line;
         }
 
-        .code-tab {
-            background: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem 0.5rem 0 0;
-            color: white;
-            display: inline-block;
-            margin-bottom: -1px;
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
         }
 
         button {
@@ -129,12 +146,23 @@
             border-radius: 0.5rem;
             cursor: pointer;
             font-size: 1rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: var(--transition);
         }
 
         button:hover {
+            background: var(--accent-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @media (max-width: 768px) {
@@ -148,8 +176,8 @@
                 padding: 1.5rem;
             }
 
-            pre {
-                font-size: 0.8rem;
+            .code-container {
+                padding: 1rem;
             }
         }
     </style>
@@ -170,34 +198,36 @@
 
     <!-- Code Section -->
     <section class="code-section">
-        <h2>الشرح البرمجي</h2>
-        <div class="code-tab">JavaScript</div>
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <button onclick="copyCode()"><i class="far fa-copy"></i> نسخ الكود</button>
+        </div>
         <div class="code-container">
-            <pre><code>// تعريف كائن الشخص
-const person = {
-    name: "اسامة زينهم",
-    age: 30,
-    job: "مهندس برمجيات",
-    address: {
-        city: "المنيا",
-        zip: "12345"
-    },
-    language: "العربية"
-};
-
-// استخدام Destructuring لاستخراج البيانات
-const { 
-    name, 
-    age, 
-    job, 
-    address: { city, zip }, 
-    language = "غير محدد" 
-} = person;
-
-// استخدام Destructuring في الدوال
-function displayGreeting({ name, age, job }) {
-    alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);
-}</code></pre>
+            <pre><code><span class="code-line"><span class="code-comment">// تعريف كائن الشخص</span></span>
+<span class="code-line"><span class="code-keyword">const</span> person <span class="code-operator">=</span> {</span>
+<span class="code-line">    name: <span class="code-string">"اسامة زينهم"</span>,</span>
+<span class="code-line">    age: <span class="code-number">30</span>,</span>
+<span class="code-line">    job: <span class="code-string">"مهندس برمجيات"</span>,</span>
+<span class="code-line">    address: {</span>
+<span class="code-line">        city: <span class="code-string">"المنيا"</span>,</span>
+<span class="code-line">        zip: <span class="code-string">"12345"</span></span>
+<span class="code-line">    },</span>
+<span class="code-line">    language: <span class="code-string">"العربية"</span></span>
+<span class="code-line">};</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// استخدام Destructuring لاستخراج البيانات</span></span>
+<span class="code-line"><span class="code-keyword">const</span> { </span>
+<span class="code-line">    name, </span>
+<span class="code-line">    age, </span>
+<span class="code-line">    job, </span>
+<span class="code-line">    address: { city, zip }, </span>
+<span class="code-line">    language <span class="code-operator">=</span> <span class="code-string">"غير محدد"</span> </span>
+<span class="code-line">} <span class="code-operator">=</span> person;</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// استخدام Destructuring في الدوال</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">displayGreeting</span>({ name, age, job }) {</span>
+<span class="code-line">    <span class="code-function">alert</span>(<span class="code-string">`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`</span>);</span>
+<span class="code-line">}</span></code></pre>
         </div>
     </section>
 
@@ -231,6 +261,19 @@ function displayGreeting({ name, age, job }) {
         // دالة عرض الترحيب
         function displayGreeting({ name, age, job }) {
             alert(`مرحبًا ${name}! عمرك ${age} وتعمل كـ ${job}.`);
+        }
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-header button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
         }
     </script>
 </body>

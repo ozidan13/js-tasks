@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معالجة النصوص</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
 
         :root {
             --primary-color: #260553;
@@ -17,22 +18,9 @@
             --bg-white: #ffffff;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
         }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #470d99;
-            border-radius: 5px; 
-
-        }
-
 
         * {
             margin: 0;
@@ -46,6 +34,7 @@
             color: var(--text-dark);
             line-height: 1.6;
             padding: 2rem;
+            min-height: 100vh;
         }
 
         /* Learning Objective Section */
@@ -56,12 +45,7 @@
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
-            transform: translateY(0);
-            transition: var(--transition);
-        }
-
-        .objective-section:hover {
-            transform: translateY(-5px);
+            animation: fadeIn 0.5s ease;
         }
 
         .objective-section h2 {
@@ -76,7 +60,7 @@
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
-            transition: var(--transition);
+            animation: slideIn 0.5s ease;
         }
 
         .demo-controls {
@@ -95,11 +79,13 @@
             border: 2px solid var(--bg-light);
             border-radius: 0.5rem;
             transition: var(--transition);
+            font-size: 1rem;
         }
 
         input:focus {
             border-color: var(--primary-color);
             outline: none;
+            box-shadow: 0 0 8px rgba(38, 5, 83, 0.2);
         }
 
         .results-box {
@@ -131,50 +117,56 @@
             animation: slideIn 0.3s ease forwards;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         /* Code Section */
         .code-section {
             background: var(--bg-white);
-            padding: 2rem;
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
         }
 
-        .code-container {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            direction: ltr;
-            position: relative;
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .code-tab {
-            background: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem 0.5rem 0 0;
-            color: white;
-            display: inline-block;
-            margin-bottom: -1px;
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
+            overflow-x: auto;
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
         }
 
         pre {
             margin: 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
         }
 
         button {
@@ -190,24 +182,34 @@
         }
 
         button:hover {
-            background: var(--secondary-color);
+            background: var(--accent-color);
             transform: translateY(-2px);
             box-shadow: var(--shadow);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
             }
-
+            
             .objective-section,
             .demo-section,
             .code-section {
                 padding: 1.5rem;
             }
-
-            pre {
-                font-size: 0.8rem;
+            
+            input {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -236,30 +238,31 @@
 
     <!-- Code Explanation Section -->
     <section class="code-section">
-        <h2>الشرح البرمجي</h2>
-        <div class="code-tab">JavaScript</div>
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <button onclick="copyCode()"><i class="far fa-copy"></i> نسخ الكود</button>
+        </div>
         <div class="code-container">
-            <pre><code>// دالة تنظيف النص الأساسية
-function cleanText(text) {
-    return text
-        .trim() // إزالة المسافات الزائدة
-        .replace(/\s+/g, ' ') // إزالة المسافات المكررة
-        .replace(/[^\w\u0600-\u06FF ]/g, ''); // إزالة الرموز الخاصة
-}
-
-// معالجة الإدخال وعرض النتائج
-function processText() {
-    const inputText = document.getElementById('textInput').value;
-    const cleanedText = cleanText(inputText);
-    
-    const resultsList = document.getElementById('resultsList');
-    const listItem = document.createElement('li');
-    listItem.textContent = cleanedText;
-    
-    resultsList.prepend(listItem);
-    document.getElementById('resultsBox').classList.add('show');
-}
-</code></pre>
+            <pre><code><span class="code-line"><span class="code-comment">// دالة تنظيف النص الأساسية</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">cleanText</span>(text) {</span>
+<span class="code-line">    <span class="code-keyword">return</span> text</span>
+<span class="code-line">        .<span class="code-function">trim</span>() <span class="code-comment">// إزالة المسافات الزائدة</span></span>
+<span class="code-line">        .<span class="code-function">replace</span>(<span class="code-regex">/\s+/g</span>, <span class="code-string">' '</span>) <span class="code-comment">// إزالة المسافات المكررة</span></span>
+<span class="code-line">        .<span class="code-function">replace</span>(<span class="code-regex">/[^\w\u0600-\u06FF ]/g</span>, <span class="code-string">''</span>); <span class="code-comment">// إزالة الرموز الخاصة</span></span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// معالجة الإدخال وعرض النتائج</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">processText</span>() {</span>
+<span class="code-line">    <span class="code-keyword">const</span> inputText <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">'textInput'</span>).<span class="code-property">value</span>;</span>
+<span class="code-line">    <span class="code-keyword">const</span> cleanedText <span class="code-operator">=</span> <span class="code-function">cleanText</span>(inputText);</span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="code-keyword">const</span> resultsList <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">'resultsList'</span>);</span>
+<span class="code-line">    <span class="code-keyword">const</span> listItem <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">createElement</span>(<span class="code-string">'li'</span>);</span>
+<span class="code-line">    listItem.<span class="code-property">textContent</span> <span class="code-operator">=</span> cleanedText;</span>
+<span class="code-line">    </span>
+<span class="code-line">    resultsList.<span class="code-function">prepend</span>(listItem);</span>
+<span class="code-line">    <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">'resultsBox'</span>).<span class="code-property">classList</span>.<span class="code-function">add</span>(<span class="code-string">'show'</span>);</span>
+<span class="code-line">}</span></code></pre>
         </div>
     </section>
 
@@ -290,6 +293,19 @@ function processText() {
             
             // Clear input
             document.getElementById('textInput').value = '';
+        }
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-header button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
         }
 
         // Handle Enter key

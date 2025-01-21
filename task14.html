@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تطبيق Set و Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
 
         :root {
             --primary-color: #260553;
@@ -16,22 +17,10 @@
             --bg-light: #f8f9fa;
             --bg-white: #ffffff;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
         }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background-color: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #470d99;
-            border-radius: 5px; 
-
-        }
-
 
         * {
             margin: 0;
@@ -45,6 +34,7 @@
             color: var(--text-dark);
             line-height: 1.6;
             padding: 2rem;
+            min-height: 100vh;
         }
 
         /* Learning Objective Section */
@@ -55,6 +45,7 @@
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
         }
 
         .objective-section h2 {
@@ -69,6 +60,7 @@
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            animation: slideIn 0.5s ease;
         }
 
         .info {
@@ -76,88 +68,106 @@
             padding: 1.5rem;
             border-radius: 0.5rem;
             margin: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .info:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
 
         .info ul {
-            padding-left: 1rem;
+            padding-right: 1rem;
+            list-style: none;
         }
 
         .info li {
             margin: 0.5rem 0;
-        }
-
-        .info p {
-            margin: 0.5rem 0;
-            color: var(--text-light);
+            padding: 0.5rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 0.3rem;
         }
 
         .info strong {
-            color: var(--text-dark);
+            color: var(--primary-color);
         }
 
-        /* Code Display Section */
+        /* Code Section */
         .code-section {
             background: var(--bg-white);
-            padding: 2rem;
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .code-container {
-            background: #1e1e1e;
-            color: #d4d4d4;
+            background: var(--code-bg);
+            color: var(--code-text);
             padding: 1.5rem;
-            border-radius: 0.5rem;
+            border-radius: 0 0 1rem 1rem;
             overflow-x: auto;
             direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
         }
 
         pre {
             margin: 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            counter-reset: line;
         }
 
-        .code-tab {
-            background: #333;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem 0.5rem 0 0;
-            color: white;
-            display: inline-block;
-            margin-bottom: -1px;
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
         }
 
-        button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
             }
-
+            
             .objective-section,
             .demo-section,
             .code-section {
                 padding: 1.5rem;
             }
-
-            pre {
-                font-size: 0.8rem;
+            
+            .info li {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -178,22 +188,23 @@
 
     <!-- Code Section -->
     <section class="code-section">
-        <h2>الشرح البرمجي</h2>
-        <div class="code-tab">JavaScript</div>
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <button onclick="copyCode()"><i class="far fa-copy"></i> نسخ الكود</button>
+        </div>
         <div class="code-container">
-            <pre><code>// Set Example
-const userSet = new Set(["Osama", "Ahmed", "Ali"]);
-userSet.add("Reda");
-userSet.delete("Ali");
-
-// Map Example
-const productMap = new Map();
-productMap.set("Laptop", { price: 15000, quantity: 3 });
-productMap.set("Phone", { price: 8000, quantity: 5 });
-
-console.log([...userSet]);
-console.log([...productMap.entries()]);
-</code></pre>
+            <pre><code><span class="code-line"><span class="code-comment">// مثال على Set</span></span>
+<span class="code-line"><span class="code-keyword">const</span> userSet <span class="code-operator">=</span> <span class="code-keyword">new</span> <span class="code-function">Set</span>([<span class="code-string">"Osama"</span>, <span class="code-string">"Ahmed"</span>, <span class="code-string">"Ali"</span>]);</span>
+<span class="code-line">userSet.<span class="code-function">add</span>(<span class="code-string">"Reda"</span>);</span>
+<span class="code-line">userSet.<span class="code-function">delete</span>(<span class="code-string">"Ali"</span>);</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// مثال على Map</span></span>
+<span class="code-line"><span class="code-keyword">const</span> productMap <span class="code-operator">=</span> <span class="code-keyword">new</span> <span class="code-function">Map</span>();</span>
+<span class="code-line">productMap.<span class="code-function">set</span>(<span class="code-string">"Laptop"</span>, { price: <span class="code-number">15000</span>, quantity: <span class="code-number">3</span> });</span>
+<span class="code-line">productMap.<span class="code-function">set</span>(<span class="code-string">"Phone"</span>, { price: <span class="code-number">8000</span>, quantity: <span class="code-number">5</span> });</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-function">console</span>.<span class="code-function">log</span>([...userSet]);</span>
+<span class="code-line"><span class="code-function">console</span>.<span class="code-function">log</span>([...productMap.<span class="code-function">entries</span>()]);</span></code></pre>
         </div>
     </section>
 
@@ -222,6 +233,19 @@ console.log([...productMap.entries()]);
                 <p><strong>${product}:</strong> السعر ${price} جنيه، الكمية ${quantity}</p>
             `).join("")}
         `;
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-header button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
+        }
     </script>
 </body>
 </html>
