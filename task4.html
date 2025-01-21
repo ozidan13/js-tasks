@@ -1,91 +1,272 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>قائمة المهام</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f4f4f9;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
         }
+
+        .container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h1 {
-            color: #333;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
         }
-        #taskForm {
-            margin-bottom: 20px;
-        }
-        input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 200px;
-        }
-        button {
-            padding: 10px 15px;
-            font-size: 16px;
-            border: none;
-            background-color: #007bff;
+
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
-            border-radius: 5px;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        #taskForm {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem;
+            border: 2px solid var(--bg-light);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(38, 5, 83, 0.1);
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+
         button:hover {
-            background-color: #0056b3;
-            transform: scale(1.1);
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
+
         .task {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 300px;
-            margin: 10px auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.5s ease forwards;
+            padding: 1rem;
+            margin: 1rem auto;
+            border-radius: 0.5rem;
+            background: var(--bg-white);
+            box-shadow: var(--shadow);
+            animation: slideIn 0.3s ease forwards;
+            max-width: 500px;
         }
+
         .task button {
-            background-color: transparent;
-            border: none;
-            color: #dc3545;
-            font-size: 18px;
-            cursor: pointer;
-            transition: color 0.3s ease;
+            background: none;
+            color: var(--error-color);
+            padding: 0.5rem;
+            transition: var(--transition);
         }
+
         .task button:hover {
-            color: #b02a37;
+            transform: scale(1.1);
         }
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
+            overflow-x: auto;
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
+        }
+
+        pre {
+            margin: 0;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
             }
-        }
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                transform: translateY(20px);
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <h1>To-Do List</h1>
-    <form id="taskForm">
-        <input type="text" id="taskInput" placeholder="Add a new task" required>
-        <button type="submit"><i class="fas fa-plus"></i> Add</button>
-    </form>
-    <div id="tasksContainer"></div>
+    <div class="container">
+        <!-- Learning Objective Section -->
+        <section class="objective-section">
+            <h2>الهدف التعليمي</h2>
+            <p>تعلم كيفية بناء قائمة مهام تفاعلية باستخدام JavaScript مع تطبيق مبادئ إدارة الحالة والتفاعلات الديناميكية.</p>
+        </section>
+
+        <h1>قائمة المهام</h1>
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="أضف مهمة جديدة" required>
+            <button type="submit">
+                <i class="fas fa-plus"></i>إضافة
+            </button>
+        </form>
+        <div id="tasksContainer"></div>
+    </div>
+
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <div class="code-actions">
+                <button class="btn" onclick="copyCode()">
+                    <i class="far fa-copy"></i> نسخ الكود
+                </button>
+            </div>
+        </div>
+        <div class="code-container">
+            <pre><code><span class="code-line"><span class="code-comment">// إدارة قائمة المهام</span></span>
+<span class="code-line"><span class="code-keyword">const</span> tasks <span class="code-operator">=</span> []<span class="code-punctuation">;</span></span>
+<span class="code-line"><span class="code-keyword">const</span> tasksContainer <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"tasksContainer"</span>)<span class="code-punctuation">;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"taskForm"</span>).<span class="code-function">addEventListener</span>(<span class="code-string">"submit"</span><span class="code-punctuation">,</span> <span class="code-keyword">function</span>(event) {</span>
+<span class="code-line">    event.<span class="code-function">preventDefault</span>()<span class="code-punctuation">;</span></span>
+<span class="code-line">    <span class="code-keyword">const</span> task <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"taskInput"</span>).value.<span class="code-function">trim</span>()<span class="code-punctuation">;</span></span>
+<span class="code-line">    <span class="code-keyword">if</span> (task) {</span>
+<span class="code-line">        tasks.<span class="code-function">push</span>(task)<span class="code-punctuation">;</span></span>
+<span class="code-line">        <span class="code-function">displayTasks</span>()<span class="code-punctuation">;</span></span>
+<span class="code-line">        <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"taskInput"</span>).value <span class="code-operator">=</span> <span class="code-string">""</span><span class="code-punctuation">;</span></span>
+<span class="code-line">    }</span>
+<span class="code-line">})<span class="code-punctuation">;</span></span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">displayTasks</span>() {</span>
+<span class="code-line">    tasksContainer.<span class="code-property">innerHTML</span> <span class="code-operator">=</span> <span class="code-string">""</span><span class="code-punctuation">;</span></span>
+<span class="code-line">    tasks.<span class="code-function">forEach</span>((task, index) <span class="code-operator">=></span> {</span>
+<span class="code-line">        <span class="code-keyword">const</span> taskDiv <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">createElement</span>(<span class="code-string">"div"</span>)<span class="code-punctuation">;</span></span>
+<span class="code-line">        taskDiv.<span class="code-property">className</span> <span class="code-operator">=</span> <span class="code-string">"task"</span><span class="code-punctuation">;</span></span>
+<span class="code-line">        taskDiv.<span class="code-property">innerHTML</span> <span class="code-operator">=</span> <span class="code-string">`</span></span>
+<span class="code-line"><span class="code-string">            &lt;span>${task}&lt;/span></span></span>
+<span class="code-line"><span class="code-string">            &lt;button onclick="deleteTask(${index})">&lt;i class="fas fa-trash-alt">&lt;/i>&lt;/button></span></span>
+<span class="code-line"><span class="code-string">        `</span><span class="code-punctuation">;</span></span>
+<span class="code-line">        tasksContainer.<span class="code-function">appendChild</span>(taskDiv)<span class="code-punctuation">;</span></span>
+<span class="code-line">    })<span class="code-punctuation">;</span></span>
+<span class="code-line">}</span></code></pre>
+        </div>
+    </section>
 
     <script>
         const tasks = [];
@@ -115,12 +296,21 @@
         }
 
         function deleteTask(index) {
-            const taskDiv = tasksContainer.children[index];
-            taskDiv.style.animation = "fadeOut 0.5s ease forwards";
-            setTimeout(() => {
-                tasks.splice(index, 1);
-                displayTasks();
-            }, 500);
+            tasks.splice(index, 1);
+            displayTasks();
+        }
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-actions button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
         }
     </script>
 </body>

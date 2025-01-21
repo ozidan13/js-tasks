@@ -1,78 +1,323 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator with Icons</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>آلة حاسبة تفاعلية</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
             text-align: center;
-            margin-top: 50px;
-            background-color: #f9f9f9;
-            color: #333;
         }
-        form {
-            margin-top: 20px;
+
+        .container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 0.5s ease;
         }
-        input {
-            padding: 10px;
-            width: 200px;
-            margin: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #007BFF;
+
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
-            transition: background-color 0.3s ease;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
+
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--bg-light);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(38, 5, 83, 0.1);
+        }
+
+        .buttons-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         button:hover {
-            background-color: #0056b3;
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
+
+        button i {
+            margin-left: 0.5rem;
+        }
+
         .result {
-            margin-top: 20px;
-            font-size: 18px;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
             font-weight: bold;
-            color: green;
+            text-align: center;
+            background-color: var(--bg-light);
+            color: var(--success-color);
+            transition: var(--transition);
+            animation: slideIn 0.3s ease;
         }
+
         .error {
-            color: red;
+            background-color: #ffebee;
+            color: var(--error-color);
         }
-        i {
-            margin-right: 5px;
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
+            overflow-x: auto;
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        pre {
+            margin: 0;
+            position: relative;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+            white-space: pre-wrap;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            user-select: none;
+            border-right: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container,
+            .code-section {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .buttons-group {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>آلة حاسبة بسيطة</h1>
-    <form id="calculatorForm">
-        <input type="number" id="num1" placeholder="الرقم الأول" required>
-        <input type="number" id="num2" placeholder="الرقم الثاني" required>
-        <div>
-            <button type="button" onclick="calculate('add')">
-                <i class="fas fa-plus"></i>جمع
-            </button>
-            <button type="button" onclick="calculate('subtract')">
-                <i class="fas fa-minus"></i>طرح
-            </button>
-            <button type="button" onclick="calculate('multiply')">
-                <i class="fas fa-times"></i>ضرب
-            </button>
-            <button type="button" onclick="calculate('divide')">
-                <i class="fas fa-divide"></i>قسمة
-            </button>
+    <h1>آلة حاسبة تفاعلية</h1>
+    <div class="container">
+        <!-- Learning Objective Section -->
+        <section class="objective-section">
+            <h2>الهدف التعليمي</h2>
+            <p>تعلم كيفية بناء آلة حاسبة تفاعلية باستخدام JavaScript، مع تطبيق مبادئ التحقق من المدخلات وعرض النتائج بشكل تفاعلي.</p>
+        </section>
+
+        <!-- Interactive Demo Section -->
+        <form id="calculatorForm">
+            <div class="input-group">
+                <input type="number" id="num1" placeholder="الرقم الأول" required>
+                <input type="number" id="num2" placeholder="الرقم الثاني" required>
+            </div>
+            <div class="buttons-group">
+                <button type="button" onclick="calculate('add')">
+                    <i class="fas fa-plus"></i>جمع
+                </button>
+                <button type="button" onclick="calculate('subtract')">
+                    <i class="fas fa-minus"></i>طرح
+                </button>
+                <button type="button" onclick="calculate('multiply')">
+                    <i class="fas fa-times"></i>ضرب
+                </button>
+                <button type="button" onclick="calculate('divide')">
+                    <i class="fas fa-divide"></i>قسمة
+                </button>
+            </div>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <div class="code-actions">
+                <button class="btn" onclick="copyCode()">
+                    <i class="far fa-copy"></i> نسخ الكود
+                </button>
+            </div>
         </div>
-    </form>
-    <div class="result" id="result"></div>
+        <div class="code-container">
+            <pre><code><span class="code-line"><span class="code-comment">// دالة تنفيذ العمليات الحسابية</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">calculate</span>(operation) {</span>
+<span class="code-line">    <span class="code-keyword">const</span> num1 <span class="code-operator">=</span> <span class="code-function">parseFloat</span>(<span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"num1"</span>).value)<span class="code-punctuation">;</span></span>
+<span class="code-line">    <span class="code-keyword">const</span> num2 <span class="code-operator">=</span> <span class="code-function">parseFloat</span>(<span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"num2"</span>).value)<span class="code-punctuation">;</span></span>
+<span class="code-line">    <span class="code-keyword">const</span> resultDiv <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"result"</span>)<span class="code-punctuation">;</span></span>
+<span class="code-line">    <span class="code-keyword">let</span> result<span class="code-punctuation">;</span></span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="code-comment">// التحقق من صحة المدخلات</span></span>
+<span class="code-line">    <span class="code-keyword">if</span> (<span class="code-function">isNaN</span>(num1) <span class="code-operator">||</span> <span class="code-function">isNaN</span>(num2)) {</span>
+<span class="code-line">        resultDiv.textContent <span class="code-operator">=</span> <span class="code-string">"من فضلك، أدخل أرقامًا صالحة."</span><span class="code-punctuation">;</span></span>
+<span class="code-line">        resultDiv.classList.<span class="code-function">add</span>(<span class="code-string">"error"</span>)<span class="code-punctuation">;</span></span>
+<span class="code-line">        <span class="code-keyword">return</span><span class="code-punctuation">;</span></span>
+<span class="code-line">    }</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="code-comment">// تنفيذ العملية المحددة</span></span>
+<span class="code-line">    <span class="code-keyword">switch</span> (operation) {</span>
+<span class="code-line">        <span class="code-keyword">case</span> <span class="code-string">'add'</span><span class="code-punctuation">:</span></span>
+<span class="code-line">            result <span class="code-operator">=</span> num1 <span class="code-operator">+</span> num2<span class="code-punctuation">;</span></span>
+<span class="code-line">            <span class="code-keyword">break</span><span class="code-punctuation">;</span></span>
+<span class="code-line">        <span class="code-keyword">case</span> <span class="code-string">'subtract'</span><span class="code-punctuation">:</span></span>
+<span class="code-line">            result <span class="code-operator">=</span> num1 <span class="code-operator">-</span> num2<span class="code-punctuation">;</span></span>
+<span class="code-line">            <span class="code-keyword">break</span><span class="code-punctuation">;</span></span>
+<span class="code-line">        <span class="code-keyword">case</span> <span class="code-string">'multiply'</span><span class="code-punctuation">:</span></span>
+<span class="code-line">            result <span class="code-operator">=</span> num1 <span class="code-operator">*</span> num2<span class="code-punctuation">;</span></span>
+<span class="code-line">            <span class="code-keyword">break</span><span class="code-punctuation">;</span></span>
+<span class="code-line">        <span class="code-keyword">case</span> <span class="code-string">'divide'</span><span class="code-punctuation">:</span></span>
+<span class="code-line">            <span class="code-keyword">if</span> (num2 <span class="code-operator">===</span> <span class="code-number">0</span>) {</span>
+<span class="code-line">                resultDiv.textContent <span class="code-operator">=</span> <span class="code-string">"خطأ: القسمة على صفر غير مسموح بها!"</span><span class="code-punctuation">;</span></span>
+<span class="code-line">                resultDiv.classList.<span class="code-function">add</span>(<span class="code-string">"error"</span>)<span class="code-punctuation">;</span></span>
+<span class="code-line">                <span class="code-keyword">return</span><span class="code-punctuation">;</span></span>
+<span class="code-line">            }</span>
+<span class="code-line">            result <span class="code-operator">=</span> num1 <span class="code-operator">/</span> num2<span class="code-punctuation">;</span></span>
+<span class="code-line">            <span class="code-keyword">break</span><span class="code-punctuation">;</span></span>
+<span class="code-line">        <span class="code-keyword">default</span><span class="code-punctuation">:</span></span>
+<span class="code-line">            result <span class="code-operator">=</span> <span class="code-string">"عملية غير معروفة!"</span><span class="code-punctuation">;</span></span>
+<span class="code-line">    }</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="code-comment">// عرض النتيجة</span></span>
+<span class="code-line">    resultDiv.textContent <span class="code-operator">=</span> <span class="code-string">`النتيجة: ${result}`</span><span class="code-punctuation">;</span></span>
+<span class="code-line">}</span></code></pre>
+        </div>
+    </section>
 
     <script>
         function calculate(operation) {
@@ -84,14 +329,14 @@
             // Reset result style
             resultDiv.className = "result";
 
-            // التحقق من صحة المدخلات
+            // Validate inputs
             if (isNaN(num1) || isNaN(num2)) {
                 resultDiv.textContent = "من فضلك، أدخل أرقامًا صالحة.";
-                resultDiv.className = "result error";
+                resultDiv.classList.add("error");
                 return;
             }
 
-            // تنفيذ العمليات
+            // Perform calculation
             switch (operation) {
                 case 'add':
                     result = num1 + num2;
@@ -105,7 +350,7 @@
                 case 'divide':
                     if (num2 === 0) {
                         resultDiv.textContent = "خطأ: القسمة على صفر غير مسموح بها!";
-                        resultDiv.className = "result error";
+                        resultDiv.classList.add("error");
                         return;
                     }
                     result = num1 / num2;
@@ -114,8 +359,21 @@
                     result = "عملية غير معروفة!";
             }
 
-            // عرض النتيجة
+            // Display result
             resultDiv.textContent = `النتيجة: ${result}`;
+        }
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-actions button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
         }
     </script>
 </body>

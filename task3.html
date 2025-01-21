@@ -1,54 +1,273 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekday Checker</title>
+    <title>فحص أيام الأسبوع</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
             text-align: center;
-            margin-top: 50px;
         }
-        input {
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 16px;
-            width: 250px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            background-color: #007bff;
+
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
-            border-radius: 5px;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .objective-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem;
+            border: 2px solid var(--bg-light);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(38, 5, 83, 0.1);
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+
         button:hover {
-            background-color: #0056b3;
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
+
         .message {
-            margin-top: 20px;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
             font-weight: bold;
-            font-size: 18px;
-            color: #007bff;
+            text-align: center;
+            background-color: var(--bg-light);
+            color: var(--success-color);
+            animation: slideIn 0.3s ease;
         }
+
         .error {
-            color: red;
+            background-color: #ffebee;
+            color: var(--error-color);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
+            overflow-x: auto;
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
+        }
+
+        pre {
+            margin: 0;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>What is your favorite day?</h1>
-    <form id="dayForm">
-        <input type="text" id="dayInput" placeholder="Enter a day (e.g., Friday)" required>
-        <button type="submit">Check</button>
-    </form>
-    <div class="message" id="message"></div>
+    <div class="container">
+        <!-- Learning Objective Section -->
+        <section class="objective-section">
+            <h2>الهدف التعليمي</h2>
+            <p>تعلم كيفية التحقق من أيام الأسبوع باستخدام JavaScript مع تطبيق مبادئ التحقق من المدخلات وعرض النتائج بشكل تفاعلي.</p>
+        </section>
+
+        <!-- Interactive Demo -->
+        <h1>ما هو يومك المفضل؟</h1>
+        <form id="dayForm">
+            <input type="text" id="dayInput" placeholder="أدخل يومًا (مثال: الجمعة)" required>
+            <button type="submit">
+                <i class="fas fa-check"></i>تحقق
+            </button>
+        </form>
+        <div class="message" id="message"></div>
+    </div>
+
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <div class="code-actions">
+                <button class="btn" onclick="copyCode()">
+                    <i class="far fa-copy"></i> نسخ الكود
+                </button>
+            </div>
+        </div>
+        <div class="code-container">
+            <pre><code><span class="code-line">document.getElementById("dayForm").addEventListener("submit", function(event) {</span>
+<span class="code-line">    event.preventDefault();</span>
+<span class="code-line">    const dayInput = document.getElementById("dayInput").value.trim().toLowerCase();</span>
+<span class="code-line">    const messageDiv = document.getElementById("message");</span>
+<span class="code-line">    let message;</span>
+<span class="code-line"></span>
+<span class="code-line">    switch (dayInput) {</span>
+<span class="code-line">        case 'الجمعة':</span>
+<span class="code-line">            message = "الجمعة هو يومك المفضل! استمتع بعطلة نهاية الأسبوع!";</span>
+<span class="code-line">            break;</span>
+<span class="code-line">        case 'السبت':</span>
+<span class="code-line">            message = "السبت يوم رائع للاسترخاء!";</span>
+<span class="code-line">            break;</span>
+<span class="code-line">        // ... بقية الحالات ...</span>
+<span class="code-line">        default:</span>
+<span class="code-line">            message = "يوم غير صالح. الرجاء إدخال يوم صحيح من أيام الأسبوع!";</span>
+<span class="code-line">            messageDiv.className = "message error";</span>
+<span class="code-line">    }</span>
+<span class="code-line"></span>
+<span class="code-line">    messageDiv.textContent = message;</span>
+<span class="code-line">    if (!messageDiv.className.includes("error")) {</span>
+<span class="code-line">        messageDiv.className = "message";</span>
+<span class="code-line">    }</span>
+<span class="code-line">});</span></code></pre>
+        </div>
+    </section>
 
     <script>
         document.getElementById("dayForm").addEventListener("submit", function(event) {
@@ -58,29 +277,29 @@
             let message;
 
             switch (dayInput) {
-                case 'friday':
-                    message = "Friday is your favorite day! Enjoy your weekend!";
+                case 'الجمعة':
+                    message = "الجمعة هو يومك المفضل! استمتع بعطلة نهاية الأسبوع!";
                     break;
-                case 'saturday':
-                    message = "Saturday is a great weekend day to relax!";
+                case 'السبت':
+                    message = "السبت يوم رائع للاسترخاء!";
                     break;
-                case 'sunday':
-                    message = "Sunday is the start of the week! Stay motivated!";
+                case 'الأحد':
+                    message = "الأحد بداية الأسبوع! حافظ على حماسك!";
                     break;
-                case 'monday':
-                    message = "Monday is a fresh start! Make it count!";
+                case 'الاثنين':
+                    message = "الاثنين بداية جديدة! اجعلها مهمة!";
                     break;
-                case 'tuesday':
-                    message = "Tuesday is a productive day! Keep going!";
+                case 'الثلاثاء':
+                    message = "الثلاثاء يوم منتج! استمر في التقدم!";
                     break;
-                case 'wednesday':
-                    message = "Wednesday is midweek! You're halfway through!";
+                case 'الأربعاء':
+                    message = "الأربعاء منتصف الأسبوع! أنت في منتصف الطريق!";
                     break;
-                case 'thursday':
-                    message = "Thursday is almost the weekend! Hang in there!";
+                case 'الخميس':
+                    message = "الخميس اقتراب نهاية الأسبوع! استمر!";
                     break;
                 default:
-                    message = "Invalid day entered. Please enter a valid day of the week in English!";
+                    message = "يوم غير صالح. الرجاء إدخال يوم صحيح من أيام الأسبوع!";
                     messageDiv.className = "message error";
                     break;
             }
@@ -90,6 +309,19 @@
                 messageDiv.className = "message";
             }
         });
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-actions button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
+        }
     </script>
 </body>
 </html>
