@@ -1,131 +1,385 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJAX and Promises</title>
+    <title>إدارة المستخدمين باستخدام AJAX</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 30px;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 1rem;
+            min-height: 100vh;
         }
-        h1 {
-            margin-bottom: 20px;
+
+        /* Learning Objective Section */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 1rem auto;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            max-width: 1200px;
         }
+
+        /* Table Container */
+        .table-container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin: 1rem auto;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            max-width: 1200px;
+        }
+
         table {
-            width: 90%;
-            max-width: 800px;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+            min-width: 800px;
         }
+
         th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 2px solid var(--bg-light);
+            transition: var(--transition);
         }
+
         th {
-            background-color: #007BFF;
+            background-color: var(--primary-color);
             color: white;
-            font-weight: bold;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: var(--bg-light);
         }
-        button {
-            padding: 5px 10px;
-            border: none;
-            background-color: #28a745;
+
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 1rem auto;
+            box-shadow: var(--shadow);
+            max-width: 1200px;
+        }
+
+        .code-header {
+            background: var(--primary-color);
             color: white;
-            border-radius: 5px;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
+            overflow-x: auto;
+            direction: ltr;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            position: relative;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding: 0.2rem 0;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            width: 2em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            user-select: none;
+        }
+
+        /* Button Styling */
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: var(--transition);
+            font-size: 0.9rem;
         }
-        button:hover {
-            background-color: #218838;
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
-        .error {
-            color: red;
-            margin-top: 20px;
+
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 90%;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .objective-section,
+            .table-container,
+            .code-section {
+                margin: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .objective-section {
+                padding: 1.5rem;
+                border-radius: 0.8rem;
+            }
+
+            .table-container {
+                padding: 1rem;
+            }
+
+            .code-header {
+                padding: 1rem;
+            }
+
+            .code-container {
+                padding: 1rem;
+            }
+
+            pre {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            pre {
+                font-size: 0.7rem;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h1>قائمة المستخدمين</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>الاسم</th>
-                <th>البريد الإلكتروني</th>
-                <th>العنوان</th>
-                <th>الإجراءات</th>
-            </tr>
-        </thead>
-        <tbody id="userTable"></tbody>
-    </table>
-    <p class="error" id="error"></p>
+    <!-- Learning Objective Section -->
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم كيفية إدارة طلبات AJAX باستخدام الـ Promises في JavaScript، مع تطبيق عملي لجلب البيانات وعرضها بطريقة تفاعلية مع التعامل مع الأخطاء.</p>
+    </section>
+
+    <!-- User Table Section -->
+    <div class="table-container">
+        <h2>قائمة المستخدمين</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>الاسم</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>العنوان</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody id="userTable">
+                <tr>
+                    <td colspan="4" style="text-align: center">
+                        <div class="loader"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="error" id="error"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">تفاصيل المستخدم</h3>
+            <div id="modalContent"></div>
+            <button class="btn" onclick="closeModal()">إغلاق</button>
+        </div>
+    </div>
+
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <div class="code-actions">
+                <button class="btn" onclick="copyCode()">
+                    <i class="far fa-copy"></i> نسخ الكود
+                </button>
+            </div>
+        </div>
+        <div class="code-container">
+            <pre><code><span class="code-keyword">async</span> <span class="code-function">function</span> <span class="code-function">fetchUsers</span>() {
+    <span class="code-keyword">try</span> {
+        <span class="code-keyword">const</span> response = <span class="code-keyword">await</span> fetch(<span class="code-string">'https://jsonplaceholder.typicode.com/users'</span>);
+        <span class="code-keyword">if</span> (!response.ok) <span class="code-keyword">throw</span> <span class="code-keyword">new</span> <span class="code-function">Error</span>(<span class="code-string">'فشل جلب البيانات'</span>);
+        
+        <span class="code-keyword">const</span> users = <span class="code-keyword">await</span> response.json();
+        <span class="code-comment">// بناء الجدول ديناميكيًا</span>
+        renderUsersTable(users);
+        
+    } <span class="code-keyword">catch</span> (error) {
+        showError(error.message);
+    }
+}
+
+<span class="code-comment">// عرض التفاصيل في نافذة منبثقة</span>
+<span class="code-keyword">async</span> <span class="code-function">function</span> <span class="code-function">showDetails</span>(userId) {
+    <span class="code-keyword">try</span> {
+        <span class="code-keyword">const</span> response = <span class="code-keyword">await</span> fetch(<span class="code-string">`${apiURL}/${userId}`</span>);
+        <span class="code-keyword">if</span> (!response.ok) <span class="code-keyword">throw</span> <span class="code-keyword">new</span> <span class="code-function">Error</span>(<span class="code-string">'خطأ في الاتصال'</span>);
+        
+        <span class="code-keyword">const</span> user = <span class="code-keyword">await</span> response.json();
+        displayUserModal(user);
+        
+    } <span class="code-keyword">catch</span> (error) {
+        showError(<span class="code-string">`تعذر جلب التفاصيل: ${error.message}`</span>);
+    }
+}</code></pre>
+        </div>
+    </section>
 
     <script>
         const apiURL = "https://jsonplaceholder.typicode.com/users";
         const userTable = document.getElementById("userTable");
         const errorDiv = document.getElementById("error");
 
-        // Fetch user data from API
-        fetch(apiURL)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(users => {
-                if (users.length === 0) {
-                    errorDiv.textContent = "لا توجد بيانات لعرضها.";
-                    return;
-                }
-                users.forEach(user => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
+        // Fetch users with async/await
+        async function fetchUsers() {
+            try {
+                const response = await fetch(apiURL);
+                if (!response.ok) throw new Error(`خطأ في الاتصال: ${response.status}`);
+                const users = await response.json();
+                
+                userTable.innerHTML = users.map(user => `
+                    <tr>
                         <td>${user.name}</td>
                         <td>${user.email}</td>
                         <td>${user.address.city}, ${user.address.street}</td>
-                        <td><button onclick="showDetails(${user.id})">عرض التفاصيل</button></td>
-                    `;
-                    userTable.appendChild(row);
-                });
-            })
-            .catch(error => {
-                errorDiv.textContent = `حدث خطأ أثناء جلب البيانات: ${error.message}`;
-            });
-
-        // Show user details
-        function showDetails(userId) {
-            fetch(`${apiURL}/${userId}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(user => {
-                    alert(`
-                        الاسم: ${user.name}
-                        الهاتف: ${user.phone}
-                        الشركة: ${user.company.name}
-                        الموقع: ${user.website}
-                    `);
-                })
-                .catch(error => {
-                    alert(`تعذر جلب تفاصيل المستخدم: ${error.message}`);
-                });
+                        <td><button class="btn" onclick="showDetails(${user.id})">عرض التفاصيل</button></td>
+                    </tr>
+                `).join('');
+                
+            } catch (error) {
+                showError(`حدث خطأ: ${error.message}`);
+            }
         }
+
+        // Show user details in modal
+        async function showDetails(userId) {
+            try {
+                const response = await fetch(`${apiURL}/${userId}`);
+                if (!response.ok) throw new Error(`خطأ في الاتصال: ${response.status}`);
+                const user = await response.json();
+                
+                document.getElementById('modalContent').innerHTML = `
+                    <p><strong>الاسم:</strong> ${user.name}</p>
+                    <p><strong>الهاتف:</strong> ${user.phone}</p>
+                    <p><strong>الشركة:</strong> ${user.company.name}</p>
+                    <p><strong>الموقع:</strong> <a href="http://${user.website}" target="_blank">${user.website}</a></p>
+                `;
+                document.getElementById('modal').style.display = 'flex';
+            } catch (error) {
+                showError(`تعذر جلب التفاصيل: ${error.message}`);
+            }
+        }
+
+        // Utility functions
+        function showError(message) {
+            errorDiv.textContent = message;
+            setTimeout(() => errorDiv.textContent = '', 5000);
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => alert('تم نسخ الكود بنجاح!'))
+                .catch(() => alert('فشل نسخ الكود'));
+        }
+
+        // Initial load
+        fetchUsers();
+
+        // Add line numbers dynamically
+        document.querySelectorAll('.code-container pre code').forEach(code => {
+            const lines = code.innerHTML.split('\n');
+            code.innerHTML = lines.map(line => 
+                `<span class="code-line">${line}</span>`
+            ).join('\n');
+        });
     </script>
 </body>
 </html>

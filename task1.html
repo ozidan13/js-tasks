@@ -1,104 +1,338 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Message</title>
+    <title>رسالة ترحيب تفاعلية</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+            --code-keyword: #569cd6;
+            --code-function: #dcdcaa;
+            --code-string: #ce9178;
+            --code-comment: #6a9955;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f8ff;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .form-container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         h1 {
-            color: #333;
-            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
         }
 
         form {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            position: relative;
         }
 
         input {
-            padding: 10px;
-            width: 250px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--bg-light);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(38, 5, 83, 0.1);
         }
 
         button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
+            background: var(--primary-color);
+            color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: var(--transition);
+            margin-top: 1rem;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
 
-        #output {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            background-color: #eaf4fc;
-            color: #007BFF;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            width: fit-content;
+        .output-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 2rem auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .output-section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            overflow-x: auto;
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        pre {
+            margin: 0;
+            position: relative;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+            white-space: pre-wrap;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            user-select: none;
+            border-right: 1px solid #444;
+        }
+
+        .code-keyword { color: var(--code-keyword); }
+        .code-function { color: var(--code-function); }
+        .code-string { color: var(--code-string); }
+        .code-comment { color: var(--code-comment); }
+        .code-operator { color: #d4d4d4; }
+        .code-punctuation { color: #d4d4d4; }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .objective-section,
+            .form-container,
+            .output-section,
+            .code-section {
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .code-container {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .code-line {
+                padding-left: 2.5em;
+            }
+
+            .code-line::before {
+                width: 2em;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h1>أدخل بياناتك</h1>
-    <form id="userForm">
-        <input type="text" id="name" placeholder="اسمك" required>
-        <input type="number" id="age" placeholder="سنك" min="1" required>
-        <input type="text" id="hobby" placeholder="هوايتك" required>
-        <button type="submit">اعرض الرسالة</button>
-    </form>
-    <div id="output" style="display: none;">    </div>
+    <!-- Learning Objective Section -->
+    <section class="objective-section">
+        <h2>الهدف التعليمي</h2>
+        <p>تعلم كيفية معالجة مدخلات الـ Forms في JavaScript مع التحقق من الصحة وعرض النتائج بشكل تفاعلي، مع تطبيق مبادئ تصميم الواجهات الحديثة.</p>
+    </section>
+
+    <!-- Interactive Form -->
+    <div class="form-container">
+        <h1>أدخل بياناتك</h1>
+        <form id="userForm">
+            <div class="input-group">
+                <input type="text" id="name" placeholder="اسمك" required>
+            </div>
+            <div class="input-group">
+                <input type="number" id="age" placeholder="سنك" min="1" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="hobby" placeholder="هوايتك" required>
+            </div>
+            <button type="submit">اعرض الرسالة</button>
+        </form>
+    </div>
+
+    <!-- Output Section -->
+    <div class="output-section" id="output">
+        <div id="outputContent"></div>
+    </div>
+
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <div class="code-actions">
+                <button class="btn" onclick="copyCode()">
+                    <i class="far fa-copy"></i> نسخ الكود
+                </button>
+            </div>
+        </div>
+        <div class="code-container">
+            <pre><code><span class="code-line"><span class="code-comment">// معالجة إرسال النموذج</span></span>
+                    <span class="code-line"><span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"userForm"</span>).<span class="code-function">addEventListener</span>(<span class="code-string">"submit"</span><span class="code-punctuation">,</span> <span class="code-keyword">function</span>(event) {</span>
+                    <span class="code-line">    event.<span class="code-function">preventDefault</span>()<span class="code-punctuation">;</span></span>
+                    <span class="code-line">    </span>
+                    <span class="code-line">    <span class="code-keyword">const</span> name <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"name"</span>).value.<span class="code-function">trim</span>()<span class="code-punctuation">;</span></span>
+                    <span class="code-line">    <span class="code-keyword">const</span> age <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"age"</span>).value.<span class="code-function">trim</span>()<span class="code-punctuation">;</span></span>
+                    <span class="code-line">    <span class="code-keyword">const</span> hobby <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"hobby"</span>).value.<span class="code-function">trim</span>()<span class="code-punctuation">;</span></span>
+                    <span class="code-line">    </span>
+                    <span class="code-line">    <span class="code-keyword">if</span> (<span class="code-operator">!</span>name <span class="code-operator">||</span> <span class="code-operator">!</span>age <span class="code-operator">||</span> <span class="code-operator">!</span>hobby) {</span>
+                    <span class="code-line">        <span class="code-function">showError</span>(<span class="code-string">"من فضلك املأ جميع الحقول!"</span>)<span class="code-punctuation">;</span></span>
+                    <span class="code-line">        <span class="code-keyword">return</span><span class="code-punctuation">;</span></span>
+                    <span class="code-line">    }</span>
+                    <span class="code-line">    </span>
+                    <span class="code-line">    <span class="code-keyword">const</span> message <span class="code-operator">=</span> <span class="code-string">`أهلاً يا ${name}! عمرك ${age} سنة، وهوايتك المفضلة هي ${hobby}.`</span><span class="code-punctuation">;</span></span>
+                    <span class="code-line">    <span class="code-function">showOutput</span>(message)<span class="code-punctuation">;</span></span>
+                    <span class="code-line">})<span class="code-punctuation">;</span></span>
+                    <span class="code-line"></span>
+                    <span class="code-line"><span class="code-keyword">function</span> <span class="code-function">showOutput</span>(message) {</span>
+                    <span class="code-line">    <span class="code-keyword">const</span> output <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"output"</span>)<span class="code-punctuation">;</span></span>
+                    <span class="code-line">    output.<span class="code-function">querySelector</span>(<span class="code-string">"#outputContent"</span>).textContent <span class="code-operator">=</span> message<span class="code-punctuation">;</span></span>
+                    <span class="code-line">    output.classList.<span class="code-function">add</span>(<span class="code-string">"show"</span>)<span class="code-punctuation">;</span></span>
+                    <span class="code-line">}</span></span></code></pre>
+        </div>
+    </section>
 
     <script>
         document.getElementById("userForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            // قراءة المدخلات
             const name = document.getElementById("name").value.trim();
             const age = document.getElementById("age").value.trim();
             const hobby = document.getElementById("hobby").value.trim();
 
-            // التحقق من صحة المدخلات
             if (!name || !age || !hobby) {
-                alert("من فضلك املأ جميع الحقول!");
+                showError("من فضلك املأ جميع الحقول!");
                 return;
             }
 
-            // إنشاء الرسالة
-            const message = `أهلاً يا ${name}! عندك ${age} سنة، وهوايتك المفضلة هي ${hobby}. جميل جدًا!`;
-
-            // عرض الرسالة
-            const outputDiv = document.getElementById("output");
-            outputDiv.textContent = message;
-            outputDiv.style.display = "block";
+            const message = `أهلاً يا ${name}! عمرك ${age} سنة، وهوايتك المفضلة هي ${hobby}.`;
+            showOutput(message);
         });
+
+        function showOutput(message) {
+            const output = document.getElementById("output");
+            output.querySelector("#outputContent").textContent = message;
+            output.classList.add("show");
+            output.style.backgroundColor = "#eaf4fc";
+            output.style.color = "#007BFF";
+        }
+
+        function showError(message) {
+            const output = document.getElementById("output");
+            output.querySelector("#outputContent").textContent = message;
+            output.classList.add("show");
+            output.style.backgroundColor = "#ffebee";
+            output.style.color = "#c62828";
+        }
+
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-actions button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
+        }
     </script>
 </body>
 </html>

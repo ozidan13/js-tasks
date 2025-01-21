@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تنظيف البيانات</title>
+    <title>معالجة النصوص</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
 
@@ -16,6 +16,7 @@
             --bg-light: #f8f9fa;
             --bg-white: #ffffff;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -40,6 +41,12 @@
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            transform: translateY(0);
+            transition: var(--transition);
+        }
+
+        .objective-section:hover {
+            transform: translateY(-5px);
         }
 
         .objective-section h2 {
@@ -47,44 +54,80 @@
             margin-bottom: 1rem;
         }
 
-        /* Demo Section */
+        /* Interactive Demo Section */
         .demo-section {
             background: var(--bg-white);
             padding: 2rem;
             border-radius: 1rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
+            transition: var(--transition);
         }
 
-        .info {
+        .demo-controls {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--bg-light);
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .results-box {
             background: var(--bg-light);
             padding: 1.5rem;
             border-radius: 0.5rem;
-            margin: 1rem 0;
+            margin-top: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
         }
 
-        .info ul {
-            padding-left: 1rem;
+        .results-box.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .info li {
+        .results-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .results-list li {
             background: var(--bg-white);
-            padding: 0.8rem;
+            padding: 1rem;
             margin: 0.5rem 0;
             border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.3s ease forwards;
         }
 
-        .info li:hover {
-            background-color: #e0e0e0;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .info strong {
-            color: var(--text-dark);
-        }
-
-        /* Code Display Section */
+        /* Code Section */
         .code-section {
             background: var(--bg-white);
             padding: 2rem;
@@ -100,13 +143,7 @@
             border-radius: 0.5rem;
             overflow-x: auto;
             direction: ltr;
-        }
-
-        pre {
-            margin: 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            position: relative;
         }
 
         .code-tab {
@@ -118,20 +155,29 @@
             margin-bottom: -1px;
         }
 
+        pre {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
         button {
             background: var(--primary-color);
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 2rem;
             border-radius: 0.5rem;
             cursor: pointer;
             font-size: 1rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: var(--transition);
+            width: 100%;
         }
 
         button:hover {
+            background: var(--secondary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow);
         }
 
         @media (max-width: 768px) {
@@ -155,47 +201,85 @@
     <!-- Learning Objective Section -->
     <section class="objective-section">
         <h2>الهدف التعليمي</h2>
-        <p>تعلم كيفية تنظيف البيانات من النصوص باستخدام JavaScript، مع التركيز على إزالة الرموز الغير مرغوب فيها وتصحيح الأخطاء الشائعة في القيم النصية.</p>
+        <p>تعلم تقنيات معالجة النصوص في JavaScript مع التركيز على إزالة المسافات الزائدة، الترميز الخاص، والرموز غير المرغوب فيها، مع تطبيق عملي مباشر.</p>
     </section>
 
-    <!-- Demo Section -->
+    <!-- Interactive Demo Section -->
     <section class="demo-section">
-        <h2>عرض تطبيقي</h2>
-        <div class="info" id="output"></div>
+        <h2>تجربة تفاعلية</h2>
+        <div class="demo-controls">
+            <div class="input-group">
+                <input type="text" id="textInput" placeholder="أدخل النص المراد تنظيفه...">
+            </div>
+            <button onclick="processText()">تنظيف النص</button>
+        </div>
+        <div class="results-box" id="resultsBox">
+            <h3>النتيجة:</h3>
+            <ul class="results-list" id="resultsList"></ul>
+        </div>
     </section>
 
-    <!-- Code Section -->
+    <!-- Code Explanation Section -->
     <section class="code-section">
         <h2>الشرح البرمجي</h2>
         <div class="code-tab">JavaScript</div>
         <div class="code-container">
-            <pre><code>// Data Cleaning Example
-const names = ["Mohamed", "Sara123", "Ali@!", "Ahmed"];
-names.push("Osama"); // Adding Osama
+            <pre><code>// دالة تنظيف النص الأساسية
+function cleanText(text) {
+    return text
+        .trim() // إزالة المسافات الزائدة
+        .replace(/\s+/g, ' ') // إزالة المسافات المكررة
+        .replace(/[^\w\u0600-\u06FF ]/g, ''); // إزالة الرموز الخاصة
+}
 
-// Cleaning and Filtering
-const cleanedNames = [...names.map(name => name.trim().replace(/[^a-zA-Zء-ي ]/g, ""))];
-const updatedNames = cleanedNames.filter(name => name !== "Sara");
-
-// Displaying Results
-console.log(updatedNames);
+// معالجة الإدخال وعرض النتائج
+function processText() {
+    const inputText = document.getElementById('textInput').value;
+    const cleanedText = cleanText(inputText);
+    
+    const resultsList = document.getElementById('resultsList');
+    const listItem = document.createElement('li');
+    listItem.textContent = cleanedText;
+    
+    resultsList.prepend(listItem);
+    document.getElementById('resultsBox').classList.add('show');
+}
 </code></pre>
         </div>
     </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const names = ["Mohamed", "Sara123", "Ali@!", "Ahmed"];
-            names.push("Osama"); // Adding Osama
+        function cleanText(text) {
+            return text
+                .trim()
+                .replace(/\s+/g, ' ')
+                .replace(/[^\w\u0600-\u06FF ]/g, '');
+        }
 
-            const cleanedNames = [...names.map(name => name.trim().replace(/[^a-zA-Zء-ي ]/g, ""))];
-            const updatedNames = cleanedNames.filter(name => name !== "Sara"); // Removing Sara
+        function processText() {
+            const inputText = document.getElementById('textInput').value;
+            const cleanedText = cleanText(inputText);
+            
+            const resultsList = document.getElementById('resultsList');
+            const listItem = document.createElement('li');
+            listItem.textContent = cleanedText || 'لا يوجد نص لتنظيفه';
+            
+            // Add animation
+            listItem.style.animation = 'slideIn 0.3s ease forwards';
+            
+            // Add new result to top
+            resultsList.prepend(listItem);
+            
+            // Show results box
+            document.getElementById('resultsBox').classList.add('show');
+            
+            // Clear input
+            document.getElementById('textInput').value = '';
+        }
 
-            const outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = `
-                <h3>الأسماء المُنظفة:</h3>
-                <ul>${updatedNames.map(name => `<li>${name}</li>`).join("")}</ul>
-            `;
+        // Handle Enter key
+        document.getElementById('textInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') processText();
         });
     </script>
 </body>
