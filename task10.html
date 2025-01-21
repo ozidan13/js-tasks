@@ -1,154 +1,291 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Table</title>
+    <title>جدول المستخدمين</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Import custom fonts for better typography */
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
 
-        * {
-            font-family: 'Cairo', sans-serif;
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
         }
 
-        /* Reset and base styling for body */
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
             min-height: 100vh;
-            justify-content: center;
+        }
+
+        .container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            max-width: 1000px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
         }
 
-        /* Styling for the table */
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
         table {
-            width: 70%;
-            margin: 20px 0;
+            width: 100%;
             border-collapse: collapse;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.5s ease;
         }
 
         th, td {
-            padding: 15px;
+            padding: 1rem;
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         th {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #0ef5e3;
+            background-color: var(--primary-color);
+            color: white;
             font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        td {
-            font-size: 1rem;
         }
 
         tr:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.03);
         }
 
         .delete-btn {
-            color: #ff4c4c;
+            color: var(--error-color);
             cursor: pointer;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 0.3rem;
         }
 
         .delete-btn:hover {
-            color: #ff1e1e;
+            background-color: var(--error-color);
+            color: white;
         }
 
-        /* Styling for the form */
         form {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
         input, button {
-            padding: 10px;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
             font-size: 1rem;
-            border: none;
-            border-radius: 5px;
+            transition: var(--transition);
         }
 
         button {
-            background: linear-gradient(135deg, #0ef5e3, #1e90ff);
-            color: #000;
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            cursor: pointer;
         }
 
-        @media screen and (max-width: 768px) {
-            table {
-                width: 90%;
-            }
-
-            form {
-                flex-direction: column;
-            }
-
-            input, button {
-                width: 100%;
-            }
+        button:hover {
+            opacity: 0.9;
         }
 
-        /* Style for code block */
-        pre {
-            background: #1e1e1e;
-            color: #0ef5e3;
-            padding: 20px;
-            border-radius: 8px;
-            width: 90%;
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            max-width: 1000px;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
             overflow-x: auto;
-            margin-top: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
         }
 
-        code {
-            font-family: 'Courier New', Courier, monospace;
+        pre {
+            margin: 0;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            form {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <h1>جدول المستخدمين</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>الاسم</th>
-                <th>العمر</th>
-                <th>البريد الإلكتروني</th>
-                <th>إجراءات</th>
-            </tr>
-        </thead>
-        <tbody id="userTable"></tbody>
-    </table>
-    <form id="userForm">
-        <input type="text" id="name" placeholder="اسم" required>
-        <input type="number" id="age" placeholder="عمر" required>
-        <input type="email" id="email" placeholder="بريد إلكتروني" required>
-        <button type="submit">إضافة مستخدم</button>
-    </form>
+    <div class="container">
+        <section class="objective-section">
+            <h2>الهدف التعليمي</h2>
+            <p>تعلم كيفية إدارة جدول المستخدمين مع إمكانيات الإضافة والحذف باستخدام JavaScript.</p>
+        </section>
 
-    <pre>
-        <code id="jsCode"></code>
-    </pre>
+        <h1>جدول المستخدمين</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>الاسم</th>
+                    <th>العمر</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>إجراءات</th>
+                </tr>
+            </thead>
+            <tbody id="userTable"></tbody>
+        </table>
+        
+        <form id="userForm">
+            <input type="text" id="name" placeholder="اسم المستخدم" required>
+            <input type="number" id="age" placeholder="العمر" required>
+            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+            <button type="submit">إضافة مستخدم</button>
+        </form>
+    </div>
+
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <button onclick="copyCode()"><i class="far fa-copy"></i> نسخ الكود</button>
+        </div>
+        <div class="code-container">
+            <pre><code><span class="code-line"><span class="code-comment">// مصفوفة تخزين المستخدمين</span></span>
+<span class="code-line"><span class="code-keyword">const</span> users <span class="code-operator">=</span> [];</span>
+<span class="code-line"><span class="code-keyword">const</span> userTable <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"userTable"</span>);</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// إضافة مستخدم جديد</span></span>
+<span class="code-line"><span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"userForm"</span>).<span class="code-function">addEventListener</span>(<span class="code-string">"submit"</span>, <span class="code-keyword">function</span>(event) {</span>
+<span class="code-line">    event.<span class="code-function">preventDefault</span>();</span>
+<span class="code-line">    <span class="code-keyword">const</span> name <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"name"</span>).<span class="code-property">value</span>;</span>
+<span class="code-line">    <span class="code-keyword">const</span> age <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"age"</span>).<span class="code-property">value</span>;</span>
+<span class="code-line">    <span class="code-keyword">const</span> email <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"email"</span>).<span class="code-property">value</span>;</span>
+<span class="code-line"></span>
+<span class="code-line">    users.<span class="code-function">push</span>({ name, age, email });</span>
+<span class="code-line">    <span class="code-function">displayUsers</span>();</span>
+<span class="code-line">    <span class="code-keyword">this</span>.<span class="code-function">reset</span>();</span>
+<span class="code-line">});</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// عرض المستخدمين</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">displayUsers</span>() {</span>
+<span class="code-line">    userTable.<span class="code-property">innerHTML</span> <span class="code-operator">=</span> <span class="code-string">""</span>;</span>
+<span class="code-line">    users.<span class="code-function">forEach</span>((user, index) <span class="code-operator">=></span> {</span>
+<span class="code-line">        <span class="code-keyword">const</span> row <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">createElement</span>(<span class="code-string">"tr"</span>);</span>
+<span class="code-line">        row.<span class="code-property">innerHTML</span> <span class="code-operator">=</span> <span class="code-string">`</span></span>
+<span class="code-line"><span class="code-string">            &lt;td>${user.name}&lt;/td></span></span>
+<span class="code-line"><span class="code-string">            &lt;td>${user.age}&lt;/td></span></span>
+<span class="code-line"><span class="code-string">            &lt;td>${user.email}&lt;/td></span></span>
+<span class="code-line"><span class="code-string">            &lt;td>&lt;span class="delete-btn" onclick="deleteUser(${index})">حذف&lt;/span>&lt;/td></span></span>
+<span class="code-line"><span class="code-string">        `</span>;</span>
+<span class="code-line">        userTable.<span class="code-function">appendChild</span>(row);</span>
+<span class="code-line">    });</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// حذف مستخدم</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">deleteUser</span>(index) {</span>
+<span class="code-line">    <span class="code-keyword">if</span> (<span class="code-function">confirm</span>(<span class="code-string">"هل أنت متأكد من رغبتك في حذف هذا المستخدم؟"</span>)) {</span>
+<span class="code-line">        users.<span class="code-function">splice</span>(index, <span class="code-number">1</span>);</span>
+<span class="code-line">        <span class="code-function">displayUsers</span>();</span>
+<span class="code-line">    }</span>
+<span class="code-line">}</span></code></pre>
+        </div>
+    </section>
 
     <script>
-        // JavaScript code for user table functionality
         const users = [];
         const userTable = document.getElementById("userTable");
 
@@ -178,46 +315,27 @@
         }
 
         function deleteUser(index) {
-            users.splice(index, 1);
-            displayUsers();
+            if (confirm("هل أنت متأكد من رغبتك في حذف هذا المستخدم؟")) {
+                users.splice(index, 1);
+                displayUsers();
+            }
         }
 
-        // Display JavaScript code dynamically in the code block
-        const jsCode = `
-        const users = [];
-        const userTable = document.getElementById("userTable");
-
-        document.getElementById("userForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const name = document.getElementById("name").value;
-            const age = document.getElementById("age").value;
-            const email = document.getElementById("email").value;
-
-            users.push({ name, age, email });
-            displayUsers();
-            this.reset();
-        });
-
-        function displayUsers() {
-            userTable.innerHTML = "";
-            users.forEach((user, index) => {
-                const row = document.createElement("tr");
-                row.innerHTML = \`
-                    <td>\${user.name}</td>
-                    <td>\${user.age}</td>
-                    <td>\${user.email}</td>
-                    <td><span class="delete-btn" onclick="deleteUser(\${index})">حذف</span></td>
-                \`;
-                userTable.appendChild(row);
-            });
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-header button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
         }
 
-        function deleteUser(index) {
-            users.splice(index, 1);
-            displayUsers();
-        }
-        `;
-        document.getElementById("jsCode").textContent = jsCode;
+        // Initial display
+        displayUsers();
     </script>
 </body>
 </html>

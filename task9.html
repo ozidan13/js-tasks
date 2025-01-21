@@ -1,90 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>قائمة المنتجات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Cairo', Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            text-align: center;
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --primary-color: #260553;
+            --secondary-color: #1b0338;
+            --accent-color: #24056b;
+            --text-dark: #333;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
-        h1 {
-            margin-bottom: 20px;
-            font-size: 2em;
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 2rem;
+            min-height: 100vh;
         }
-        #productList {
+
+        .container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
             max-width: 800px;
             margin: 0 auto;
+            animation: fadeIn 0.5s ease;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .objective-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        #productList {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
         .product {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 0.5rem;
+            background: var(--bg-white);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: slideIn 0.5s ease forwards;
         }
+
         .product:hover {
-            transform: scale(1.02);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        .product span {
+
+        .product-info {
             flex: 1;
-            text-align: left;
-            margin: 0 10px;
-            font-size: 1em;
+            margin-left: 1.5rem;
         }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
         .product button {
-            padding: 5px 10px;
+            padding: 0.5rem 1rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 0.3rem;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: var(--transition);
+            font-weight: 500;
         }
-        .product button:hover {
-            background-color: #007BFF;
-            color: #fff;
-        }
+
         .delete-btn {
-            background-color: #FF6347;
+            background-color: var(--error-color);
             color: white;
         }
-        .delete-btn:hover {
-            background-color: #FF4500;
-        }
+
         .edit-btn {
-            background-color: #4CAF50;
+            background-color: var(--success-color);
             color: white;
         }
-        .edit-btn:hover {
-            background-color: #45A049;
+
+        .product button:hover {
+            opacity: 0.9;
         }
+
+        .empty-state {
+            text-align: center;
+            color: #666;
+            padding: 2rem;
+        }
+
+        /* Code Section */
+        .code-section {
+            background: var(--bg-white);
+            border-radius: 1rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+        }
+
+        .code-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-container {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0 0 1rem 1rem;
+            overflow-x: auto;
+            direction: ltr;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
+        }
+
+        pre {
+            margin: 0;
+            counter-reset: line;
+        }
+
+        .code-line {
+            display: block;
+            padding-left: 3.5em;
+            position: relative;
+        }
+
+        .code-line::before {
+            counter-increment: line;
+            content: counter(line);
+            position: absolute;
+            left: 0;
+            width: 3em;
+            padding-right: 1em;
+            color: #666;
+            text-align: right;
+            border-right: 1px solid #444;
+        }
+
         @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
             .product {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .product span {
-                text-align: start;
-                margin-bottom: 10px;
+            
+            .product-actions {
+                width: 100%;
+                margin-top: 1rem;
             }
+            
             .product button {
-                margin: 5px 0;
+                width: 100%;
             }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <h1>قائمة المنتجات</h1>
-    <div id="productList"></div>
+    <div class="container">
+        <section class="objective-section">
+            <h2>الهدف التعليمي</h2>
+            <p>تعلم كيفية إدارة قائمة المنتجات مع إمكانيات الحذف والتعديل باستخدام JavaScript.</p>
+        </section>
+
+        <h1>قائمة المنتجات</h1>
+        <div id="productList"></div>
+    </div>
+
+    <!-- Code Explanation Section -->
+    <section class="code-section">
+        <div class="code-header">
+            <span>الشرح البرمجي</span>
+            <button onclick="copyCode()"><i class="far fa-copy"></i> نسخ الكود</button>
+        </div>
+        <div class="code-container">
+            <pre><code><span class="code-line"><span class="code-comment">// بيانات المنتجات الأولية</span></span>
+<span class="code-line"><span class="code-keyword">const</span> products <span class="code-operator">=</span> [</span>
+<span class="code-line">    { name: <span class="code-string">"لابتوب"</span>, price: <span class="code-number">15000</span>, description: <span class="code-string">"لابتوب عالي الأداء للألعاب والبرمجة"</span> },</span>
+<span class="code-line">    { name: <span class="code-string">"هاتف"</span>, price: <span class="code-number">8000</span>, description: <span class="code-string">"هاتف ذكي مع شاشة AMOLED"</span> },</span>
+<span class="code-line">    { name: <span class="code-string">"سماعات"</span>, price: <span class="code-number">500</span>, description: <span class="code-string">"سماعات أذن عالية الجودة"</span> }</span>
+<span class="code-line">];</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// عرض المنتجات</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">renderProducts</span>() {</span>
+<span class="code-line">    <span class="code-keyword">const</span> productList <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">getElementById</span>(<span class="code-string">"productList"</span>);</span>
+<span class="code-line">    productList.<span class="code-property">innerHTML</span> <span class="code-operator">=</span> <span class="code-string">""</span>;</span>
+<span class="code-line">    </span>
+<span class="code-line">    <span class="code-keyword">if</span> (products.<span class="code-property">length</span> <span class="code-operator">===</span> <span class="code-number">0</span>) {</span>
+<span class="code-line">        productList.<span class="code-property">innerHTML</span> <span class="code-operator">=</span> <span class="code-string">"&lt;p class='empty-state'>لا توجد منتجات لعرضها.&lt;/p>"</span>;</span>
+<span class="code-line">        <span class="code-keyword">return</span>;</span>
+<span class="code-line">    }</span>
+<span class="code-line">    </span>
+<span class="code-line">    products.<span class="code-function">forEach</span>((product, index) <span class="code-operator">=></span> {</span>
+<span class="code-line">        <span class="code-keyword">const</span> productDiv <span class="code-operator">=</span> <span class="code-keyword">document</span>.<span class="code-function">createElement</span>(<span class="code-string">"div"</span>);</span>
+<span class="code-line">        productDiv.<span class="code-property">className</span> <span class="code-operator">=</span> <span class="code-string">"product"</span>;</span>
+<span class="code-line">        productDiv.<span class="code-property">innerHTML</span> <span class="code-operator">=</span> <span class="code-string">`</span></span>
+<span class="code-line"><span class="code-string">            &lt;div class="product-info"></span></span>
+<span class="code-line"><span class="code-string">                &lt;h3>${product.name}&lt;/h3></span></span>
+<span class="code-line"><span class="code-string">                &lt;p>السعر: ${product.price} جنيه&lt;/p></span></span>
+<span class="code-line"><span class="code-string">                &lt;p>${product.description}&lt;/p></span></span>
+<span class="code-line"><span class="code-string">            &lt;/div></span></span>
+<span class="code-line"><span class="code-string">            &lt;div class="product-actions"></span></span>
+<span class="code-line"><span class="code-string">                &lt;button class="delete-btn" onclick="deleteProduct(${index})">حذف&lt;/button></span></span>
+<span class="code-line"><span class="code-string">                &lt;button class="edit-btn" onclick="editProduct(${index})">تعديل&lt;/button></span></span>
+<span class="code-line"><span class="code-string">            &lt;/div></span></span>
+<span class="code-line"><span class="code-string">        `</span>;</span>
+<span class="code-line">        productList.<span class="code-function">appendChild</span>(productDiv);</span>
+<span class="code-line">    });</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// حذف منتج</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">deleteProduct</span>(index) {</span>
+<span class="code-line">    <span class="code-keyword">if</span> (<span class="code-function">confirm</span>(<span class="code-string">"هل أنت متأكد أنك تريد حذف هذا المنتج؟"</span>)) {</span>
+<span class="code-line">        products.<span class="code-function">splice</span>(index, <span class="code-number">1</span>);</span>
+<span class="code-line">        <span class="code-function">renderProducts</span>();</span>
+<span class="code-line">    }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-comment">// تعديل منتج</span></span>
+<span class="code-line"><span class="code-keyword">function</span> <span class="code-function">editProduct</span>(index) {</span>
+<span class="code-line">    <span class="code-keyword">const</span> newName <span class="code-operator">=</span> <span class="code-function">prompt</span>(<span class="code-string">"أدخل الاسم الجديد:"</span>, products[index].name);</span>
+<span class="code-line">    <span class="code-keyword">const</span> newPrice <span class="code-operator">=</span> <span class="code-function">prompt</span>(<span class="code-string">"أدخل السعر الجديد:"</span>, products[index].price);</span>
+<span class="code-line">    <span class="code-keyword">const</span> newDescription <span class="code-operator">=</span> <span class="code-function">prompt</span>(<span class="code-string">"أدخل الوصف الجديد:"</span>, products[index].description);</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="code-keyword">if</span> (newName <span class="code-operator">&amp;&amp;</span> newName.<span class="code-function">trim</span>()) products[index].name <span class="code-operator">=</span> newName.<span class="code-function">trim</span>();</span>
+<span class="code-line">    <span class="code-keyword">if</span> (newPrice <span class="code-operator">&amp;&amp;</span> <span class="code-operator">!</span><span class="code-function">isNaN</span>(newPrice)) products[index].price <span class="code-operator">=</span> <span class="code-function">parseFloat</span>(newPrice);</span>
+<span class="code-line">    <span class="code-keyword">if</span> (newDescription <span class="code-operator">&amp;&amp;</span> newDescription.<span class="code-function">trim</span>()) products[index].description <span class="code-operator">=</span> newDescription.<span class="code-function">trim</span>();</span>
+<span class="code-line"></span>
+<span class="code-line">    <span class="code-function">renderProducts</span>();</span>
+<span class="code-line">}</span></code></pre>
+        </div>
+    </section>
+
     <script>
         const products = [
             { name: "لابتوب", price: 15000, description: "لابتوب عالي الأداء للألعاب والبرمجة" },
@@ -92,26 +298,29 @@
             { name: "سماعات", price: 500, description: "سماعات أذن عالية الجودة" }
         ];
 
-        const productList = document.getElementById("productList");
-
         function renderProducts() {
-            productList.innerHTML = ""; // Clear list for re-rendering
+            const productList = document.getElementById("productList");
+            productList.innerHTML = "";
+            
             if (products.length === 0) {
-                productList.innerHTML = "<p>لا توجد منتجات لعرضها.</p>";
+                productList.innerHTML = "<p class='empty-state'>لا توجد منتجات لعرضها.</p>";
                 return;
             }
+            
             products.forEach((product, index) => {
                 const productDiv = document.createElement("div");
                 productDiv.className = "product";
-
                 productDiv.innerHTML = `
-                    <span><strong>${product.name}</strong></span>
-                    <span>السعر: ${product.price} جنيه</span>
-                    <span>${product.description}</span>
-                    <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
-                    <button class="edit-btn" onclick="editProduct(${index})">تعديل</button>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>السعر: ${product.price} جنيه</p>
+                        <p>${product.description}</p>
+                    </div>
+                    <div class="product-actions">
+                        <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
+                        <button class="edit-btn" onclick="editProduct(${index})">تعديل</button>
+                    </div>
                 `;
-
                 productList.appendChild(productDiv);
             });
         }
@@ -135,7 +344,21 @@
             renderProducts();
         }
 
-        renderProducts(); // Render the product list on page load
+        function copyCode() {
+            const code = document.querySelector('.code-container code').innerText;
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = document.querySelector('.code-header button');
+                    btn.innerHTML = '<i class="fas fa-check"></i> تم النسخ!';
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="far fa-copy"></i> نسخ الكود';
+                    }, 2000);
+                })
+                .catch(() => alert('فشل نسخ الكود'));
+        }
+
+        // Initial render
+        renderProducts();
     </script>
 </body>
 </html>
