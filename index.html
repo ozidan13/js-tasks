@@ -195,6 +195,160 @@
             height: 300px;
         }
 
+        /* Featured Tasks Section */
+        .featured-tasks {
+            padding: 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-top: 3rem;
+        }
+
+        .featured-tasks h3 {
+            color: var(--text-light);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .featured-tasks h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--text-light);
+            border-radius: 3px;
+        }
+
+        .task-carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .featured-boxes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .task-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .task-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+            z-index: -1;
+            transition: all 0.4s ease;
+        }
+
+        .task-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .task-card:hover::before {
+            opacity: 0.8;
+        }
+
+        .task-card i {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .task-card h4 {
+            color: var(--text-light);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .task-link {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .task-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .task-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .task-link:hover::before {
+            width: 100%;
+        }
+
+        @media (max-width: 900px) {
+            .featured-boxes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .featured-boxes {
+                grid-template-columns: 1fr;
+            }
+        }
 
         @keyframes heroPattern {
             0% { background-position: 0 0; }
@@ -434,6 +588,37 @@
                     <i class="fab fa-whatsapp"></i>احجز Session الـ Mentorship
                 </a>
 
+                <div class="featured-tasks">
+                    <h3>تطبيقات مميزة</h3>
+                    <div class="task-carousel-container">
+                        <div class="featured-boxes">
+                            <div class="task-card">
+                                <i class="fas fa-comment-dots"></i>
+                                <h4>رسالة ترحيب تفاعلية</h4>
+                                <p>تطبيق تفاعلي يقوم بإنشاء رسائل ترحيب مخصصة للمستخدمين</p>
+                                <a href="task1.html" target="fileIframe" class="task-link">عرض التطبيق</a>
+                            </div>
+                            <div class="task-card">
+                                <i class="fas fa-calculator"></i>
+                                <h4>آلة حاسبة تفاعلية</h4>
+                                <p>آلة حاسبة متطورة تدعم العمليات الحسابية الأساسية</p>
+                                <a href="task2.html" target="fileIframe" class="task-link">عرض التطبيق</a>
+                            </div>
+                            <div class="task-card">
+                                <i class="fas fa-calendar-check"></i>
+                                <h4>فحص أيام الأسبوع</h4>
+                                <p>تطبيق للتحقق من نوع اليوم (عمل أو عطلة) بناءً على اليوم المدخل</p>
+                                <a href="task3.html" target="fileIframe" class="task-link">عرض التطبيق</a>
+                            </div>
+                            <div class="task-card">
+                                <i class="fas fa-tasks"></i>
+                                <h4>قائمة المهام</h4>
+                                <p>تطبيق لإدارة المهام اليومية مع إمكانية الإضافة والحذف</p>
+                                <a href="task4.html" target="fileIframe" class="task-link">عرض التطبيق</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
             </div>
         </section>
@@ -453,6 +638,7 @@
         const iframe = document.querySelector('iframe');
         const landing = document.getElementById('landing');
         const hero = document.querySelector('.hero');
+        const taskLinks = document.querySelectorAll('.task-link');
 
         // Toggle Sidebar
         menuBtn.addEventListener('click', () => {
@@ -544,6 +730,32 @@
             if (e.key === 'Escape' && sidebar.classList.contains('visible')) {
                 sidebar.classList.remove('visible');
             }
+        });
+
+        // Handle task link clicks
+        function handleTaskLinkClick(e) {
+            e.preventDefault();
+            const href = e.currentTarget.getAttribute('href');
+            
+            // Hide landing and hero, show iframe
+            landing.style.display = 'none';
+            hero.style.display = 'none';
+            iframe.style.display = 'block';
+            
+            // Load content in iframe
+            iframe.src = href;
+            
+            // Update active state in sidebar
+            const sidebarLink = document.querySelector(`nav a[href="${href}"]`);
+            if (sidebarLink) {
+                links.forEach(item => item.classList.remove('active'));
+                sidebarLink.classList.add('active');
+            }
+        }
+        
+        // Add event listeners to task links
+        taskLinks.forEach(link => {
+            link.addEventListener('click', handleTaskLinkClick);
         });
     </script>
 </body>
