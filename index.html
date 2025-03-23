@@ -109,8 +109,9 @@
 
         /* Hero Section */
         .hero {
-            min-height: 60vh;
+            min-height: 100vh;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background-size: 400% 400%;
             padding: 6rem 2rem 2rem;
             display: flex;
             align-items: center;
@@ -119,33 +120,79 @@
             color: var(--text-light);
             position: relative;
             overflow: hidden;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s linear infinite;
         }
 
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.1;
-            animation: heroPattern 20s linear infinite;
+            top: -150px;
+            right: -150px;
+        }
+
+        .hero::after {
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: rotate(0deg) translate(0, 0) scale(1); }
+            33% { transform: rotate(120deg) translate(50px, 50px) scale(1.2); }
+            66% { transform: rotate(240deg) translate(-50px, 50px) scale(0.8); }
+            100% { transform: rotate(360deg) translate(0, 0) scale(1); }
         }
 
         .whatsapp-button {
             display: inline-block;
             background-color: #25D366;
             color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 15px 30px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 900;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
         }
 
         .whatsapp-button:hover {
             background-color: #0d923e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
 
@@ -158,6 +205,16 @@
             max-width: 800px;
             position: relative;
             z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h2 {
@@ -371,10 +428,10 @@
             <div class="hero-content">
                 <h2>مرحباً بك في منصة تطبيقات الجافاسكريبت </h2>
                 <p>منصة متكاملة لعرض التطبيقات المطلوبة في المتابعة بكفاءة عالية</p>
-                <p>إعداد بشمهندس أسامة زينهم</p>
+                <p>إعداد م.أسامة زينهم</p>
                 <!-- Add an elegent button that redirects to "https://wa.me/201116771405" with fantastic animation and icon-->
                 <a href="https://wa.me/201116771405" target="_blank" class="whatsapp-button" rel="noopener noreferrer">
-                    <i class="fab fa-whatsapp"></i>احجز كورس الـ Javascript
+                    <i class="fab fa-whatsapp"></i>احجز Session الـ Mentorship
                 </a>
 
                 
