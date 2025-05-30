@@ -197,72 +197,123 @@
         <h2>الشرح البرمجي</h2>
         <div class="code-tab">JavaScript</div>
         <div class="code-container">
-            <pre><code>// Countdown Example
+            <pre><code>// Example Countdown Implementation
+// This code demonstrates how to create a countdown timer in JavaScript
+
+// Set the date we're counting down to
 const eventDate = new Date("Feb 28, 2025 15:00:00").getTime();
 
-let countdownInterval = setInterval(function () {
+// Function to update the countdown display
+function updateCountdown() {
     const now = new Date().getTime();
-    const distance = eventDate - now;
+    let distance = eventDate - now;
 
+    // Time calculations for days, hours, minutes and seconds
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById("countdown-display").innerHTML =
-        `
-            <p>العد التنازلي للحدث:</p>
-            <ul>
-                <li>أيام: ${days}</li>
-                <li>ساعات: ${hours}</li>
-                <li>دقائق: ${minutes}</li>
-                <li>ثواني: ${seconds}</li>
-            </ul>
-        `;
+    // Display the result
+    return {
+        days,
+        hours,
+        minutes,
+        seconds,
+        isExpired: distance < 0
+    };
+}
 
-    if (distance < 0) {
+// Example of how to use the updateCountdown function
+/*
+// Start the countdown
+const countdownInterval = setInterval(() => {
+    const timeLeft = updateCountdown();
+    
+    if (timeLeft.isExpired) {
         clearInterval(countdownInterval);
-        document.getElementById("countdown-display").innerHTML = "الحدث قد بدأ!";
+        console.log("الحدث قد بدأ!");
+    } else {
+        console.log(`الوقت المتبقي: ${timeLeft.days} أيام ${timeLeft.hours} ساعات ${timeLeft.minutes} دقائق ${timeLeft.seconds} ثواني`);
     }
 }, 1000);
-
-// Start Countdown button functionality
-document.getElementById("start-countdown").addEventListener("click", function() {
-    countdownInterval; // Starts countdown when the button is clicked.
-});
+*/
 </code></pre>
         </div>
     </section>
 
     <script>
-        document.getElementById("start-countdown").addEventListener("click", function () {
-            const eventDate = new Date("Feb 28, 2025 15:00:00").getTime();
+        document.addEventListener('DOMContentLoaded', function() {
+            const eventDate = new Date("Dec 28, 2025 15:00:00").getTime();
             const countdownDisplay = document.getElementById("countdown-display");
+            const startButton = document.getElementById("start-countdown");
+            let countdownInterval = null;
 
-            let countdownInterval = setInterval(function () {
+            function updateCountdown() {
                 const now = new Date().getTime();
-                const distance = eventDate - now;
+                let distance = eventDate - now;
 
+                // If countdown is over
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    countdownDisplay.innerHTML = `
+                        <p style="text-align: center; font-size: 1.5rem; color: #4CAF50;">
+                            لقد بدأ الحدث! 
+                        </p>`;
+                    startButton.style.display = 'none';
+                    return;
+                }
+
+
+                // Calculate time units
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                countdownDisplay.innerHTML =
-                    `
-                        <ul>
-                            <li>Days: ${days}</li>
-                            <li>Hours: ${hours}</li>
-                            <li>Minutes: ${minutes}</li>
-                            <li>Seconds: ${seconds}</li>
-                        </ul>
-                    `;
+                // Update display with RTL support
+                countdownDisplay.innerHTML = `
+                    <p style="text-align: center; margin-bottom: 1rem; font-weight: bold; color: var(--primary-color);">
+                        العد التنازلي للحدث:
+                    </p>
+                    <ul style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; padding: 0;">
+                        <li style="background: var(--primary-color); color: white; padding: 1rem; border-radius: 8px; min-width: 80px; text-align: center;">
+                            <div style="font-size: 1.8rem; font-weight: bold;">${days}</div>
+                            <div>أيام</div>
+                        </li>
+                        <li style="background: var(--primary-color); color: white; padding: 1rem; border-radius: 8px; min-width: 80px; text-align: center;">
+                            <div style="font-size: 1.8rem; font-weight: bold;">${hours}</div>
+                            <div>ساعات</div>
+                        </li>
+                        <li style="background: var(--primary-color); color: white; padding: 1rem; border-radius: 8px; min-width: 80px; text-align: center;">
+                            <div style="font-size: 1.8rem; font-weight: bold;">${minutes}</div>
+                            <div>دقائق</div>
+                        </li>
+                        <li style="background: var(--primary-color); color: white; padding: 1rem; border-radius: 8px; min-width: 80px; text-align: center;">
+                            <div style="font-size: 1.8rem; font-weight: bold;">${seconds}</div>
+                            <div>ثواني</div>
+                        </li>
+                    </ul>`;
+            }
 
-                if (distance < 0) {
+
+            // Start countdown when button is clicked
+            startButton.addEventListener("click", function() {
+                if (countdownInterval) {
                     clearInterval(countdownInterval);
-                    countdownDisplay.innerHTML = "الحدث قد بدأ!";
                 }
-            }, 1000);
+                updateCountdown(); // Initial call to avoid delay
+                countdownInterval = setInterval(updateCountdown, 1000);
+                startButton.disabled = true;
+                startButton.textContent = 'جاري العد التنازلي...';
+                startButton.style.opacity = '0.7';
+            });
+
+            // Initial display
+            countdownDisplay.innerHTML = `
+                <p style="text-align: center; color: var(--text-light);">
+                    انقر على الزر لبدء العد التنازلي
+                </p>`;
         });
     </script>
 </body>
