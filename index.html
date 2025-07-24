@@ -421,6 +421,7 @@
             border-radius: 8px;
             transition: all 0.3s ease;
             font-weight: 500;
+            cursor: pointer;
         }
 
         nav ul li a:hover {
@@ -457,11 +458,17 @@
             color: var(--text-dark-mode);
         }
 
-        iframe {
+        #task-content {
             width: 100%;
-            height: calc(100vh - 60px);
-            border: none;
+            min-height: calc(100vh - 60px);
             display: none;
+            padding: 0;
+            margin: 0;
+            overflow-y: auto;
+        }
+
+        #task-content.show {
+            display: block;
         }
 
         /* Dark Mode Styles */
@@ -508,70 +515,70 @@
 
     <nav id="sidebar">
         <ul>
-            <li><a href="task1.html" target="fileIframe" class="active">
+            <li><a href="#task1" data-task="task1">
                 <i class="fas fa-tasks"></i> تطبيق 1</a>
             </li>
-            <li><a href="task2.html" target="fileIframe">
+            <li><a href="#task2" data-task="task2">
                 <i class="fas fa-tasks"></i> تطبيق 2</a>
             </li>
-            <li><a href="task3.html" target="fileIframe">
+            <li><a href="#task3" data-task="task3">
                 <i class="fas fa-tasks"></i> تطبيق 3</a>
             </li>
-            <li><a href="task4.html" target="fileIframe">
+            <li><a href="#task4" data-task="task4">
                 <i class="fas fa-tasks"></i> تطبيق 4</a>
             </li>
-            <li><a href="task5.html" target="fileIframe">
+            <li><a href="#task5" data-task="task5">
                 <i class="fas fa-tasks"></i> تطبيق 5</a>
             </li>
-            <li><a href="task6.html" target="fileIframe">
+            <li><a href="#task6" data-task="task6">
                 <i class="fas fa-tasks"></i> تطبيق 6</a>
             </li>
-            <li><a href="task7.html" target="fileIframe">
+            <li><a href="#task7" data-task="task7">
                 <i class="fas fa-tasks"></i> تطبيق 7</a>
             </li>
-            <li><a href="task8.html" target="fileIframe">
+            <li><a href="#task8" data-task="task8">
                 <i class="fas fa-tasks"></i> تطبيق 8</a>
             </li>
-            <li><a href="task9.html" target="fileIframe">
+            <li><a href="#task9" data-task="task9">
                 <i class="fas fa-tasks"></i> تطبيق 9</a>
             </li>
-            <li><a href="task10.html" target="fileIframe">
+            <li><a href="#task10" data-task="task10">
                 <i class="fas fa-tasks"></i> تطبيق 10</a>
             </li>
-            <li><a href="task11.html" target="fileIframe">
+            <li><a href="#task11" data-task="task11">
                 <i class="fas fa-tasks"></i> تطبيق 11</a>
             </li>
-            <li><a href="task12.html" target="fileIframe">
+            <li><a href="#task12" data-task="task12">
                 <i class="fas fa-tasks"></i> تطبيق 12</a>
             </li>
-            <li><a href="task13.html" target="fileIframe">
+            <li><a href="#task13" data-task="task13">
                 <i class="fas fa-tasks"></i> تطبيق 13</a>
             </li>
-            <li><a href="task14.html" target="fileIframe">
+            <li><a href="#task14" data-task="task14">
                 <i class="fas fa-tasks"></i> تطبيق 14</a>
             </li>
-            <li><a href="task15.html" target="fileIframe">
+            <li><a href="#task15" data-task="task15">
                 <i class="fas fa-tasks"></i> تطبيق 15</a>
             </li>
-            <li><a href="task16.html" target="fileIframe">
+            <li><a href="#task16" data-task="task16">
                 <i class="fas fa-tasks"></i> تطبيق 16</a>
             </li>
-            <li><a href="task17.html" target="fileIframe">
+            <li><a href="#task17" data-task="task17">
                 <i class="fas fa-tasks"></i> تطبيق 17</a>
             </li>
-            <li><a href="task18.html" target="fileIframe">
+            <li><a href="#task18" data-task="task18">
                 <i class="fas fa-tasks"></i> تطبيق 18</a>
             </li>
-            <li><a href="task19.html" target="fileIframe">
+            <li><a href="#task19" data-task="task19">
                 <i class="fas fa-tasks"></i> تطبيق 19</a>
             </li>
-            <li><a href="task20.html" target="fileIframe">
+            <li><a href="#task20" data-task="task20">
                 <i class="fas fa-tasks"></i> تطبيق 20</a>
             </li>
-            <li><a href="task21.html" target="fileIframe">
+            <li><a href="#task21" data-task="task21">
                 <i class="fas fa-tasks"></i> تطبيق 21</a>
             </li>
-            <li><a href="task22.html" target="fileIframe">
+            <li><a href="#task22" data-task="task22">
                 <i class="fas fa-tasks"></i> تطبيق 22</a>
             </li>
         </ul>
@@ -596,25 +603,25 @@
                                 <i class="fas fa-comment-dots"></i>
                                 <h4>رسالة ترحيب تفاعلية</h4>
                                 <p>تطبيق تفاعلي يقوم بإنشاء رسائل ترحيب مخصصة للمستخدمين</p>
-                                <a href="task1.html" target="fileIframe" class="task-link">عرض التطبيق</a>
+                                <a href="#task1" data-task="task1" class="task-link">عرض التطبيق</a>
                             </div>
                             <div class="task-card">
                                 <i class="fas fa-calculator"></i>
                                 <h4>آلة حاسبة تفاعلية</h4>
                                 <p>آلة حاسبة متطورة تدعم العمليات الحسابية الأساسية</p>
-                                <a href="task2.html" target="fileIframe" class="task-link">عرض التطبيق</a>
+                                <a href="#task2" data-task="task2" class="task-link">عرض التطبيق</a>
                             </div>
                             <div class="task-card">
                                 <i class="fas fa-calendar-check"></i>
                                 <h4>فحص أيام الأسبوع</h4>
                                 <p>تطبيق للتحقق من نوع اليوم (عمل أو عطلة) بناءً على اليوم المدخل</p>
-                                <a href="task3.html" target="fileIframe" class="task-link">عرض التطبيق</a>
+                                <a href="#task3" data-task="task3" class="task-link">عرض التطبيق</a>
                             </div>
                             <div class="task-card">
                                 <i class="fas fa-tasks"></i>
                                 <h4>قائمة المهام</h4>
                                 <p>تطبيق لإدارة المهام اليومية مع إمكانية الإضافة والحذف</p>
-                                <a href="task4.html" target="fileIframe" class="task-link">عرض التطبيق</a>
+                                <a href="#task4" data-task="task4" class="task-link">عرض التطبيق</a>
                             </div>
                         </div>
                     </div>
@@ -626,7 +633,7 @@
             <h2>اختر تطبيق للبدء</h2>
             <p>يمكنك اختيار أي تطبيق من القائمة الجانبية للبدء في العرض</p>
         </div>
-        <iframe name="fileIframe"></iframe>
+        <div id="task-content"></div>
     </main>
 
     <script>
@@ -634,18 +641,345 @@
         const sidebar = document.getElementById('sidebar');
         const menuBtn = document.querySelector('.menu-btn');
         const themeToggle = document.querySelector('.theme-toggle');
-        const links = document.querySelectorAll('nav a');
-        const iframe = document.querySelector('iframe');
+        const links = document.querySelectorAll('nav a, .task-link');
+        const taskContent = document.getElementById('task-content');
         const landing = document.getElementById('landing');
         const hero = document.querySelector('.hero');
-        const taskLinks = document.querySelectorAll('.task-link');
+
+        // Enhanced Routing System with Script Isolation
+        class EnhancedRouter {
+            constructor() {
+                this.routes = {};
+                this.currentTask = null;
+                this.currentTaskContext = null;
+                this.taskScripts = [];
+                this.taskIntervals = [];
+                this.taskTimeouts = [];
+                this.taskEventListeners = [];
+                this.init();
+            }
+
+            init() {
+                // Register routes for all tasks
+                for (let i = 1; i <= 22; i++) {
+                    this.routes[`task${i}`] = `task${i}.html`;
+                }
+                
+                // Listen for hash changes
+                window.addEventListener('hashchange', () => this.handleRoute());
+                
+                // Handle initial route if page is already loaded
+                if (document.readyState === 'complete') {
+                    setTimeout(() => this.handleRoute(), 100);
+                }
+            }
+
+            // Cleanup previous task resources
+            cleanupCurrentTask() {
+                // Clear all task-related intervals
+                this.taskIntervals.forEach(interval => clearInterval(interval));
+                this.taskIntervals = [];
+                
+                // Clear all task-related timeouts
+                this.taskTimeouts.forEach(timeout => clearTimeout(timeout));
+                this.taskTimeouts = [];
+                
+                // Remove task-specific event listeners
+                this.taskEventListeners.forEach(({element, event, handler}) => {
+                    element.removeEventListener(event, handler);
+                });
+                this.taskEventListeners = [];
+                
+                // Remove task scripts
+                this.taskScripts.forEach(script => {
+                    if (script.parentNode) {
+                        script.parentNode.removeChild(script);
+                    }
+                });
+                this.taskScripts = [];
+                
+                // Remove task styles
+                const existingStyles = document.querySelectorAll('[data-task-style]');
+                existingStyles.forEach(style => style.remove());
+                
+                // Clear task content and force garbage collection
+                taskContent.innerHTML = '';
+                
+                // Additional memory cleanup
+                this.performMemoryCleanup();
+            }
+            
+            // Enhanced memory cleanup for better performance
+            performMemoryCleanup() {
+                // Remove any orphaned DOM elements
+                const orphanedElements = document.querySelectorAll('[data-task-script], [data-task-style]');
+                orphanedElements.forEach(element => {
+                    if (element.parentNode) {
+                        element.parentNode.removeChild(element);
+                    }
+                });
+                
+                // Clear any global variables that might have been created by tasks
+                const globalVarsToClean = ['taskData', 'taskConfig', 'taskState', 'currentTaskData'];
+                globalVarsToClean.forEach(varName => {
+                    if (window[varName]) {
+                        delete window[varName];
+                    }
+                });
+                
+                // Force garbage collection if available (development only)
+                if (window.gc && typeof window.gc === 'function') {
+                    try {
+                        window.gc();
+                    } catch (e) {
+                        // Ignore errors in production
+                    }
+                }
+            }
+
+            async loadTaskContent(taskFile) {
+                try {
+                    // Cleanup previous task first
+                    this.cleanupCurrentTask();
+                    
+                    const response = await fetch(taskFile);
+                    if (!response.ok) throw new Error(`Failed to load ${taskFile}`);
+                    const html = await response.text();
+                    
+                    // Create a temporary container to parse the HTML
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Extract and preserve styles from the head
+                    const styles = doc.querySelectorAll('style');
+                    let styleContent = '';
+                    styles.forEach(style => {
+                        styleContent += style.textContent;
+                    });
+                    
+                    // Create a style element for this task
+                    if (styleContent) {
+                        const taskStyle = document.createElement('style');
+                        taskStyle.textContent = styleContent;
+                        taskStyle.setAttribute('data-task-style', taskFile);
+                        document.head.appendChild(taskStyle);
+                    }
+                    
+                    // Get only the body content to avoid head conflicts
+                    const bodyContent = doc.body.innerHTML;
+                    
+                    // Load content into task container
+                    taskContent.innerHTML = bodyContent;
+                    
+                    // Execute scripts with proper isolation
+                    await this.executeTaskScripts(doc, taskFile);
+                    
+                    return true;
+                } catch (error) {
+                    console.error('Error loading task:', error);
+                    taskContent.innerHTML = `
+                        <div style="padding: 2rem; text-align: center; color: #e74c3c;">
+                            <h2>خطأ في تحميل التطبيق</h2>
+                            <p>عذراً، حدث خطأ أثناء تحميل التطبيق المطلوب.</p>
+                        </div>
+                    `;
+                    return false;
+                }
+            }
+
+            // Execute task scripts with proper isolation and timing
+            async executeTaskScripts(doc, taskFile) {
+                const scripts = doc.querySelectorAll('script');
+                
+                for (const script of scripts) {
+                    if (script.src) {
+                        // External script
+                        await this.loadExternalScript(script.src, taskFile);
+                    } else {
+                        // Inline script - modify to work without DOMContentLoaded
+                        let scriptContent = script.textContent;
+                        
+                        // More robust DOMContentLoaded replacement
+                        // Check if script contains DOMContentLoaded
+                        if (scriptContent.includes('DOMContentLoaded')) {
+                            // Simple but effective replacement - just remove the event listener wrapper
+                            // and execute the function content immediately
+                            
+                            // Find the start of DOMContentLoaded event listener (handle both single and double quotes)
+                            let domLoadedStart = scriptContent.indexOf('document.addEventListener("DOMContentLoaded"');
+                            if (domLoadedStart === -1) {
+                                domLoadedStart = scriptContent.indexOf('document.addEventListener(\'DOMContentLoaded\'');
+                            }
+                            if (domLoadedStart !== -1) {
+                                // Find the function start
+                                const functionStart = scriptContent.indexOf('function', domLoadedStart);
+                                if (functionStart !== -1) {
+                                    // Find the opening brace of the function
+                                    const openBrace = scriptContent.indexOf('{', functionStart);
+                                    if (openBrace !== -1) {
+                                        // Find the matching closing brace
+                                        let braceCount = 0;
+                                        let closeBrace = -1;
+                                        for (let i = openBrace; i < scriptContent.length; i++) {
+                                            if (scriptContent[i] === '{') braceCount++;
+                                            if (scriptContent[i] === '}') {
+                                                braceCount--;
+                                                if (braceCount === 0) {
+                                                    closeBrace = i;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        
+                                        if (closeBrace !== -1) {
+                                            // Extract the function content (without the braces)
+                                            const functionContent = scriptContent.substring(openBrace + 1, closeBrace);
+                                            
+                                            // Replace the entire DOMContentLoaded block with immediate execution
+                                            const beforeBlock = scriptContent.substring(0, domLoadedStart);
+                                            const afterBlock = scriptContent.substring(scriptContent.indexOf('});', closeBrace) + 3);
+                                            
+                                            scriptContent = beforeBlock + '(function() {' + functionContent + '})();' + afterBlock;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // Handle jQuery-style ready (simpler approach)
+                        if (scriptContent.includes('$(document).ready')) {
+                            scriptContent = scriptContent.replace(
+                                /\$\(document\)\.ready\s*\(/g,
+                                '(function() { return ('
+                            ).replace(/\);\s*$/, '); })();');
+                        }
+                        
+                        // Handle window.onload
+                        if (scriptContent.includes('window.onload')) {
+                            scriptContent = scriptContent.replace(
+                                /window\.onload\s*=\s*function/g,
+                                '(function'
+                            ).replace(/;\s*$/, '(); ');
+                        }
+                        
+                        // Wrap the script in an IIFE for isolation
+                        const wrappedScript = `
+                            (function() {
+                                try {
+                                    // Override setInterval and setTimeout to track them
+                                    const originalSetInterval = window.setInterval;
+                                    const originalSetTimeout = window.setTimeout;
+                                    
+                                    window.setInterval = function(fn, delay) {
+                                        const id = originalSetInterval(fn, delay);
+                                        if (window.router) window.router.taskIntervals.push(id);
+                                        return id;
+                                    };
+                                    
+                                    window.setTimeout = function(fn, delay) {
+                                        const id = originalSetTimeout(fn, delay);
+                                        if (window.router) window.router.taskTimeouts.push(id);
+                                        return id;
+                                    };
+                                    
+                                    ${scriptContent}
+                                    
+                                    // Restore original functions
+                                    window.setInterval = originalSetInterval;
+                                    window.setTimeout = originalSetTimeout;
+                                } catch (error) {
+                                    console.error('Error executing task script for ${taskFile}:', error);
+                                }
+                            })();
+                        `;
+                        
+                        const newScript = document.createElement('script');
+                        newScript.textContent = wrappedScript;
+                        newScript.setAttribute('data-task-script', taskFile);
+                        document.body.appendChild(newScript);
+                        this.taskScripts.push(newScript);
+                    }
+                }
+            }
+
+            // Load external script with promise
+            loadExternalScript(src, taskFile) {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.setAttribute('data-task-script', taskFile);
+                    script.onload = () => resolve();
+                    script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+                    document.head.appendChild(script);
+                    this.taskScripts.push(script);
+                });
+            }
+
+            async handleRoute() {
+                const hash = window.location.hash.slice(1); // Remove #
+                
+                if (hash && this.routes[hash]) {
+                    // Show task content
+                    this.showTaskContent();
+                    
+                    // Load task content
+                    const success = await this.loadTaskContent(this.routes[hash]);
+                    if (success) {
+                        this.currentTask = hash;
+                        this.updateActiveLink(hash);
+                    }
+                } else {
+                    // Show landing page
+                    this.showLandingPage();
+                    this.currentTask = null;
+                    this.updateActiveLink(null);
+                }
+            }
+
+            showTaskContent() {
+                landing.style.display = 'none';
+                hero.style.display = 'none';
+                taskContent.classList.add('show');
+            }
+
+            showLandingPage() {
+                landing.style.display = 'block';
+                hero.style.display = 'flex';
+                taskContent.classList.remove('show');
+            }
+
+            updateActiveLink(taskId) {
+                // Remove active class from all links
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to current task link
+                if (taskId) {
+                    const activeLink = document.querySelector(`nav a[data-task="${taskId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            }
+
+            navigateToTask(taskId) {
+                window.location.hash = taskId;
+            }
+        }
+
+        // Initialize Enhanced Router
+        const router = new EnhancedRouter();
+        
+        // Make router globally accessible for script tracking
+        window.router = router;
 
         // Toggle Sidebar
         menuBtn.addEventListener('click', () => {
             sidebar.classList.toggle('visible');
         });
 
-        // Theme Toggle
+        // Theme Toggle - Set light mode as default
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             themeToggle.querySelector('i').classList.toggle('fa-moon');
@@ -656,18 +990,10 @@
         links.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                
-                // Update active state
-                links.forEach(item => item.classList.remove('active'));
-                link.classList.add('active');
-                
-                // Hide landing and hero, show iframe
-                landing.style.display = 'none';
-                hero.style.display = 'none';
-                iframe.style.display = 'block';
-                
-                // Load content in iframe
-                iframe.src = link.getAttribute('href');
+                const taskId = link.getAttribute('data-task');
+                if (taskId) {
+                    router.navigateToTask(taskId);
+                }
                 
                 // Close sidebar on mobile
                 if (window.innerWidth <= 768) {
@@ -678,33 +1004,30 @@
 
         // Close sidebar when clicking outside
         document.addEventListener('click', (e) => {
-            if (!sidebar.contains(e.target) && !menuBtn.contains(e.target) && window.innerWidth <= 768) {
-                sidebar.classList.remove('visible');
-            }
-           
-        });
-        // Close sidebar when clicking at anything the the page unless the sidebar
-        document.addEventListener('click', (e) => {
             if (!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
                 sidebar.classList.remove('visible');
             }
         });
-        
+
+        // Handle hash changes for routing
+        window.addEventListener('hashchange', () => {
+            router.handleRoute();
+        });
 
         // Handle initial page load
         window.addEventListener('load', () => {
-            // Check for system dark mode preference
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.body.classList.add('dark-mode');
-                themeToggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
-            }
-
+            // Set light mode as default (don't check system preference)
+            // User can manually toggle to dark mode if needed
+            
             // Initialize hero section animation
             hero.style.opacity = '0';
             setTimeout(() => {
                 hero.style.opacity = '1';
                 hero.style.transition = 'opacity 0.5s ease-in-out';
             }, 100);
+            
+            // Handle initial routing
+            setTimeout(() => router.handleRoute(), 200);
         });
 
         // Handle resize events
@@ -714,48 +1037,12 @@
             }
         });
 
-        // Handle iframe load events
-        iframe.addEventListener('load', () => {
-            // Add smooth transition when loading new content
-            iframe.style.opacity = '0';
-            setTimeout(() => {
-                iframe.style.opacity = '1';
-                iframe.style.transition = 'opacity 0.3s ease-in-out';
-            }, 100);
-        });
-
         // Handle keyboard navigation
         document.addEventListener('keydown', (e) => {
             // Close sidebar with Escape key
             if (e.key === 'Escape' && sidebar.classList.contains('visible')) {
                 sidebar.classList.remove('visible');
             }
-        });
-
-        // Handle task link clicks
-        function handleTaskLinkClick(e) {
-            e.preventDefault();
-            const href = e.currentTarget.getAttribute('href');
-            
-            // Hide landing and hero, show iframe
-            landing.style.display = 'none';
-            hero.style.display = 'none';
-            iframe.style.display = 'block';
-            
-            // Load content in iframe
-            iframe.src = href;
-            
-            // Update active state in sidebar
-            const sidebarLink = document.querySelector(`nav a[href="${href}"]`);
-            if (sidebarLink) {
-                links.forEach(item => item.classList.remove('active'));
-                sidebarLink.classList.add('active');
-            }
-        }
-        
-        // Add event listeners to task links
-        taskLinks.forEach(link => {
-            link.addEventListener('click', handleTaskLinkClick);
         });
     </script>
 </body>
