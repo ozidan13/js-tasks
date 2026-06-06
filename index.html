@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,23 +21,23 @@
 
         ::-webkit-scrollbar-thumb {
             background-color: #470d99;
-            border-radius: 5px; 
+            border-radius: 5px;
 
         }
 
-        
+
         :root {
             --primary-color: #470d99;
             --secondary-color: #1b0338;
             --accent-color: #24056b;
             --glass-bg: rgba(255, 255, 255, 0.1);
             --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            
+
             /* Light Mode */
             --bg-light: #f9f9f9;
             --text-light: #ffffff;
             --text-dark: #333333;
-            
+
             /* Dark Mode */
             --bg-dark: #121212;
             --card-dark: #1e1e1e;
@@ -92,7 +93,8 @@
             align-items: center;
         }
 
-        .menu-btn, .theme-toggle {
+        .menu-btn,
+        .theme-toggle {
             background: none;
             border: none;
             color: var(--text-light);
@@ -103,7 +105,8 @@
             transition: transform 0.3s ease;
         }
 
-        .menu-btn:hover, .theme-toggle:hover {
+        .menu-btn:hover,
+        .theme-toggle:hover {
             transform: scale(1.1);
         }
 
@@ -124,12 +127,21 @@
         }
 
         @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
-        .hero::before, .hero::after {
+        .hero::before,
+        .hero::after {
             content: '';
             position: absolute;
             width: 300px;
@@ -151,10 +163,21 @@
         }
 
         @keyframes float {
-            0% { transform: rotate(0deg) translate(0, 0) scale(1); }
-            33% { transform: rotate(120deg) translate(50px, 50px) scale(1.2); }
-            66% { transform: rotate(240deg) translate(-50px, 50px) scale(0.8); }
-            100% { transform: rotate(360deg) translate(0, 0) scale(1); }
+            0% {
+                transform: rotate(0deg) translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: rotate(120deg) translate(50px, 50px) scale(1.2);
+            }
+
+            66% {
+                transform: rotate(240deg) translate(-50px, 50px) scale(0.8);
+            }
+
+            100% {
+                transform: rotate(360deg) translate(0, 0) scale(1);
+            }
         }
 
         .whatsapp-button {
@@ -275,7 +298,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             border-color: rgba(255, 255, 255, 0.4);
         }
-        
+
         .task-card:hover::before {
             opacity: 0.8;
         }
@@ -323,7 +346,7 @@
             left: 0;
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
             transition: all 0.4s ease;
             z-index: -1;
         }
@@ -351,8 +374,13 @@
         }
 
         @keyframes heroPattern {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100px 100px;
+            }
         }
 
         .hero-content {
@@ -500,6 +528,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>تطبيقات الجافاسكريبت</h1>
@@ -516,70 +545,70 @@
     <nav id="sidebar">
         <ul>
             <li><a href="#task1" data-task="task1">
-                <i class="fas fa-tasks"></i> تطبيق 1</a>
+                    <i class="fas fa-tasks"></i> تطبيق 1</a>
             </li>
             <li><a href="#task2" data-task="task2">
-                <i class="fas fa-tasks"></i> تطبيق 2</a>
+                    <i class="fas fa-tasks"></i> تطبيق 2</a>
             </li>
             <li><a href="#task3" data-task="task3">
-                <i class="fas fa-tasks"></i> تطبيق 3</a>
+                    <i class="fas fa-tasks"></i> تطبيق 3</a>
             </li>
             <li><a href="#task4" data-task="task4">
-                <i class="fas fa-tasks"></i> تطبيق 4</a>
+                    <i class="fas fa-tasks"></i> تطبيق 4</a>
             </li>
             <li><a href="#task5" data-task="task5">
-                <i class="fas fa-tasks"></i> تطبيق 5</a>
+                    <i class="fas fa-tasks"></i> تطبيق 5</a>
             </li>
             <li><a href="#task6" data-task="task6">
-                <i class="fas fa-tasks"></i> تطبيق 6</a>
+                    <i class="fas fa-tasks"></i> تطبيق 6</a>
             </li>
             <li><a href="#task7" data-task="task7">
-                <i class="fas fa-tasks"></i> تطبيق 7</a>
+                    <i class="fas fa-tasks"></i> تطبيق 7</a>
             </li>
             <li><a href="#task8" data-task="task8">
-                <i class="fas fa-tasks"></i> تطبيق 8</a>
+                    <i class="fas fa-tasks"></i> تطبيق 8</a>
             </li>
             <li><a href="#task9" data-task="task9">
-                <i class="fas fa-tasks"></i> تطبيق 9</a>
+                    <i class="fas fa-tasks"></i> تطبيق 9</a>
             </li>
             <li><a href="#task10" data-task="task10">
-                <i class="fas fa-tasks"></i> تطبيق 10</a>
+                    <i class="fas fa-tasks"></i> تطبيق 10</a>
             </li>
             <li><a href="#task11" data-task="task11">
-                <i class="fas fa-tasks"></i> تطبيق 11</a>
+                    <i class="fas fa-tasks"></i> تطبيق 11</a>
             </li>
             <li><a href="#task12" data-task="task12">
-                <i class="fas fa-tasks"></i> تطبيق 12</a>
+                    <i class="fas fa-tasks"></i> تطبيق 12</a>
             </li>
             <li><a href="#task13" data-task="task13">
-                <i class="fas fa-tasks"></i> تطبيق 13</a>
+                    <i class="fas fa-tasks"></i> تطبيق 13</a>
             </li>
             <li><a href="#task14" data-task="task14">
-                <i class="fas fa-tasks"></i> تطبيق 14</a>
+                    <i class="fas fa-tasks"></i> تطبيق 14</a>
             </li>
             <li><a href="#task15" data-task="task15">
-                <i class="fas fa-tasks"></i> تطبيق 15</a>
+                    <i class="fas fa-tasks"></i> تطبيق 15</a>
             </li>
             <li><a href="#task16" data-task="task16">
-                <i class="fas fa-tasks"></i> تطبيق 16</a>
+                    <i class="fas fa-tasks"></i> تطبيق 16</a>
             </li>
             <li><a href="#task17" data-task="task17">
-                <i class="fas fa-tasks"></i> تطبيق 17</a>
+                    <i class="fas fa-tasks"></i> تطبيق 17</a>
             </li>
             <li><a href="#task18" data-task="task18">
-                <i class="fas fa-tasks"></i> تطبيق 18</a>
+                    <i class="fas fa-tasks"></i> تطبيق 18</a>
             </li>
             <li><a href="#task19" data-task="task19">
-                <i class="fas fa-tasks"></i> تطبيق 19</a>
+                    <i class="fas fa-tasks"></i> تطبيق 19</a>
             </li>
             <li><a href="#task20" data-task="task20">
-                <i class="fas fa-tasks"></i> تطبيق 20</a>
+                    <i class="fas fa-tasks"></i> تطبيق 20</a>
             </li>
             <li><a href="#task21" data-task="task21">
-                <i class="fas fa-tasks"></i> تطبيق 21</a>
+                    <i class="fas fa-tasks"></i> تطبيق 21</a>
             </li>
             <li><a href="#task22" data-task="task22">
-                <i class="fas fa-tasks"></i> تطبيق 22</a>
+                    <i class="fas fa-tasks"></i> تطبيق 22</a>
             </li>
         </ul>
     </nav>
@@ -626,7 +655,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </section>
         <div id="landing">
@@ -664,10 +693,10 @@
                 for (let i = 1; i <= 22; i++) {
                     this.routes[`task${i}`] = `task${i}.html`;
                 }
-                
+
                 // Listen for hash changes
                 window.addEventListener('hashchange', () => this.handleRoute());
-                
+
                 // Handle initial route if page is already loaded
                 if (document.readyState === 'complete') {
                     setTimeout(() => this.handleRoute(), 100);
@@ -679,17 +708,17 @@
                 // Clear all task-related intervals
                 this.taskIntervals.forEach(interval => clearInterval(interval));
                 this.taskIntervals = [];
-                
+
                 // Clear all task-related timeouts
                 this.taskTimeouts.forEach(timeout => clearTimeout(timeout));
                 this.taskTimeouts = [];
-                
+
                 // Remove task-specific event listeners
-                this.taskEventListeners.forEach(({element, event, handler}) => {
+                this.taskEventListeners.forEach(({ element, event, handler }) => {
                     element.removeEventListener(event, handler);
                 });
                 this.taskEventListeners = [];
-                
+
                 // Remove task scripts
                 this.taskScripts.forEach(script => {
                     if (script.parentNode) {
@@ -697,18 +726,18 @@
                     }
                 });
                 this.taskScripts = [];
-                
+
                 // Remove task styles
                 const existingStyles = document.querySelectorAll('[data-task-style]');
                 existingStyles.forEach(style => style.remove());
-                
+
                 // Clear task content and force garbage collection
                 taskContent.innerHTML = '';
-                
+
                 // Additional memory cleanup
                 this.performMemoryCleanup();
             }
-            
+
             // Enhanced memory cleanup for better performance
             performMemoryCleanup() {
                 // Remove any orphaned DOM elements
@@ -718,7 +747,7 @@
                         element.parentNode.removeChild(element);
                     }
                 });
-                
+
                 // Clear any global variables that might have been created by tasks
                 const globalVarsToClean = ['taskData', 'taskConfig', 'taskState', 'currentTaskData'];
                 globalVarsToClean.forEach(varName => {
@@ -726,7 +755,7 @@
                         delete window[varName];
                     }
                 });
-                
+
                 // Force garbage collection if available (development only)
                 if (window.gc && typeof window.gc === 'function') {
                     try {
@@ -741,22 +770,22 @@
                 try {
                     // Cleanup previous task first
                     this.cleanupCurrentTask();
-                    
+
                     const response = await fetch(taskFile);
                     if (!response.ok) throw new Error(`Failed to load ${taskFile}`);
                     const html = await response.text();
-                    
+
                     // Create a temporary container to parse the HTML
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
-                    
+
                     // Extract and preserve styles from the head
                     const styles = doc.querySelectorAll('style');
                     let styleContent = '';
                     styles.forEach(style => {
                         styleContent += style.textContent;
                     });
-                    
+
                     // Create a style element for this task
                     if (styleContent) {
                         const taskStyle = document.createElement('style');
@@ -764,16 +793,16 @@
                         taskStyle.setAttribute('data-task-style', taskFile);
                         document.head.appendChild(taskStyle);
                     }
-                    
+
                     // Get only the body content to avoid head conflicts
                     const bodyContent = doc.body.innerHTML;
-                    
+
                     // Load content into task container
                     taskContent.innerHTML = bodyContent;
-                    
+
                     // Execute scripts with proper isolation
                     await this.executeTaskScripts(doc, taskFile);
-                    
+
                     return true;
                 } catch (error) {
                     console.error('Error loading task:', error);
@@ -790,7 +819,7 @@
             // Execute task scripts with proper isolation and timing
             async executeTaskScripts(doc, taskFile) {
                 const scripts = doc.querySelectorAll('script');
-                
+
                 for (const script of scripts) {
                     if (script.src) {
                         // External script
@@ -798,13 +827,13 @@
                     } else {
                         // Inline script - modify to work without DOMContentLoaded
                         let scriptContent = script.textContent;
-                        
+
                         // More robust DOMContentLoaded replacement
                         // Check if script contains DOMContentLoaded
                         if (scriptContent.includes('DOMContentLoaded')) {
                             // Simple but effective replacement - just remove the event listener wrapper
                             // and execute the function content immediately
-                            
+
                             // Find the start of DOMContentLoaded event listener (handle both single and double quotes)
                             let domLoadedStart = scriptContent.indexOf('document.addEventListener("DOMContentLoaded"');
                             if (domLoadedStart === -1) {
@@ -830,22 +859,22 @@
                                                 }
                                             }
                                         }
-                                        
+
                                         if (closeBrace !== -1) {
                                             // Extract the function content (without the braces)
                                             const functionContent = scriptContent.substring(openBrace + 1, closeBrace);
-                                            
+
                                             // Replace the entire DOMContentLoaded block with immediate execution
                                             const beforeBlock = scriptContent.substring(0, domLoadedStart);
                                             const afterBlock = scriptContent.substring(scriptContent.indexOf('});', closeBrace) + 3);
-                                            
+
                                             scriptContent = beforeBlock + '(function() {' + functionContent + '})();' + afterBlock;
                                         }
                                     }
                                 }
                             }
                         }
-                        
+
                         // Handle jQuery-style ready (simpler approach)
                         if (scriptContent.includes('$(document).ready')) {
                             scriptContent = scriptContent.replace(
@@ -853,7 +882,7 @@
                                 '(function() { return ('
                             ).replace(/\);\s*$/, '); })();');
                         }
-                        
+
                         // Handle window.onload
                         if (scriptContent.includes('window.onload')) {
                             scriptContent = scriptContent.replace(
@@ -861,7 +890,7 @@
                                 '(function'
                             ).replace(/;\s*$/, '(); ');
                         }
-                        
+
                         // Wrap the script in an IIFE for isolation
                         const wrappedScript = `
                             (function() {
@@ -892,7 +921,7 @@
                                 }
                             })();
                         `;
-                        
+
                         const newScript = document.createElement('script');
                         newScript.textContent = wrappedScript;
                         newScript.setAttribute('data-task-script', taskFile);
@@ -917,11 +946,11 @@
 
             async handleRoute() {
                 const hash = window.location.hash.slice(1); // Remove #
-                
+
                 if (hash && this.routes[hash]) {
                     // Show task content
                     this.showTaskContent();
-                    
+
                     // Load task content
                     const success = await this.loadTaskContent(this.routes[hash]);
                     if (success) {
@@ -953,7 +982,7 @@
                 document.querySelectorAll('nav a').forEach(link => {
                     link.classList.remove('active');
                 });
-                
+
                 // Add active class to current task link
                 if (taskId) {
                     const activeLink = document.querySelector(`nav a[data-task="${taskId}"]`);
@@ -970,7 +999,7 @@
 
         // Initialize Enhanced Router
         const router = new EnhancedRouter();
-        
+
         // Make router globally accessible for script tracking
         window.router = router;
 
@@ -994,7 +1023,7 @@
                 if (taskId) {
                     router.navigateToTask(taskId);
                 }
-                
+
                 // Close sidebar on mobile
                 if (window.innerWidth <= 768) {
                     sidebar.classList.remove('visible');
@@ -1018,14 +1047,14 @@
         window.addEventListener('load', () => {
             // Set light mode as default (don't check system preference)
             // User can manually toggle to dark mode if needed
-            
+
             // Initialize hero section animation
             hero.style.opacity = '0';
             setTimeout(() => {
                 hero.style.opacity = '1';
                 hero.style.transition = 'opacity 0.5s ease-in-out';
             }, 100);
-            
+
             // Handle initial routing
             setTimeout(() => router.handleRoute(), 200);
         });
@@ -1047,4 +1076,5 @@
     </script>
     <script src="site-polish.js"></script>
 </body>
+
 </html>

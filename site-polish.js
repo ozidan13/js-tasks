@@ -40,6 +40,15 @@
                 --app-green: #10b981;
                 --app-amber: #f59e0b;
                 --app-purple: #8b5cf6;
+
+                /* Dark mode overrides for tasks variables */
+                --bg-light: #020617 !important;
+                --bg-white: rgba(15, 23, 42, 0.76) !important;
+                --text-dark: #e2e8f0 !important;
+                --text-light: #94a3b8 !important;
+                --primary-color: #38bdf8 !important;
+                --secondary-color: #0284c7 !important;
+                --accent-color: #0369a1 !important;
             }
 
             html,
@@ -486,6 +495,53 @@
                 .weeks-container {
                     grid-template-columns: 1fr;
                 }
+            }
+
+            /* Style all task containers when loaded inside index.html */
+            .objective-section,
+            .form-container,
+            .demo-section,
+            .table-container,
+            .output-section,
+            .code-section,
+            .results-box,
+            .info,
+            .card,
+            .container {
+                border-radius: 18px !important;
+                border: 1px solid rgba(148, 163, 184, 0.16) !important;
+                box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28) !important;
+            }
+
+            .form-container,
+            .demo-section,
+            .table-container,
+            .output-section,
+            .results-box,
+            .info,
+            .card,
+            .container {
+                background: rgba(15, 23, 42, 0.76) !important;
+                color: #e2e8f0 !important;
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+            }
+
+            h1, h2, h3, h4, h5, h6,
+            .form-container h1,
+            .demo-section h2,
+            .table-container h2,
+            .container h1,
+            .container h2,
+            .container h3 {
+                color: #f8fafc !important;
+            }
+
+            .info strong,
+            .container strong,
+            .card strong,
+            .demo-section strong {
+                color: #38bdf8 !important;
             }
         `;
         document.head.appendChild(style);

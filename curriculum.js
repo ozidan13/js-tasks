@@ -444,7 +444,21 @@
         }
     };
 
-    const currentScript = document.currentScript;
+    let currentScript = document.currentScript;
+    if (!currentScript) {
+        // Fallback: find script tag that includes "curriculum.js"
+        const scripts = document.querySelectorAll('script[src*="curriculum.js"]');
+        for (const s of scripts) {
+            const src = s.getAttribute('src');
+            if (src && src.includes('week=')) {
+                currentScript = s;
+                break;
+            }
+        }
+        if (!currentScript && scripts.length > 0) {
+            currentScript = scripts[scripts.length - 1];
+        }
+    }
     const week = getWeekNumber(currentScript);
     const data = curriculum[week];
 
@@ -480,6 +494,16 @@
         const style = document.createElement("style");
         style.id = "curriculum-section-styles";
         style.textContent = `
+            :root {
+                --bg-light: #020617 !important;
+                --bg-white: rgba(15, 23, 42, 0.76) !important;
+                --text-dark: #e2e8f0 !important;
+                --text-light: #94a3b8 !important;
+                --primary-color: #38bdf8 !important;
+                --secondary-color: #0284c7 !important;
+                --accent-color: #0369a1 !important;
+            }
+
             html {
                 background: #020617;
             }
@@ -554,7 +578,11 @@
             .form-container,
             .demo-section,
             .table-container,
-            .output-section {
+            .output-section,
+            .results-box,
+            .info,
+            .card,
+            .container {
                 background: rgba(15, 23, 42, 0.76) !important;
                 color: #e2e8f0 !important;
                 backdrop-filter: blur(16px);
@@ -568,10 +596,21 @@
             }
 
             body > h1,
+            h1, h2, h3, h4, h5, h6,
             .form-container h1,
             .demo-section h2,
-            .table-container h2 {
+            .table-container h2,
+            .container h1,
+            .container h2,
+            .container h3 {
                 color: #f8fafc !important;
+            }
+
+            .info strong,
+            .container strong,
+            .card strong,
+            .demo-section strong {
+                color: #38bdf8 !important;
             }
 
             input,
