@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,7 @@
 
         ::-webkit-scrollbar-thumb {
             background-color: #470d99;
-            border-radius: 5px; 
+            border-radius: 5px;
 
         }
 
@@ -63,8 +64,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
@@ -106,10 +114,25 @@
             box-shadow: var(--shadow);
         }
 
-        .color-red { background-color: #e74c3c; color: white; }
-        .color-yellow { background-color: #f1c40f; color: black; }
-        .color-green { background-color: #2ecc71; color: white; }
-        .color-reset { background-color: #bdc3c7; color: black; }
+        .color-red {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .color-yellow {
+            background-color: #f1c40f;
+            color: black;
+        }
+
+        .color-green {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .color-reset {
+            background-color: #bdc3c7;
+            color: black;
+        }
 
         footer {
             text-align: center;
@@ -174,21 +197,23 @@
             body {
                 padding: 1rem;
             }
-            
+
             .container {
                 padding: 1.5rem;
             }
-            
+
             .color-picker {
                 flex-direction: column;
             }
-            
+
             button {
                 width: 100%;
             }
         }
     </style>
+    <script src="curriculum.js?week=12" defer></script>
 </head>
+
 <body>
     <div class="container">
         <section class="objective-section">
@@ -264,4 +289,5 @@
         }
     </script>
 </body>
+
 </html>

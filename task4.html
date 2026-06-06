@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +34,7 @@
 
         ::-webkit-scrollbar-thumb {
             background-color: #470d99;
-            border-radius: 5px; 
+            border-radius: 5px;
 
         }
 
@@ -64,8 +65,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
@@ -153,8 +161,15 @@
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Code Section */
@@ -214,23 +229,26 @@
             body {
                 padding: 1rem;
             }
-            
+
             .container {
                 padding: 1.5rem;
             }
-            
+
             h1 {
                 font-size: 1.5rem;
             }
         }
     </style>
+    <script src="curriculum.js?week=4" defer></script>
 </head>
+
 <body>
     <div class="container">
         <!-- Learning Objective Section -->
         <section class="objective-section">
             <h2>الهدف التعليمي</h2>
-            <p>تعلم كيفية بناء قائمة مهام تفاعلية باستخدام JavaScript مع تطبيق مبادئ إدارة الحالة والتفاعلات الديناميكية.</p>
+            <p>تعلم كيفية بناء قائمة مهام تفاعلية باستخدام JavaScript مع تطبيق مبادئ إدارة الحالة والتفاعلات
+                الديناميكية.</p>
         </section>
 
         <h1>قائمة المهام</h1>
@@ -287,7 +305,7 @@
         const tasks = [];
         const tasksContainer = document.getElementById("tasksContainer");
 
-        document.getElementById("taskForm").addEventListener("submit", function(event) {
+        document.getElementById("taskForm").addEventListener("submit", function (event) {
             event.preventDefault();
             const task = document.getElementById("taskInput").value.trim();
             if (task) {
@@ -329,4 +347,5 @@
         }
     </script>
 </body>
+
 </html>

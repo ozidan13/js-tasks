@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +34,7 @@
 
         ::-webkit-scrollbar-thumb {
             background-color: #470d99;
-            border-radius: 5px; 
+            border-radius: 5px;
 
         }
 
@@ -64,8 +65,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
@@ -92,7 +100,8 @@
             animation: slideIn 0.5s ease;
         }
 
-        th, td {
+        th,
+        td {
             padding: 1rem;
             text-align: center;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -128,7 +137,8 @@
             margin-top: 2rem;
         }
 
-        input, button {
+        input,
+        button {
             padding: 0.8rem;
             border: 1px solid #ddd;
             border-radius: 0.5rem;
@@ -204,26 +214,35 @@
             body {
                 padding: 1rem;
             }
-            
+
             .container {
                 padding: 1.5rem;
             }
-            
+
             form {
                 grid-template-columns: 1fr;
             }
-            
+
             table {
                 font-size: 0.9rem;
             }
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
+    <script src="curriculum.js?week=10" defer></script>
 </head>
+
 <body>
     <div class="container">
         <section class="objective-section">
@@ -243,7 +262,7 @@
             </thead>
             <tbody id="userTable"></tbody>
         </table>
-        
+
         <form id="userForm">
             <input type="text" id="name" placeholder="اسم المستخدم" required>
             <input type="number" id="age" placeholder="العمر" required>
@@ -304,7 +323,7 @@
         const users = [];
         const userTable = document.getElementById("userTable");
 
-        document.getElementById("userForm").addEventListener("submit", function(event) {
+        document.getElementById("userForm").addEventListener("submit", function (event) {
             event.preventDefault();
             const name = document.getElementById("name").value;
             const age = document.getElementById("age").value;
@@ -353,4 +372,5 @@
         displayUsers();
     </script>
 </body>
+
 </html>

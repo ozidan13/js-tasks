@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,7 @@
 
         ::-webkit-scrollbar-thumb {
             background-color: #470d99;
-            border-radius: 5px; 
+            border-radius: 5px;
 
         }
 
@@ -62,8 +63,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .objective-section {
@@ -208,26 +216,35 @@
             body {
                 padding: 1rem;
             }
-            
+
             .container {
                 padding: 1.5rem;
             }
-            
+
             h1 {
                 font-size: 1.5rem;
             }
-            
+
             .books-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
+    <script src="curriculum.js?week=8" defer></script>
 </head>
+
 <body>
     <div class="container">
         <section class="objective-section">
@@ -340,11 +357,11 @@
             Object.entries(library).forEach(([category, books]) => {
                 const section = document.createElement("div");
                 section.className = "category-section";
-                
+
                 const header = document.createElement("div");
                 header.className = "category-header";
                 header.innerHTML = `<h2>كتب ${category}</h2>`;
-                
+
                 const grid = document.createElement("div");
                 grid.className = "books-grid";
 
@@ -384,4 +401,5 @@
         displayBooks();
     </script>
 </body>
+
 </html>
